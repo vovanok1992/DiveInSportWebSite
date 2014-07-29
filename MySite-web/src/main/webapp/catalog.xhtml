@@ -1,0 +1,395 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:vo="http://java.sun.com/jsf/composite/user"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+
+    <f:metadata>  
+        <f:viewParam name="categoryId" value="#{catalogBean.id}" />  
+        <f:viewParam name="sort" value="#{catalogBean.sortType}"/>  
+        <f:viewParam name="search" value="#{catalogBean.search}"/>  
+    </f:metadata> 
+
+    <h:head>
+        <title>Каталог</title>
+        <h:outputStylesheet name="css/default.css" />
+        <h:outputStylesheet name="css/layout.css" />
+        <h:outputStylesheet name="css/menubutt.css" />
+        <h:outputStylesheet name="css/smallmenu.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="resources/img/about/icon.ico"/>
+        
+    </h:head>
+    <h:body>
+
+        <h:outputScript library="js" name="resize_catalog.js"/>
+        <h:outputScript library="js" name="attrchange.js"/>
+        
+        <script>
+            $('#menu').attrchange (function(attrName) {
+                alert('Attribute: ' + attrName + ' modified ');
+            });
+        </script>
+
+        <div id="seperator" style="height:20px;"/>
+
+        <div id="page" >    
+
+            <h:panelGroup layout="block" id="header">
+                <vo:headercontent/>
+            </h:panelGroup>
+
+            <div id="menu">     
+
+                <p:treeTable value="#{userCategoriesBean.root}" 
+                             styleClass="hide-column-names" 
+                             var="category">
+
+                    <f:facet name="header">  
+                        <h:link value="Категории" 
+                                outcome="catalog.xhtml"/>  
+                    </f:facet>  
+                    <p:column style="width:32%">  
+
+                        <h:link value="#{category.name}" 
+                                style="#{category.id == catalogBean.id ? 'font-weight:bold; color:#FF0000':''}" 
+                                outcome="catalog.xhtml?categoryId=#{category.id}" 
+                                />
+
+                    </p:column>  
+
+                    <f:facet name="footer">
+                        <div style="height: 15px;"/>
+                    </f:facet>
+                </p:treeTable>
+
+                <vo:searchbox/>
+
+                <p:panel header="Товаров на странице" style="margin-top: 10px; ">
+                    <h:form>    
+                        <p:selectOneMenu id="sorts" 
+                                         style="width: 100%; font-size: 100%" 
+                                         value="#{catalogBean.pageSize}" >
+
+                            <f:selectItem itemLabel="5" itemValue="5"/>
+                            <f:selectItem itemLabel="10" itemValue="10"/>
+                            <f:selectItem itemLabel="20" itemValue="20"/>
+                            <f:selectItem itemLabel="50" itemValue="50"/>
+
+                            <p:ajax listener="#{catalogBean.handleChange}" 
+                                    update=":ships :pages"/>  
+
+                        </p:selectOneMenu>
+                    </h:form>
+                </p:panel>
+
+                <p:panel header="Сортировка" style="margin-top: 10px; ">
+                    <h:form>    
+                        <p:selectOneMenu id="sorts" 
+                                         style="width: 100%; font-size: 100%" 
+                                         value="#{catalogBean.sortType}">
+
+                            <f:selectItem itemLabel="Самые новые" 
+                                          itemValue="-1"/>
+                            <f:selectItem itemLabel="Самые старые"
+                                          itemValue="1"/>
+                            <f:selectItem itemLabel="По возростанию цены" 
+                                          itemValue="2"/>
+                            <f:selectItem itemLabel="По убыванию цены" 
+                                          itemValue="-2"/>
+                            <p:ajax listener="#{catalogBean.handleChange}" 
+                                    update=":ships"/>  
+
+                        </p:selectOneMenu>
+                    </h:form>
+                </p:panel>
+
+                <p:panel header="Денежная единица" style="margin-top: 10px; ">
+                    <h:form>    
+                        <p:selectOneMenu id="sorts" 
+                                         style="width: 100%; font-size: 100%" 
+                                         value="#{loginBean.priceType}">
+
+                            <f:selectItem itemLabel="$ - USD" itemValue="1"/>
+                            <f:selectItem itemLabel="€ - EUR" itemValue="2"/>
+                            <f:selectItem itemLabel="Р - RUB" itemValue="3"/>
+                            <f:selectItem itemLabel="₴ - UAH" itemValue="4"/>
+                            <p:ajax  update=":ships"/>  
+                        </p:selectOneMenu>
+                    </h:form>
+                </p:panel>
+
+
+                <vo:contacts/>
+
+
+                <!--cart-->
+
+                <p:panel header="Корзина" 
+                         id="minicart" 
+                         toggleable="true" 
+                         style="margin-top: 10px; text-align: left; min-height: 50px;"
+                         >
+
+
+                    <h:form id="cartcontent">
+                        <h:panelGroup rendered="#{not empty sessionCart.items}">
+
+                            <p:accordionPanel value="#{sessionCart.items}" 
+                                              var="basicCartItem" 
+                                              activeIndex="null">
+
+                                <p:tab title="#{basicCartItem.name}">
+                                    <h:panelGrid columns="2" style="width:100%">
+                                        <h:outputText value="Цена:"/>
+                                        <h:outputText value="#{basicCartItem.price}"/>
+
+                                        <h:outputText value="Код:"/>
+                                        <h:outputText value="#{basicCartItem.code}"/>
+
+                                        <h:outputText value="Кол-во:"/>
+                                        <h:outputText value="#{basicCartItem.ammount}"/>
+
+                                    </h:panelGrid>
+
+                                    <p:commandButton value="Выбросить" 
+                                                     style="font-size: 100%; width: 100%; "
+                                                     action="#{sessionCart.removeItem(basicCartItem)}"
+                                                     update=":cartcontent"/>
+                                </p:tab>
+                            </p:accordionPanel>
+
+                            <p:button value="Перейтти в корзину" 
+                                      outcome="/cart.xhtml"
+                                      style="width: 100%; 
+                                      margin-top: 5px; 
+                                      color: #FF5511; 
+                                      font-weight: bold"/>
+
+                        </h:panelGroup>
+                        <div style="width:90%; 
+                             height: 20px; 
+                             border-top: 1px solid #777777; 
+                             margin: 5px; 
+                             padding: 3px;">
+
+                            <h:outputText value="Пусто" 
+                                          rendered="#{empty sessionCart.items}"/>
+                            <h:outputText value="Заказов:#{sessionCart.items.size()}" 
+                                          rendered="#{not empty sessionCart.items}"/>
+                        </div>
+
+                    </h:form>
+
+                </p:panel>
+
+                <p:sticky target="minicart" />
+                <!--end cart-->
+            </div>
+
+            <h:panelGroup layout="block" 
+                            id="content">
+
+                <div id="smallmenu" 
+                     style="z-index: 10">
+
+                    <h:panelGrid columns="1" 
+                                   cellpadding="0" 
+                                   id="menutable">
+
+                        <h:form>
+                            <p:commandButton type="button" 
+                                             value="Закрыть" 
+                                             style="width:100%"
+                                             onclick="$('#smallmenu').slideToggle();
+                                                         $closed = true;
+                                                         $('#menubutton').fadeIn('fast');"/>
+                        </h:form>
+
+                        <p:treeTable value="#{userCategoriesBean.root}" 
+                                     styleClass="hide-column-names" var="category">
+                           
+                            <f:facet name="header">  
+                                
+                                <h:link value="Категории" 
+                                        outcome="catalog.xhtml"/>  
+                                
+                            </f:facet>  
+                            
+                            <p:column style="width:32%">  
+                                <h:link value="#{category.name}" 
+                                        style="#{category.id == catalogBean.id ? 
+                                                 'font-weight:bold; color:#FF0000'
+                                                 :''}" 
+                                        outcome="catalog.xhtml?categoryId=#{category.id}"/>
+                            </p:column>  
+    
+                            <f:facet name="footer">
+                                <div style="height: 15px;"/>
+                            </f:facet>
+                            
+                        </p:treeTable>
+
+                        <h:outputText value="Сортировка:"/>
+
+                        <h:form id="formsorts">    
+                            <p:selectOneMenu id="sorts" 
+                                               value="#{catalogBean.sortType}" 
+                                               style="width:100%;">
+                                
+                                <f:selectItem itemLabel="Самые новые" 
+                                                itemValue="-1"/>
+                                <f:selectItem itemLabel="Самые старые" 
+                                                itemValue="1"/>
+                                <f:selectItem itemLabel="По возростанию цены" 
+                                                itemValue="2"/>
+                                <f:selectItem itemLabel="По убыванию цены" 
+                                                itemValue="-2"/>
+                                <p:ajax listener="#{catalogBean.handleChange}"
+                                        update=":ships"/>  
+
+                            </p:selectOneMenu>
+                        </h:form>
+
+                        <h:outputText value="Поиск:"/>
+                        <h:form>
+
+                            <p:inputText value="#{searchTextBoxBean.text}"
+                                         style="height: available;
+                                                margin-right: -1px;
+                                                height: 19px;
+                                                border-top-right-radius: 0;
+                                                border-bottom-right-radius: 0"
+                                         />
+                            
+                            <p:commandButton style="height: border-box; 
+                                                      border-top-left-radius: 0;
+                                                      border-bottom-left-radius: 0"
+                                               icon="ui-icon-search" 
+                                               action="#{searchTextBoxBean.redirect()}"/>
+                        </h:form>
+
+                        <p:button value="Перейти в корзину" 
+                                  style="width:100%; 
+                                  height: available;"
+                                  outcome="cart.xhtml"
+                                  />
+                    </h:panelGrid>
+                </div>
+
+                <!-- button -->
+
+                <div id="menubutton" >
+                    <div id="text">
+                        Меню  
+                    </div>
+
+                    <script>
+                                $closed = true;
+                                $('#text').click(function(){
+
+                        if ($closed == true){
+                        $('#menubutton').fadeOut("fast");
+                                $('#smallmenu').css('visibility', 'visible');
+                                $('#smallmenu').css('display', 'none');
+                                $closed = false;
+                        } else {
+                        $closed = true;
+                        }
+                        $('#smallmenu').slideToggle();
+                        });
+                    </script>
+                </div>
+
+                <!-- /button -->
+
+                <h:panelGroup id="ships" 
+                              layout="block"
+                              class="catalog_list" 
+                              style="border-top: solid 1px #000; min-height: 700px;">
+
+                    <ui:repeat  value="#{catalogBean.getByCategoryId()}" 
+                                  var="shipment">
+                        <vo:shipment value="#{shipment}"/> 
+                    </ui:repeat>
+                </h:panelGroup>
+
+                <div style="width: 100%; text-align: center; bottom: 0">
+                    <h:form id="pages">
+                        <div style="border: solid 1px #FF9911; border-radius: 5px; margin-bottom: 5px; margin-top: 10px;">
+                            <ui:repeat value="#{catalogBean.pages}" var="pageNum" >
+                                <p:commandButton action="#{catalogBean.setPage(pageNum)}" 
+                                                 update=":ships :pages"
+                                                 style="#{pageNum == catalogBean.page ?'color:red;':''}" 
+                                                 value="#{pageNum gt 0 ? pageNum : '..'}" 
+                                                 disabled="#{pageNum == -1 or pageNum == catalogBean.page}" />
+                            </ui:repeat>
+                        </div>
+                    </h:form>
+                </div>
+
+
+
+            </h:panelGroup>
+
+
+            <div id="footer">
+                <vo:footercontent/>
+            </div>
+        </div>    
+        <div id="seperator2" style="height:20px;"/>
+
+
+        <h:form id ="addtocart">
+            <p:dialog header="Добавить в корзину" 
+                      widgetVar="dlgAddToCart" 
+                      showEffect="fade" 
+                      hideEffect="fold"
+                      width="400px" 
+                      style="font-size: 100%; 
+                      margin-top: 100px" 
+                      resizable="false"
+                      position="center top">  
+
+                
+                <table style="width:100%">
+                    <tr>
+                        <td>
+                            Количество:
+                        </td>
+                        <td>
+                            <p:spinner value="#{sessionCart.ammount}" style="width: 100%"/>
+                        </td>
+                    </tr>
+                    <ui:repeat var="varParam" value="#{sessionCart.parameters}">
+                        <tr>
+                            <td>
+                                <h:outputText value="#{varParam.name}"/>   
+                            </td>
+
+                            <td>
+                                <h:selectOneMenu value="#{varParam.selected}" style="width: 100%">
+                                    <f:selectItems  value="#{varParam.values}" 
+                                                    var="variant" 
+                                                    itemValue="#{variant.key}" 
+                                                    itemLabel="#{variant.value}" />
+                                </h:selectOneMenu>  
+                            </td>
+                        </tr>
+                    </ui:repeat>
+                </table>
+
+                <p:commandButton value="Добавить"
+                                 action="#{sessionCart.generateCartItem()}"
+                                 oncomplete="PF('dlgAddToCart').hide();"
+                                 />
+
+            </p:dialog> 
+        </h:form>
+    </h:body>
+</html>
+

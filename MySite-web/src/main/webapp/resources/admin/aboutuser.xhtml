@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+
+    <f:metadata>  
+        <f:viewParam name="id" value="#{userInfoBean.id}" />  
+        <f:viewParam name="id" value="#{commentsTableBean.userId}" /> 
+    </f:metadata> 
+
+    <h:body>
+        <h:panelGroup layout="block" rendered="#{not empty userInfoBean.u}">
+            <div style=" background-color:rgba(255,200,40,0.1); border: solid 1px #FF9933; border-radius: 5px; padding: 5px;">
+                
+                <div id="split" 
+                     style="width: 100%; 
+                            border: dotted 2px #FF9933; 
+                            display:block;
+                            overflow:auto;"
+                            >
+                    
+                    <div id="left" style="width: 49%; float: left; border: solid 1px #FF9933">
+                    <h:form>
+                        
+                        <p:panelGrid columns="2" style="width: 100%">
+
+                                <h:outputText value="ID пользователя"/> 
+                                <h:outputText value="#{userInfoBean.u.id}" style="font-weight: bold;"/> 
+
+                                <h:outputText value="Уровень доступа"/>
+                                <h:panelGroup>
+                                    <p:inputText id="accessLevel" required="true" label="Keyword" />  
+                                    <p:watermark for="accessLevel" value="#{userInfoBean.u.accessLevel}" /> 
+                                    <p:tooltip for="accessLevel" value="Было: #{userInfoBean.u.accessLevel}" showEffect="fade" hideEffect="fade" />  
+                                </h:panelGroup>
+
+                                <h:outputText value="IP при регистрации"/>
+                                <h:outputText value="#{userInfoBean.u.ipAddress}"/>
+
+                                <h:outputText value="Логин"/>
+                                <h:panelGroup>
+                                    <p:inputText id="login" required="true" label="Keyword" />  
+                                    <p:watermark for="login" value="#{userInfoBean.u.login}" />
+                                    <p:tooltip for="login" value="Было: #{userInfoBean.u.login}" showEffect="fade" hideEffect="fade" /> 
+                                </h:panelGroup>
+
+                                <h:outputText value="Пароль"/>
+                                <h:panelGroup>
+                                    <p:inputText id="password" required="true" label="Keyword" />  
+                                    <p:watermark for="password" value="#{userInfoBean.u.password}" /> 
+                                    <p:tooltip for="password" value="Было: #{userInfoBean.u.password}" showEffect="fade" hideEffect="fade" /> 
+
+                                </h:panelGroup>
+
+                                <h:outputText value="Дата регистрации:"/>
+                                <h:outputText value="#{userInfoBean.u.registrationDate}"/>
+
+                                <f:facet name="header">
+                                    Основная информация
+                                </f:facet>
+
+                                <f:facet name="footer" >
+                                    <div style="text-align: center; width: 100%">
+                                        <p:commandButton value="Сохранить изменения"/>
+                                    </div>
+                                </f:facet>
+                            </p:panelGrid>
+                    </h:form>    
+                </div>
+
+                <div id="right" style="width: 50%; float: right; border: solid 1px #000">
+                    <h:form>
+                        <p:accordionPanel>
+                            <p:tab title="Упраление">
+                                <p:commandButton style="width: 99%;" value="Запретить комментирование"/>
+                                <p:commandButton style="width: 99%;" value="Запретить комментирование по IP"/>
+                                <p:commandButton style="width: 99%;" value="Удалить пользователя"/>
+                                <div style="height: 82px;"/>
+                            </p:tab>
+                            <p:tab title="Дополнительная информация">
+
+                            </p:tab>
+                        </p:accordionPanel>
+                    </h:form>
+                </div>
+
+
+            </div> 
+
+
+
+            <!-- user comments -->
+           
+            
+            
+             <h:form id="form">  
+
+                <p:dataTable var="comment" 
+                             value="#{commentsTableBean.lazyModel}" 
+                             paginator="true" rows="10"  
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+                             rowsPerPageTemplate="5,10,15" 
+                             selectionMode="single"
+                             selection="#{commentsTableBean.selectedComment}"
+                             id="newsTable" 
+                             lazy="true"
+                             style=" margin-top: 10px;"
+                             >  
+
+
+
+                    <p:column headerText="Имя" >  
+                        <h:outputText value="#{comment.userName}" />  
+                    </p:column>  
+
+                    <p:column headerText="Дата создания" sortBy="#{comment.dateAdded}" >  
+                        <h:outputText value="#{comment.dateAdded}" />  
+                    </p:column>  
+
+                    <p:column headerText="Text">  
+                        <h:outputText 
+                            value="#{comment.text.length() gt 50 ? comment.text.substring(0,47).concat('...') : comment.text}" />
+
+                    </p:column>  
+
+                    <p:column headerText="ip">  
+                        <h:outputText value="#{comment.ip}" />  
+                    </p:column>  
+
+                    <f:facet name="footer">
+                        <p:commandButton id="viewButton" value="View" icon="ui-icon-search"  
+                                         update=":form:display" oncomplete="PF('carDialog').show()"/>  
+                    </f:facet>
+
+                    <f:facet name="header">
+                        Комментарии пользователя
+                    </f:facet>
+
+                </p:dataTable>  
+
+                <p:dialog id="dialog" header="Car Detail" widgetVar="carDialog" resizable="false"  
+                          showEffect="clip" hideEffect="fold">  
+
+                    <h:panelGrid id="display" columns="1" cellpadding="4">  
+
+                        <h:outputText value="Model:" />  
+                        <h:outputText value="#{commentsTableBean.selectedComment.text}" 
+                                      escape="false"/>  
+
+
+                    </h:panelGrid>  
+                </p:dialog> 
+
+            </h:form>  
+
+
+            <!-- end comments -->
+
+            </div>
+        </h:panelGroup>
+
+        <h:panelGroup layout="block" rendered="#{empty userInfoBean.u}">
+            <h:outputText value="No user with id = #{userInfoBean.id}" style="font-size: 200%"/>
+        </h:panelGroup>
+    </h:body>
+</html>
+

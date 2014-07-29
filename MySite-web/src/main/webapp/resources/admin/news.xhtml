@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:vo="http://java.sun.com/jsf/composite/user"
+      xmlns:vadm="http://java.sun.com/jsf/composite/admin">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="css/default.css" />
+        <h:outputStylesheet name="css/layout.css" />
+        <h:outputStylesheet name="css/shipmentinfo.css" />
+    </h:head>
+
+    <h:body>
+
+        <p:growl id="userinfo"/>
+
+        <div class="seperator" style="height:20px;"/>
+
+        <div id="page" >
+
+            <h:panelGroup layout="block" id="header">
+                <vo:headercontent/>
+            </h:panelGroup>
+
+            <div id="menu"> 
+                <vadm:navigatemenu selected="3"/>
+            </div>
+
+            <h:panelGroup layout="block" 
+                          id="content" 
+                          >
+
+                
+                
+                
+                <h:form id="form">  
+
+                <p:dataTable var="information" 
+                             value="#{newsTableBean.model}" 
+                             paginator="true" rows="10"  
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+                             rowsPerPageTemplate="5,10,15" 
+                             lazy="true"
+                             id="newsTable" 
+                             style=" margin-top: 10px;"
+                             >  
+
+
+
+                    <p:column headerText="Имя" >  
+                        <h:outputText value="#{information.topic}" />  
+                    </p:column>  
+
+                    <p:column headerText="Дата создания" sortBy="#{information.created}" >  
+                        <h:outputText value="#{information.created}" />  
+                    </p:column>  
+
+                    <p:column headerText="Text">  
+                        <h:outputText 
+                            value="#{information.text.length() gt 50 ? information.text.substring(0,47).concat('...') : information.text}" />
+
+                    </p:column>  
+                    
+                    <p:column style="width:30px">
+                        <p:commandButton icon="ui-icon-close" 
+                                         action="#{newsTableBean.delete()}"
+                                         update=":form:newsTable"
+                                         >
+                            <f:setPropertyActionListener value="#{information}"
+                                                         target="#{newsTableBean.selected}"/>
+                        </p:commandButton>
+                        
+                        <p:commandButton icon="ui-icon-pencil" 
+                                         ajax ="true"
+                                             update=":editor_dialog" 
+                                             oncomplete="PF('editDialog').show()">
+                            <f:setPropertyActionListener value="#{information}"
+                                                         target="#{newsTableBean.selected}"/>
+                        </p:commandButton>
+                        
+                    </p:column>
+
+                   
+
+                    <f:facet name="header">
+                        Все новости
+                    </f:facet>
+                    
+                    <f:facet name="footer">
+                        <p:commandButton value="Добавить новость"
+                                         oncomplete="PF('newDialog').show()"
+                                         />
+                    </f:facet>
+                    
+
+                </p:dataTable>  
+
+                
+
+            </h:form>  
+
+                <h:form id="editor_dialog">
+
+                    <p:dialog id="dialog" header="Изменить" widgetVar="editDialog" resizable="false"  
+                              showEffect="fade" 
+                              hideEffect="fold">
+
+                        <h:panelGrid id="display" columns="1" cellpadding="4">  
+
+                            <h:outputText value="Название:"/>
+                            <p:inputText value="#{newsTableBean.selected.topic}" style="width: 100%"/>
+                            
+                            <h:outputText value="Вступительный текст"/>
+                            <p:inputTextarea value="#{newsTableBean.selected.basicText}" 
+                                             autoResize="false"
+                                             style="width: 100%"/>
+                            
+                            <h:outputText value="Полный текст:"/>
+                            <pe:ckEditor value="#{newsTableBean.selected.text}"/>
+
+                            <p:commandButton value="Сохранить изменения"
+                                             action="#{newsTableBean.updateInfo()}"
+                                             update=":form:newsTable"
+                                             oncomplete="PF('editDialog').hide()"
+                                             />
+
+
+                        </h:panelGrid>  
+                    </p:dialog> 
+
+                </h:form>
+                
+                <h:form id="new_inf">
+                     <p:dialog id="dialog" 
+                               header="Изменить" 
+                               widgetVar="newDialog" 
+                               resizable="false"  
+                              showEffect="fade" 
+                              hideEffect="fold"
+                              
+                              >
+                         
+                        <h:panelGrid columns="1" style="font-size: 100%; width: 100%">
+                            <h:outputText value="Название:"/>
+                            <p:inputText value="#{newsEditorBean.topic}" style="width: 100%"/>
+                            
+                            <h:outputText value="Вступительный текст"/>
+                            <p:inputTextarea value="#{newsEditorBean.basicText}" autoResize="false" style="width: 100%"/>
+                            
+                            <h:outputText value="Полный текст:"/>
+                            <pe:ckEditor value="#{newsEditorBean.text}"/>
+                            
+                        </h:panelGrid>
+                        <p:commandButton 
+                            value="Save"
+                            action="#{newsEditorBean.save()}"
+                            update=":form:newsTable"
+                            oncomplete="PF('newDialog').hide()"
+                            style=" width: 100%"/>
+                     </p:dialog> 
+                </h:form>
+
+
+            </h:panelGroup>
+
+            <div id="footer">
+
+                <vo:footercontent/>
+
+            </div>
+        </div>   
+        <div class="seperator" style="height:20px;"/>
+    </h:body>
+
+
+</html>
+
+
+

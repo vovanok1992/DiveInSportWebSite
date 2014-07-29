@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:vo="http://java.sun.com/jsf/composite/user"
+      xmlns:vadm="http://java.sun.com/jsf/composite/admin">
+    <h:head>
+        <title>Управление категориями</title>
+        <h:outputStylesheet name="css/default.css" />
+        <h:outputStylesheet name="css/layout.css" />
+        <h:outputStylesheet name="css/shipmentinfo.css" />
+    </h:head>
+
+    <h:body>
+
+        <p:growl id="userinfo"/>
+
+        <div class="seperator" style="height:20px;"/>
+
+        <div id="page" >
+
+            <h:panelGroup layout="block" id="header">
+                <vo:headercontent/>
+            </h:panelGroup>
+
+            <div id="menu"> 
+                <vadm:navigatemenu selected="1"/>
+            </div>
+
+            <h:panelGroup layout="block" 
+                          id="content" 
+                          >
+
+                <h:form id="form">  
+
+                    <p:treeTable id="treetable" value="#{adminCategoriesTableBean.root}" var="category">  
+                        <f:facet name="header">  
+                            Управление категориями 
+                        </f:facet>  
+
+                        <f:facet name="footer">  
+
+                            <p:commandButton update=":form:add_root_pannel" value="Добавить корневую категорию" oncomplete="PF('newRootDialog').show()" title="View Detail" icon="ui-icon-plus">
+                                <f:setPropertyActionListener value="#{null}"
+                                                             target="#{adminCategoriesTableBean.selectedDocument}"/>
+                            </p:commandButton>
+                        </f:facet> 
+
+                        <p:column style="width:32%">  
+                            <f:facet name="header">  
+                                Name  
+                            </f:facet>  
+                            <h:outputText value="#{category.name}" />  
+                        </p:column>  
+
+                        <p:column style="width:32%">  
+                            <f:facet name="header">  
+                                id  
+                            </f:facet>  
+                            <h:outputText value="#{category.id}" />  
+                        </p:column>  
+
+                        <p:column style="width:32%">  
+                            <f:facet name="header">  
+                                Date  
+                            </f:facet>  
+                            <h:outputText value="#{category.dateCreated}" />  
+                        </p:column>  
+
+                        <p:column style="width:4%">
+                            <f:facet name="header">  
+                                Actions  
+                            </f:facet>  
+
+                            
+
+                            <p:commandButton icon="ui-icon-close" action="#{adminCategoriesTableBean.remove(category)}"/>
+
+                            <p:commandButton icon="ui-icon-pencil" 
+                                             update=":form:editPanel" 
+                                             oncomplete="PF('editDialog').show()">
+                                <f:setPropertyActionListener value="#{category}"
+                                                             target="#{adminCategoriesTableBean.selectedDocument}"/>
+                            </p:commandButton>
+
+                            <p:commandButton update=":form:add_pannel" oncomplete="PF('newDialog').show()" title="View Detail" icon="ui-icon-plus">
+                                <f:setPropertyActionListener value="#{category}"
+                                                             target="#{adminCategoriesTableBean.selectedDocument}"/>
+                            </p:commandButton>
+                        </p:column>  
+                    </p:treeTable>  
+
+                    <p:dialog id="dialog_edit" header="Document Detail" showEffect="fade" widgetVar="editDialog" modal="true">  
+                        <p:outputPanel id="editPanel">  
+                            <h:panelGrid  columns="2" cellpadding="5" rendered="#{not empty adminCategoriesTableBean.selectedDocument}" style="width: 100%">  
+                                <h:outputLabel for="name_edit" value="Name: " />  
+                                <p:inputText id="name_edit" value="#{adminCategoriesTableBean.selectedDocument.name}" style="font-weight:bold; width: 100%" />  
+
+                                <h:outputLabel for="id_out" value="id: " />  
+                                <h:outputText id="id_out" value="#{adminCategoriesTableBean.selectedDocument.id}" style="font-weight:bold" />  
+
+                                <h:outputLabel for="type_edit" value="parent id " />  
+                                <h:panelGroup>
+                                    <p:inputText id="type_edit" value="#{adminCategoriesTableBean.selectedDocument.parentId}" style="font-weight:bold; width: 100%" /> 
+                                    <p:tooltip for="type_edit" value="Изменять с осторожностью!"/>
+                                </h:panelGroup>
+
+                                <h:outputLabel for="desc_edit" value="desc " />  
+                                <p:inputTextarea id="desc_edit" value="#{adminCategoriesTableBean.selectedDocument.description}" style="font-weight:bold; width: 100%" />           
+
+                            </h:panelGrid>  
+
+                            <p:commandButton value="Сохранить изменения" 
+                                             icon="ui-icon-check" 
+                                             action="#{adminCategoriesTableBean.handleChange()}"
+                                             style="width: 100%"/>
+
+                        </p:outputPanel>  
+                    </p:dialog>
+
+                    <p:dialog id="dialog_new" header="New" showEffect="fade" widgetVar="newDialog" modal="true">  
+                        <p:outputPanel id="add_pannel">  
+                            <h:outputText value="Parent: #{category.name} (id: #{category.id})"/>
+                            <h:panelGrid  columns="2" cellpadding="5">  
+
+                                <h:outputLabel for="new_name" value="Name: " />  
+                                <p:inputText id="new_name" value="#{adminCategoriesTableBean.newName}" />  
+
+                                <h:outputLabel for="new_desc" value="Desc: " />  
+                                <p:inputText id="new_desc" value="#{adminCategoriesTableBean.newDesc}" />  
+
+                            </h:panelGrid>  
+                            <p:commandButton value="Add"  action="#{adminCategoriesTableBean.newChildCategory()}" oncomplete="PF('newDialog').hide()"/>
+                        </p:outputPanel>  
+                    </p:dialog>  
+
+                    <p:dialog id="dialog_new_root" header="NewRoot" showEffect="fade" widgetVar="newRootDialog" modal="true">  
+                        <p:outputPanel id="add_root_pannel">
+                            <h:outputText value="Root element"/>
+                            <h:panelGrid  columns="2" cellpadding="5">  
+
+                                <h:outputLabel for="new_name_root" value="Name: " />  
+                                <p:inputText id="new_name_root" value="#{adminCategoriesTableBean.newRootName}" />  
+
+                                <h:outputLabel for="new_desc_root" value="Desc: " />  
+                                <p:inputText id="new_desc_root" value="#{adminCategoriesTableBean.newRootDesc}" />  
+
+                            </h:panelGrid>  
+                            <p:commandButton value="Add" ajax="true" action="#{adminCategoriesTableBean.newRootCategory()}" oncomplete="PF('newRootDialog').hide()"/>
+                        </p:outputPanel>  
+                    </p:dialog>          
+
+                </h:form>  
+
+
+            </h:panelGroup>
+
+            <div id="footer">
+
+                <vo:footercontent/>
+
+            </div>
+        </div>   
+        <div class="seperator" style="height:20px;"/>
+    </h:body>
+
+
+</html>
+

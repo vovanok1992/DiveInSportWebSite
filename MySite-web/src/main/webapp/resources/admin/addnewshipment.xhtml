@@ -1,0 +1,367 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:vo="http://java.sun.com/jsf/composite/user" 
+      xmlns:vadm="http://java.sun.com/jsf/composite/admin">
+    
+
+    <f:metadata>  
+        <f:viewParam name="edit" value="#{editShipmentBean.editId}" />   
+    </f:metadata> 
+
+    <f:event listener="#{editShipmentBean.handleLoad()}" type="preRenderView" />
+
+    <h:head>
+        <title>Добавление товара</title>
+        <style type="text/css">
+            .inputs{
+                width:100%;
+                padding-right: 10px;
+                margin-bottom: 10px;
+                -moz-box-sizing: border-box; 
+                -webkit-box-sizing: border-box;     
+                box-sizing: border-box; 
+            }
+            .spaceUp{
+                margin-bottom: 10px;
+            }
+            .column{
+                width: 50%;
+            }
+        </style>
+        <h:outputStylesheet name="css/default.css" />
+        <h:outputStylesheet name="css/layout.css" />
+        <h:outputStylesheet name="css/shipmentinfo.css" />
+    </h:head>
+
+    <h:body>
+
+        <p:growl id="userinfo"/>
+
+        <div class="seperator" style="height:20px;"/>
+
+        <div id="page" >
+
+            <h:panelGroup layout="block" id="header">
+                <vo:headercontent/>
+            </h:panelGroup>
+
+            <div id="menu"> 
+                <vadm:navigatemenu selected="4"/>
+            </div>
+
+            <h:panelGroup layout="block" 
+                          id="content" 
+                          >
+
+                <p:panel id="panel" 
+                         style="font-size: 100%;">
+                    <h:form id="form">
+
+                        <p:poll interval="1500" listener="#{editShipmentBean.updateSession()}"/> 
+
+                        <p:messages id="errors" 
+                                    showDetail="true" 
+                                    autoUpdate="true" 
+                                    closable="true" />  
+
+                        <p:growl id="messages" 
+                                 showDetail="true"/>
+
+                        <h:outputLabel for="name" 
+                                       value="Название товара:" 
+                                       style="font-weight:bold"/> 
+
+                        <p:inputText id="name" 
+                                     styleClass ="inputs" 
+                                     value="#{editShipmentBean.name}"/>  
+
+                        <p:panelGrid id="pricetable" columns="3" style="width: 100%; font-size: 100%; margin-bottom: 10px;">
+
+                            <h:outputLabel for="price" 
+                                           value="Цена товара:" 
+                                           style="font-weight:bold"/> 
+
+                            <h:outputLabel for="priceunit" 
+                                           value="Денежная единица:" 
+                                           style="font-weight:bold"/> 
+
+                            <h:outputLabel for="pricecurrent" 
+                                           value="Курс:" 
+                                           style="font-weight:bold"/> 
+
+
+                            <p:inputText id="price" 
+                                         styleClass ="inputs" 
+                                         value="#{editShipmentBean.price}"/>  
+
+                            <p:selectOneMenu value="#{editShipmentBean.currencyUnit}"
+                                             id="priceunit">
+                                <p:ajax update="pricetable"/>
+                                <f:selectItem itemLabel="$ - USD" itemValue="1"/>
+                                <f:selectItem itemLabel="€ - EUR" itemValue="2"/>
+                                <f:selectItem itemLabel="Р - RUB" itemValue="3"/>
+                                <f:selectItem itemLabel="₴ - UAH" itemValue="4"/>
+                            </p:selectOneMenu>
+
+
+                            <h:panelGroup layout="block">
+                                <p:selectOneMenu id="pricecurrent" 
+                                                 style="float: left"  
+
+                                                 value="#{editShipmentBean.currencyType}">
+                                    <p:ajax update="pricetable"/>
+                                    <f:selectItem itemLabel="Статический" itemValue="1"/>
+                                    <f:selectItem itemLabel="Динамический" itemValue="2"/>
+                                    <f:selectItem itemLabel="Локальный(свой)" itemValue="3"/>  
+                                </p:selectOneMenu>
+
+                                <p:inputText id="currency" 
+                                             value="#{editShipmentBean.currencyValue}"
+                                             disabled="#{not (editShipmentBean.currencyType eq 3)}" 
+                                             style="float: right"/>
+                            </h:panelGroup>
+                        </p:panelGrid>
+
+
+
+                        <h:outputLabel for="information" 
+                                       value="Описание:" 
+                                       style="font-weight:bold"
+                                       />      
+                        <p:selectOneButton value="#{editShipmentBean.textEditorNum}" 
+
+                                           style="font-size: 100%; margin-bottom: 10px" >  
+                            <f:selectItem itemLabel="Стандартный редактор" itemValue="1" />  
+                            <f:selectItem itemLabel="Простой (для телефона/HTML)" itemValue="2" />  
+                            <f:selectItem itemLabel="Расширенный" itemValue="3" />  
+                            <p:ajax update="form:editors"/>  
+                        </p:selectOneButton>  
+                        <h:panelGroup id="editors">
+                            <p:editor id="information"
+
+                                      rendered="#{editShipmentBean.textEditorNum == 1}"
+                                      widgetVar="myeditor1"
+                                      styleClass ="inputs"
+                                      value="#{editShipmentBean.information}"
+                                      />
+
+                            <p:inputTextarea id="information_light"
+
+                                             rendered="#{editShipmentBean.textEditorNum == 2}"
+                                             widgetVar="myeditor2"
+                                             styleClass ="inputs"
+
+                                             value="#{editShipmentBean.information}"
+                                             />
+
+                            <pe:ckEditor id="information_ext" 
+
+                                         rendered="#{editShipmentBean.textEditorNum == 3}"
+                                         widgetVar="myeditor3"
+                                         width="100%"
+                                         value="#{editShipmentBean.information}"
+                                         />
+
+                        </h:panelGroup>
+
+                        <h:panelGrid columns="4" style="margin-top: 10px; margin-bottom: 10px">
+                            <h:outputLabel for="category" 
+                                           value="Категория: " 
+                                           style="font-weight:bold"/>
+
+                            <p:selectOneMenu id="category"  
+                                             value="#{editShipmentBean.category}">       
+                                <f:selectItems value="#{editShipmentBean.categories}" 
+                                               var="category"
+                                               itemValue="#{category.id}"
+                                               itemLabel="#{category.name}  (id:#{category.id})"
+                                               itemDescription="#{category.description}"
+                                               />
+
+                            </p:selectOneMenu>
+
+                            <h:outputLabel for="active" 
+                                           value="Товар активен: " 
+                                           style="font-weight:bold"/>
+
+                            <p:selectBooleanCheckbox id="active" value="#{editShipmentBean.active}" /> 
+                        </h:panelGrid>
+
+                        <p:dataTable id="parameters" 
+                                     style="font-size: 100% ;margin-bottom: 10px"
+                                     var="shipmentParameter" 
+                                     value="#{parametersTableBean.params}" 
+                                     selection="#{parametersTableBean.selectedShipmentParameter}" 
+                                     rowKey="#{shipmentParameter.id}" 
+                                     selectionMode="single" 
+                                     editable="true" 
+                                     editMode="cell" 
+                                     widgetVar="shipmentParameterTable">
+
+                            <f:facet name="header">
+                                Характеристики
+                            </f:facet>
+
+                            <p:ajax event="cellEdit" 
+                                    listener="#{parametersTableBean.onCellEdit}" 
+                                    update=":form:messages" />
+
+                            <p:column headerText="Параметр" >
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{shipmentParameter.name}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+
+                                        <p:selectOneMenu id="modelInput" 
+                                                         editable="true"
+                                                         value="#{shipmentParameter.name}" 
+                                                         style="width:96%">       
+                                            <f:selectItem itemLabel="Надо добавить"/>
+                                        </p:selectOneMenu>  
+
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Значение" >
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{shipmentParameter.argument}"/>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{shipmentParameter.argument}" 
+                                                     style="width:96%" 
+                                                     label="Year"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Мн." style="width:35px; text-align: center">  
+                                <p:selectBooleanCheckbox value="#{shipmentParameter.multy}" 
+                                                         label="Мульти параметр"/>  
+                            </p:column>  
+
+                            <p:column headerText="Уд." style="width:35px; text-align: center">  
+                                <p:commandButton id="selectButton" 
+                                                 update=":form:parameters" 
+                                                 icon="ui-icon-close" 
+                                                 actionListener="#{parametersTableBean.removeField(shipmentParameter)}" 
+                                                 title="Удалить строку">  
+                                </p:commandButton>  
+                            </p:column>  
+
+
+
+                            <f:facet name="footer">
+                                <p:commandButton value="Добавить поле" 
+                                                 actionListener="#{parametersTableBean.addField()}" 
+                                                 update=":form:parameters"/>
+
+                                <p:commandButton value="Очистить все" 
+                                                 actionListener="#{parametersTableBean.removeAll()}" 
+                                                 update=":form:parameters"/>
+                            </f:facet>
+                        </p:dataTable>
+
+                        <h:outputText  value="Изображения:"/>
+
+                        <p:fileUpload fileUploadListener="#{editShipmentBean.handleFileUpload}" 
+                                      auto="true"
+                                      label="Добавить"
+                                      style="font-size: 100%"
+                                      mode="advanced" 
+                                      dragDropSupport="true"  
+                                      multiple="true" 
+                                      update="messages" 
+                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" /> 
+
+                        <h:panelGroup id="savedImages" 
+                                      style="margin-bottom: 10px">
+
+                            <p:dataTable var="o" 
+                                         value="#{editShipmentBean.images}" 
+                                         rendered="#{editShipmentBean.renderFiles}" 
+                                         style="margin-top: 10px">
+
+                                <p:column headerText="Изображения" 
+                                          >
+                                    <h:outputText value="#{o}"/>   
+                                </p:column>
+
+                                <p:column >
+                                    <p:graphicImage style="max-height: 50px" 
+                                                    value="#{editShipmentBean.getAbsolutePathSmall(o)}" />
+                                </p:column>
+
+                                <p:column style="width:35px; text-align: center">
+                                    <p:commandButton action="#{editShipmentBean.removePicture(o)}" 
+                                                     icon="ui-icon-close" /> 
+                                </p:column>
+
+                                <f:facet name="footer">  
+
+                                    <h:panelGrid columns="2" 
+                                                 style="border: transparent">
+
+                                        <h:outputLabel for="pictureselect" 
+                                                       value="Основная:"
+                                                       style="float:right; margin-left: 100px;"/> 
+
+                                        <p:selectOneMenu id="pictureselect" 
+                                                         rendered="#{editShipmentBean.renderFiles}"
+                                                         value="#{editShipmentBean.mainPicture}"
+                                                         style="font-size: 100%; float:left; width:250px">       
+                                            <f:selectItems value="#{editShipmentBean.images}"/>
+                                        </p:selectOneMenu>  
+                                    </h:panelGrid>
+                                </f:facet>                   
+                            </p:dataTable>     
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{editShipmentBean.editId == 0}">
+                            <p:commandButton id="saveBtn"  
+                                             style="width: 100%; margin-top: 10px"
+                                             value="Сохранить и очистить" 
+                                             icon="ui-icon-check" 
+                                             action="#{editShipmentBean.inputsErrors()}"/>  
+
+                            <p:commandButton id="saveAndLoadBtn"  
+                                             style="width: 100%; margin-top: 10px"
+                                             value="Сохранить и перейти на страницу" 
+                                             icon="ui-icon-check" 
+                                             action="#{editShipmentBean.inputsErrors()}"/> 
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{editShipmentBean.editId > 0}">
+
+                            <p:commandButton id="savEdit"  
+                                             style="width: 100%; margin-top: 10px"
+                                             value="Сохранить изменения" 
+                                             icon="ui-icon-check" 
+                                             action="#{editShipmentBean.inputsErrors()}"/>
+                        </h:panelGroup>
+
+
+                    </h:form>
+                </p:panel>
+
+
+            </h:panelGroup>
+
+            <div id="footer">
+
+                <vo:footercontent/>
+
+            </div>
+        </div>   
+        <div class="seperator" style="height:20px;"/>
+    </h:body>
+
+
+</html>

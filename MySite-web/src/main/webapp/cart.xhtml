@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:vo="http://java.sun.com/jsf/composite/user"
+      xmlns:vadm="http://java.sun.com/jsf/composite/admin">
+    <h:head>
+        <title>Корзина</title>
+        <h:outputStylesheet name="css/default.css" />
+        <h:outputStylesheet name="css/layout.css" />
+        <h:outputStylesheet name="css/shipmentinfo.css" />
+    </h:head>
+
+    <h:body>
+
+        <p:growl id="userinfo"/>
+
+        <div class="seperator" style="height:20px;"/>
+
+        <div id="page" >
+
+            <h:panelGroup layout="block" id="header">
+                <vo:headercontent/>
+            </h:panelGroup>
+
+            <h:panelGroup layout="block" 
+                          id="content" 
+                          style="margin-left: 10px;"
+                          >
+
+                <p:dataTable value="#{sessionCart.items}" var="basicCartItem">
+                    <p:column headerText="Товар">
+                        #{basicCartItem.description}
+                    </p:column>
+
+                    <p:column headerText="Код">
+                        #{basicCartItem.code}
+                    </p:column>
+
+                    <p:column headerText="Количество">
+                        #{basicCartItem.ammount}
+                    </p:column>
+
+                    <p:column headerText="Цена за единицу">
+                        #{basicCartItem.price}
+                    </p:column>
+
+
+                </p:dataTable>   
+
+                <h:form id="loginForm">
+                    <p:commandButton value="Оформить заказ"  
+                                     onclick="PF('dlgOrder').show();" 
+                                     type="button" 
+                                     ajax="true" 
+                                     style="margin:10px;"/>
+
+                    <p:dialog 
+                        header="Оформить заказ" 
+                        widgetVar="dlgOrder" 
+                        showEffect="fade" 
+                        hideEffect="drop" 
+                        height="auto" 
+                        width="auto" 
+                        style="font-size: 100%; margin-top: 100px" 
+                        resizable="false"
+                        position="center top">  
+
+                        <h:outputText value="Укажите вашу контактную информацию, что бы мы смогли с вами связаться."/>
+
+                        <h:panelGrid id = "grid" 
+                                     columns="2" 
+                                     cellpadding="5"
+                                     style="width: 100%;"> 
+                            <h:outputText value="Телефон"/>
+                            <p:selectOneMenu value="#{orderCartBean.selectedPhone}"
+
+                                             editable="true"
+                                             style="font-size: 100%; width: 100%;">
+
+                                <f:selectItems value="#{orderCartBean.phones}"/>
+                            </p:selectOneMenu>
+
+                            <h:outputText value="Доп. информация"/>
+                            <p:inputTextarea value=""
+                                             style="font-size: 100%; width: 100%"/>
+
+
+                        </h:panelGrid>   
+
+                        <p:commandButton value="Оформить"/>
+
+                        <p:messages id="logmessages" 
+                                    showDetail="true" 
+                                    autoUpdate="true" 
+                                    closable="true" /> 
+
+                    </p:dialog> 
+                </h:form>
+
+
+            </h:panelGroup>
+
+            <div id="footer">
+
+                <vo:footercontent/>
+
+            </div>
+        </div>   
+        <div class="seperator" style="height:20px;"/>
+    </h:body>
+
+
+</html>
+
+

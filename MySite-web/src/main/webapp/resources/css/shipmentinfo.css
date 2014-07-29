@@ -1,0 +1,44 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11.03.2014, 19:21:42
+    Author     : vovan_000
+*/
+
+.name{
+    width: 100%;
+    text-align: center;
+    color: #FF9933;
+   
+    margin-top:10px;
+    
+ 
+    font-size: 2em;
+}
+
+.information{
+    text-indent: 1.5em;
+    text-align: justify;						 
+    text-align-last: left;
+}
+
+.date{
+    margin-top:10px;
+    font-size: 0.8em;
+    text-align: right;						 
+    color: #555;
+}
+
+.rate{
+    position: relative;
+    top: -3px;
+    right: -3px;
+    
+    float: left;
+    font-size: 0.8em;
+    color: #555;
+   
+}

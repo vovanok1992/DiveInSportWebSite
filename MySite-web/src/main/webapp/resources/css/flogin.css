@@ -1,0 +1,19 @@
+.flog {
+    position: fixed;
+    bottom: 80px;
+    right: 0px;
+    border-top-left-radius:5px;
+    border-bottom-left-radius:5px;
+    text-decoration: none;
+    color: #000000;
+    background-color: rgba(235, 235, 235, 0.5);
+    padding: 8px;
+    display: none;
+    width: 65px;
+    font-size: 100% !important;
+    z-index: 10;
+}
+
+.flog:hover {    
+    background-color: rgba(135, 135, 135, 0.50);
+}

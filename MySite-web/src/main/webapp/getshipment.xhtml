@@ -1,0 +1,365 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:vo="http://java.sun.com/jsf/composite/user"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <f:metadata>  
+        <f:viewParam name="ids" value="#{productDetailBean.someass}"/> 
+        <f:viewParam name="id" value="#{productDetailBean.id}"/>  
+        <f:viewParam name="id" value="#{commentsBean.id}"/>  
+        
+    </f:metadata> 
+
+    <h:head>
+        <title>#{productDetailBean.curr.name}</title>
+        <h:outputStylesheet name="css/default.css" />
+        <h:outputStylesheet name="css/layout.css" />
+        <h:outputStylesheet name="css/shipmentinfo.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="resources/img/about/icon.ico"/>
+        
+
+        <!-- Put this script tag to the <head> of your page -->
+        <script type="text/javascript" src="//vk.com/js/api/openapi.js?111"></script>
+        <script type="text/javascript" src="//vk.com/js/api/share.js?90"></script>
+
+        <script type="text/javascript">
+            VK.init({apiId: 4291047, onlyWidgets: true});
+        </script>
+
+
+
+    </h:head>
+    <h:body>
+        
+        <p:growl id="userinfo"/>
+
+        <div class="seperator" style="height:20px;"/>
+
+        <div id="page" >
+
+            <h:panelGroup layout="block" id="header">
+                <vo:headercontent/>
+            </h:panelGroup>
+
+            <div id="menu" style="overflow:hidden;"> 
+               
+                <p:button value="Вернуться в Каталог" 
+                          icon="ui-icon-document"  
+                          style="width:100%;" 
+                          outcome="catalog"/>
+                
+                <vo:contacts/>
+                <vo:searchbox/>
+                
+                <h:panelGroup id="cart">
+                    <vo:cart/>
+                </h:panelGroup>
+                
+                
+               
+            </div>
+
+            <h:panelGroup layout="block" 
+                          id="content" 
+                          rendered="#{not empty productDetailBean.curr}">
+
+                <p:breadCrumb model="#{productDetailBean.menu}" />
+
+                <p class="name">
+                    <h:outputText value="#{productDetailBean.curr.name}"/> 
+                </p>
+
+                <p>
+                    #{productDetailBean.curr.price} 
+                </p>
+
+                <p class="information">
+                    <h:outputText value="#{productDetailBean.curr.information}" 
+                                  escape="false"/>
+                </p>
+
+                <div style="width: 100%; text-align: center">
+                    <p:lightBox>  
+                        <ui:repeat value="#{productDetailBean.curr.allImages}" 
+                                   var="imageName" >
+
+                            <h:outputLink value="#{productDetailBean.curr.getAbsolutePath(imageName)}">  
+                                <h:graphicImage value="#{productDetailBean.curr.getAbsolutePathSmall(imageName)}"/>  
+                            </h:outputLink>  
+
+                        </ui:repeat>
+                    </p:lightBox>  
+                </div>
+
+                <p:dataTable var="shipmentParameter" 
+                             value="#{productDetailBean.curr.parameters}" 
+                             styleClass="hide-column-names">
+
+                    <f:facet name="header">  
+                        Характеристики  
+                    </f:facet> 
+
+                    <p:column>
+                        <h:outputText value="#{shipmentParameter.name}" />  
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{shipmentParameter.argument}" />  
+                    </p:column>
+                </p:dataTable>
+
+
+                <h:panelGroup layout="block" id="rateInfo">
+                    <div style="height: 30px; float: left">
+                    <h:form>
+                        <p:rating value="#{productDetailBean.stars}" 
+                                  cancel="false" 
+                                  style="margin-top:10px;">
+
+                            <p:ajax event="rate" 
+                                    listener="#{productDetailBean.handleRate()}"/>
+                        </p:rating>
+                    </h:form>
+                    </div>
+                    <div>
+                    <p class="rate">
+                        <h:outputText value="#{productDetailBean.curr.everageRating}">
+                            <f:convertNumber minFractionDigits="2" />
+                        </h:outputText>
+                        <h:outputText value=" ( голосов: #{productDetailBean.curr.votesCount})"/> 
+                    </p>
+                    </div>
+                </h:panelGroup>
+                
+                <p class="date">
+                    Добавленно:
+                    <h:outputText value="#{productDetailBean.curr.created}">
+                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                    </h:outputText>
+                </p>
+
+                <!-- Like -->
+
+                <div id="bar" style="margin-top: 16px; height: 20px;" >
+
+                    <div style="float: left">
+                        <div id="vk_like" style=""></div>
+                        <script type="text/javascript">
+                            VK.Widgets.Like("vk_like", {
+                                type: "button"
+                                
+                         });
+                        </script> 
+                    </div>
+                    
+                    <div style="float: right; font-size: 130%; position: relative; top: -10px;">
+                        <h:form id="dlgAddToCartForm">
+                            <p:commandButton value="Добавить в корзину" 
+                                             icon="ui-icon-cart"
+                                             actionListener="#{sessionCart.load(productDetailBean.curr)}"
+                                             update="dlgAddToCartForm"
+                                             oncomplete="PF('dlgAddToCart').show();"
+                                             />
+                            
+                            
+                            <p:dialog header="Добавить в корзину" 
+                                      widgetVar="dlgAddToCart" 
+                                      showEffect="fade" 
+                                      hideEffect="fold"
+                                      
+                                      width="400px" 
+                                      style="font-size: 100%; 
+                                             margin-top: 100px" 
+                                      resizable="false"
+                                      position="center top">  
+
+
+                                <table style="width:100%">
+                                    <tr>
+                                        <td>
+                                            Количество:
+                                        </td>
+                                        <td>
+                                            <p:spinner value="#{sessionCart.ammount}" style="width: 100%"/>
+                                        </td>
+                                    </tr>
+                                    <ui:repeat var="varParam" value="#{sessionCart.parameters}">
+                                        <tr>
+                                            <td>
+                                                <h:outputText value="#{varParam.name}"/>   
+                                            </td>
+
+                                            <td>
+                                                <h:selectOneMenu value="#{varParam.selected}" style="width: 100%">
+                                                    <f:selectItems  value="#{varParam.values}" 
+                                                                    var="variant" 
+                                                                    itemValue="#{variant.key}" 
+                                                                    itemLabel="#{variant.value}" />
+                                                </h:selectOneMenu>  
+                                            </td>
+                                        </tr>
+                                    </ui:repeat>
+                                </table>
+                                    
+                                    <p:commandButton value="Добавить"
+                                                     action="#{sessionCart.generateCartItem()}"
+                                                     update=":cart"
+                                                     oncomplete="PF('dlgAddToCart').hide();"
+                                                     />
+                                
+                            </p:dialog> 
+                            
+                        </h:form>
+                    </div>
+                </div>
+
+                
+
+                <!-- Like end -->
+                
+                <div style="height:10px;"/>
+
+                <!-- ////////////////-COMMENTS-/////////////////// -->
+
+                <div style="height: 10px;"/>
+
+                <h:panelGroup layout="block" id="comments" style="float: right; width:100%;">
+                    <ui:repeat value="#{commentsBean.getForId()}"  id="commentscontent"
+                               var="comment">
+
+                        <h:form>
+                            <p:panel closable="#{comment.userId eq loginBean.id}"     
+                                     id = "id#{comment.id}"
+                                     style="margin-bottom: 10px;">
+
+                                <p:ajax event="close" 
+                                        listener="#{commentsBean.removeCommentById(comment.id)}"  />  
+
+                                
+                                <f:facet name="header"> 
+                                    <h:outputText value="#{comment.userName}"/>
+                                </f:facet>
+                                
+                                <h:outputText value="#{comment.text}" 
+                                              escape="false" 
+                                              />
+                                
+                                <f:facet name="footer"> 
+                                    <h:outputText value="#{comment.dateAdded}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy, HH:MM:SS" />
+                                    </h:outputText>
+
+                                    <p:commandButton id="chartBtn" 
+                                                     icon="ui-icon-locked" 
+                                                     type="button" 
+                                                     style="float: right; font-size: smaller" 
+                                                     
+                                                     rendered="#{loginBean.access > 5}"/>  
+
+                                    <p:overlayPanel id="chartPanel" for="chartBtn" hideEffect="fade" style="font-size: 100%" rendered="#{loginBean.access > 5}">  
+                                        <h:panelGrid columns="1" style="font-size: 100%; width: 100%">
+                                            <p:commandButton value="Удалить" 
+                                                             action="#{commentsBean.removeCommentById(comment.id)}"
+                                                             style="font-size: 100%; width: 100%"/>
+                                            <p:commandButton value="Править"
+                                                             update=":form" 
+                                                             oncomplete="PF('comDialog').show()"
+                                                             style="font-size: 100%; width: 100%">
+                                                <f:setPropertyActionListener value="#{comment}"
+                                                                             target="#{commentsBean.selectedComment}"/>
+                                            </p:commandButton>
+                                            <p:button value="Профиль"  style="font-size: 100%" outcome="/resources/admin/aboutuser.xhtml">
+                                                <f:param name="id" value="#{comment.userId}" />
+                                            </p:button>
+                                        </h:panelGrid>
+                                    </p:overlayPanel>  
+                                </f:facet>
+                                
+                            </p:panel>
+                        </h:form>
+                                
+                    </ui:repeat>
+
+                    <div style="width: 100%; text-align: center">
+                        <h:form>
+                            <div style="border: solid 1px #FF9911; border-radius: 5px; margin-bottom: 5px">
+                                <ui:repeat value="#{commentsBean.pages}" 
+                                           var="pageNum" >
+                                    <p:commandButton action="#{commentsBean.setPage(pageNum)}" 
+                                                     style="#{pageNum == commentsBean.curPage ?'color:red;':''}" 
+                                                     value="#{commentsBean.getPageString(pageNum)}" 
+                                                     disabled="#{pageNum == -1 or pageNum == commentsBean.curPage}" />
+                                </ui:repeat>
+                            </div>
+                        </h:form>
+                    </div>
+
+                    <h:form>
+                        <p:panel header="Добавить коментарий" id="addcommentpanel"
+                                 rendered="#{commentsBean.userId > 0}">
+
+                            <h:panelGrid columns="1">
+
+                                <p:editor value="#{commentsBean.newCommentText}"/>
+
+                                <p:commandButton value="Отправить!" 
+                                                 
+                                                 icon="ui-icon-mail-closed"
+                                                 style="font-size: 100%;"
+                                                 action="#{commentsBean.createComment()}" 
+                                                 ajax="true"
+                                                 />        
+
+                            </h:panelGrid>     
+                        </p:panel>
+                    </h:form>
+
+                </h:panelGroup>
+                <!-- ////////////////-COMMENTS-END-/////////////////// -->
+                
+                <!-- ////////////////-Editor-/////////////////// -->
+                
+                <p:dialog rendered="#{loginBean.access > 5}"
+                          id="dialog" 
+                          header="Правка" 
+                          widgetVar="comDialog" 
+                          resizable="false"  
+                          showEffect="fade" 
+                          hideEffect="fold">  
+                    
+                    <h:form id="form">
+                        <h:panelGrid id="display" 
+                                     columns="1" 
+                                     cellpadding="4">  
+
+                            <p:editor id="editor" 
+                                      value="#{commentsBean.selectedComment.text}" />  
+                            
+                            <p:commandButton value="Сохранить" 
+                                             style="font-size: 100%"
+                                             action="#{commentsBean.handleEdit()}"
+                                             oncomplete="PF('comDialog').hide()"/>
+
+                        </h:panelGrid>  
+                    </h:form>
+                </p:dialog> 
+                
+                
+                <!-- ////////////////-editor-END-/////////////////// -->
+            </h:panelGroup>
+
+            <div id="footer">
+                
+                    <vo:footercontent/>
+            
+            </div>
+        </div>   
+        <div class="seperator" style="height:20px;"/>
+    </h:body>
+
+
+</html>

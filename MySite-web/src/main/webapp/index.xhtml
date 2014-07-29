@@ -1,0 +1,256 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:vo="http://java.sun.com/jsf/composite/user"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Интернет-магазин</title>
+        <h:outputStylesheet name="css/default.css" />
+        <h:outputStylesheet name="css/layout.css" />
+        <h:outputStylesheet name="css/fix.css" />
+        <h:outputScript name="js/jQuery.succinct.min.js" />
+
+        <link rel="shortcut icon" type="image/x-icon" href="resources/img/about/icon.ico"/>
+
+    </h:head>
+    <h:body>
+        
+        <vo:share/>
+        
+        <div style="height: 20px;"/>
+        <div id="page">
+            
+            
+            <h:panelGroup layout="block" id="header">
+                <vo:headercontent/>
+            </h:panelGroup>
+
+            <div id="content" style="margin-left: 5px; padding: 0;">
+
+                <h:form>
+                    <p:toolbar style="border-radius: 0; font-size: 100%">
+                        <f:facet name="left">
+
+                            <p:commandButton id="dynaButton" value="Категории" type="button"  icon="ui-icon-extlink"/>
+                            <p:menu overlay="true" 
+                                    trigger="dynaButton" 
+                                    my="left top" 
+                                    at="left bottom" 
+                                    model="#{mainCategoriesBean.model}">
+
+                            </p:menu>
+
+                            <span class="ui-separator">
+                                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                            </span>
+
+                             
+                            <p:inputText value="#{searchTextBoxBean.text}"
+                                         styleClass="searchtext"
+                                         id="searcht"
+                                         required="true"
+                                         requiredMessage="Поисковый запрос не может быть пустым"
+                                         >
+                                <f:validateLength minimum="2" />
+                            </p:inputText>
+                            
+                            <p:watermark value="Введите запрос.." for="searcht"/>
+                            
+                            <p:commandButton value="Поиск!" 
+                                      icon="ui-icon-search" 
+                                      styleClass="searchtextbut"
+                                      action="#{searchTextBoxBean.redirect()}"
+                                      
+                                      >
+                               
+                            </p:commandButton>
+                           
+
+                            <script>
+                                $( '.searchtext' ).click(function() {
+                                  $('.searchtext').animate({width:'250px'}, 500);
+                                });
+                                
+                                $( '.searchtext' ).focusout(function() {
+                                  $('.searchtext').animate({width:'150px'}, 500);
+                                });
+                                
+                                $('.searchtextbut' ).click(function() {
+                                  
+                                  if($('.searchtext').val().length &lt; 2){
+                                      alert('Длина поискового запроса должна быть больше 2 символов!');
+                                  }
+                                });
+                                
+                                
+                            </script>
+
+                        </f:facet>
+
+                        <f:facet name="right">
+                            <p:button  value="Перейти в каталог" 
+                                       style="color: #EB5100"
+                                       icon="ui-icon-document" 
+                                       outcome="catalog.xhtml"/>
+
+
+
+                            <p:button  value="Моя корзина" 
+                                       icon="ui-icon-cart" 
+                                       outcome="cart.xhtml"/>
+                        </f:facet>
+
+                    </p:toolbar>
+                </h:form>
+
+                <vo:slider />
+
+
+                <p:tabView style="border-radius: 0;">
+
+                    <p:tab title="Новости">
+                        
+                        <ui:repeat var="information" value="#{newsBean.lastNews}" 
+                                    >
+
+                            <p:panel style="margin-bottom: 5px; font-size: 100%">
+                                <div style="width: 100%; display: inline-block">
+                                    
+                                
+                                    <div style="float:left; font-weight: bold">
+                                        #{information.topic}&nbsp;
+                                        (<h:outputText value="#{information.created}" >
+                                            <f:convertDateTime pattern="dd.MM.yyyy, HH:mm" />
+                                        </h:outputText>)
+                                    </div> 
+                                       
+                                    
+                                    <div style="float: right;">
+                                        <h:link value="(читать)" outcome="readnews" >
+                                            <f:param name="id" value="#{information.id}" />
+                                        </h:link>
+                                           
+                                    </div>
+                                </div>
+                                <p>
+ 
+                                    <h:outputText value="#{information.basicText}" escape="false"
+                                                  style=" text-align: justify; word-wrap: break-word"/> 
+                                </p>                        
+                            </p:panel>
+
+
+                        </ui:repeat>
+
+
+
+
+
+                    </p:tab>
+                    <p:tab title="Написать администрации">
+                        <h:form>
+                            <p:inputTextarea style="width: 100%" />
+                            <p:commandButton style="font-size: 100%" value="Отправить"/>
+                        </h:form>
+                    </p:tab>
+
+                    <p:tab title="Наши партнеры">
+
+                    </p:tab>
+
+                    <p:tab title="О магазине">
+ 
+
+                        <h:outputText value="After a break of more than 15 years..." />
+
+                    </p:tab>
+                </p:tabView>
+                
+                <div id="buttons">
+                    <div id="buttonsheader">
+                       Популярные категории 
+                    </div>
+                    <h:panelGrid columns="5" style="width:100%">
+                        <h:link outcome="catalog" title="Сноуборды">
+                            <h:graphicImage class="buttons_item" value="resources/img/buttons/1.png"/>
+                            <f:param name="categoryId" value="6"/>
+                        </h:link>
+                        
+                        <h:link outcome="catalog" title="Компьютеры">
+                            <h:graphicImage class="buttons_item" value="resources/img/buttons/2.png"/>
+                            <f:param name="categoryId" value="7"/>
+                        </h:link>
+                        
+                        <h:link outcome="catalog" title="Велосипеды">
+                            <h:graphicImage class="buttons_item" value="resources/img/buttons/3.png"/>
+                            <f:param name="categoryId" value="9"/>
+                        </h:link>
+                        
+                        <h:link outcome="catalog" title="Ноутбуки">
+                            <h:graphicImage class="buttons_item" value="resources/img/buttons/4.png"/>
+                            <f:param name="categoryId" value="8"/>
+                        </h:link>
+
+                        <h:link outcome="catalog" title="Смартфоны">
+                            <h:graphicImage class="buttons_item" value="resources/img/buttons/5.png"/>
+                            <f:param name="categoryId" value="2"/>
+                        </h:link>
+
+                    </h:panelGrid>
+                    
+                    
+                </div>
+
+                <p:dataGrid var="shipment" value="#{lastShipmentsBean.lastShipments}" 
+                            columns="3"
+                            paginatorPosition ="bottom"
+                            styleClass="someCustomClass"
+                            rows="6" 
+                            
+                            paginator="true" 
+                            id="cars"
+                            paginatorTemplate="{PageLinks}"
+                            >
+
+                    <f:facet name="header" >
+                        Новые товары
+                    </f:facet>
+
+                    <p:panel header="#{shipment.name}" style="text-align:center;font-size: 100%;" >
+                        <div style="min-height: 300px">
+
+
+                            <p:graphicImage value="#{shipment.getAbsolutePathSmall(shipment.mainImageName)}"/> 
+                            <p style="text-align:justify;">
+                                #{shipment.infoLight}
+                            </p>
+                        </div>
+                        
+                            <p:button value="Детальнее" outcome="getshipment.xhtml" style="font-size: 100%;">
+                                <f:param name="id" value="#{shipment.id}"/>
+                            </p:button>
+                        
+
+                    </p:panel>
+
+                </p:dataGrid>
+
+
+
+
+            </div>
+            <div id="footer">
+                
+                <vo:footercontent/>
+                    
+               
+            </div>
+        </div>  
+        <div style="height: 20px;"/>
+    </h:body>
+</html>
+

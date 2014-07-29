@@ -1,0 +1,269 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:vo="http://java.sun.com/jsf/composite/user">
+    <head>
+        <title>My</title>
+    </head>
+    <body>
+        <composite:interface>
+            
+        </composite:interface>
+
+        <composite:implementation>
+            
+            <p:growl id="growl" showDetail="true" sticky="true" />  
+              
+            <vo:up/>
+                        
+            
+            <h:form rendered="#{loginBean.valid}" 
+                    style="margin: 5px;"
+                    class="user">
+                
+                Вы залогинены:
+                <b>#{loginBean.uname}&nbsp;</b>
+                <h:outputText value="[администратор]" 
+                              style="font-weight: bold; color: green"
+                              rendered="#{loginBean.access > 5}"/>
+                <p:commandButton value="Выйти" action="#{loginBean.logoutReflesh}" />
+                
+                <h:panelGroup rendered="#{loginBean.access > 5}">
+                    <p:commandButton type="button" 
+                                     id="adminPanelButt" 
+                                     icon="ui-icon-wrench" />
+                    
+                    <p:overlayPanel id="adminPanel" 
+                                    for="adminPanelButt" 
+                                    hideEffect="fade"  
+                                    >  
+                        <h:panelGrid columns="1" style="width: 100%">
+                            
+                            <p:button value="Добавить товар"  
+                                      icon="ui-icon-circle-plus"
+                                      style="font-size: 100%; width: 100%" 
+                                      outcome="/resources/admin/addnewshipment.xhtml"/>
+                            
+                            <p:button value="Управление категориями"  
+                                      icon="ui-icon-script"
+                                      style="font-size: 100%; width: 100%" 
+                                      outcome="/resources/admin/categories.xhtml"/>   
+                            
+                            <p:button value="Управление пользователями" 
+                                      icon="ui-icon-person"
+                                      style="font-size: 100%; width: 100%" 
+                                      outcome="/resources/admin/users.xhtml"/>  
+                            
+                            <p:button value="Другие настройки" 
+                                      icon="ui-icon-gear"
+                                      style="font-size: 100%; width: 100%" 
+                                      outcome="/resources/admin/miscsettings.xhtml"/> 
+                            
+                            <p:button value="Управление новостями" 
+                                      icon="ui-icon-info"
+                                      style="font-size: 100%; width: 100%" 
+                                      outcome="/resources/admin/news.xhtml"/> 
+                            
+                            <p:commandButton value="Убить все сессии" 
+                                      icon="ui-icon-alert"
+                                      style="font-size: 100%; width: 100%" 
+                                      action="#{sessionKillerBean.killAll()}"
+                                      /> 
+                            
+                        </h:panelGrid>
+                    </p:overlayPanel>  
+                </h:panelGroup>
+             
+            </h:form>
+
+            <!-- Незалогиненный юзер -->
+            <h:form rendered="#{!loginBean.valid}" 
+                    class="user"
+                   
+                    style="margin: 5px;font-size: 100%"
+                    >
+                Вы не залогинены!
+                
+                <p:commandButton id="modalDialogLoginButton" 
+                                 value="Войти" 
+                                 onclick="PF('dlgLogin').show();" 
+                                 type="button" 
+                                 ajax="true"/>  
+                
+                <p:commandButton id="modalDialogRegisterButton" 
+                                 value="Регистрация" 
+                                 onclick="PF('dlgRegister').show();" 
+                                 type="button" 
+                                 ajax="true" />   
+                
+                <vo:flogin/>
+                
+                
+            </h:form>
+            
+
+
+
+            <p:dialog rendered="#{!loginBean.valid}" 
+                      header="Авторизация" 
+                      widgetVar="dlgLogin" 
+                      showEffect="puff" 
+                      hideEffect="drop" 
+                      height="auto" 
+                      width="auto" 
+                      style="font-size: 100%; margin-top: 30px" 
+                      resizable="false"
+                      position="center top">  
+                
+                <h:form id="loginForm">
+                    <h:panelGrid id = "grid" 
+                                 columns="2" 
+                                 cellpadding="5"> 
+                        
+                        <h:outputText value="Логин: " />
+                        
+                        <p:inputText id="username" 
+                                     value="#{loginBean.uname}"/> 
+                        
+                        <h:outputText value="Пароль: " />
+                        
+                        <p:inputText id="password" 
+                                     type="password" 
+                                     value="#{loginBean.password}"/> 
+
+                        <p:commandButton value="Сбросить" 
+                                         type="reset" />  
+                        
+                        <p:commandButton value="Логин" 
+                                         action="#{loginBean.loginReflesh}" 
+                                         update="loginForm" 
+                                         ajax="true"/>    
+                    </h:panelGrid>   
+
+                </h:form>
+            </p:dialog> 
+
+            <p:dialog id="reg" 
+                      rendered="#{!loginBean.valid}"  
+                      modal="true" 
+                      header="Регистрация" 
+                      widgetVar="dlgRegister" 
+                      showEffect="fade" 
+                      hideEffect="drop" 
+                      height="auto" 
+                      width="auto" 
+                      style="font-size: 100%; font-weight: normal" 
+                      resizable="false">  
+
+                    <h:form>
+                        <p:messages id="messages" 
+                                    showDetail="false" 
+                                    autoUpdate="true" 
+                                    closable="true"/>  
+                        
+                        <h:panelGrid columns="2" 
+                                     id="infoGrid" 
+                                     style="width: 100%">
+
+                            <h:outputLabel for="" 
+                                           value="Логин: *" />
+                            <p:inputText id="username" 
+                                         value="#{regiserBean.login}" 
+                                         style="width: 100%" 
+                                         required="true" 
+                                         requiredMessage="Не указанно значение для поля логина!"/> 
+
+                            <h:outputLabel for="pwd1" 
+                                           value="Пароль: *" />
+                            <p:password id="pwd1" 
+                                        value="#{regiserBean.password}" 
+                                        style="width: 100%" 
+                                        label="pwd1" 
+                                        required="true" 
+                                        requiredMessage="Не указанно значение для поля пароля!"/>
+
+                            <h:outputLabel for="pwd2" 
+                                           value="Повторите пароль: *" />
+                            
+                            <p:password id="pwd2" 
+                                        value="#{regiserBean.passwordConfirm}" 
+                                        style="width: 100%" 
+                                        label="pwd2" 
+                                        required="true" 
+                                        requiredMessage="Не указанно значение для поля проверки пароля!" />
+                            
+                            <h:outputText value="Телефон" 
+                                          style="font-style: italic"/>
+                            <p:inputMask id="phone"
+                                         style="width: 100%;"
+                                         value="#{regiserBean.phone}" 
+                                         mask="(999) 999-99-99"/>
+                            
+                            <h:outputText value="Email"
+                                          style="font-style: italic"/>
+                            <p:inputText id="email"
+                                         style="width: 100%;"
+                                         value="#{regiserBean.email}" 
+                                         />
+                            
+                            <h:outputLabel for="cap" 
+                                           value="Введите символы с картинки: *" />
+                            <p:inputText id="cap" 
+                                         value="#{regiserBean.captcha}" 
+                                         style="width: 100%" 
+                                         required="true" 
+                                         requiredMessage="Не указанно значение для поля проверки на бота!"/>
+                        </h:panelGrid>     
+
+                        <div style="width: 100%; text-align: center">
+                            <h:graphicImage value="simpleCaptcha.png" 
+                                            style="margin: 0 auto"/>
+                        </div>
+                        
+                        
+                        
+                        <div style="width: 100%; text-align: center">
+                            <p:commandButton id="saveButton" 
+                                             action="#{regiserBean.registerRedirect()}" 
+                                             style="margin: 0 auto" 
+                                             update="infoGrid" 
+                                             value="Готово" />  
+                        </div>
+                        
+                    </h:form>
+                
+            </p:dialog> 
+
+            <p:dialog rendered="#{!loginBean.valid}" 
+                      modal="true" 
+                      header="Спасибо!" 
+                      widgetVar="regFinish" 
+                      showEffect="puff" 
+                      hideEffect="drop" 
+                      height="auto" 
+                      width="auto" 
+                      style="font-size: 100%;" 
+                      resizable="false">  
+                <h:outputText value="Регистрация завершена! Теперь вы можете войти." />
+            </p:dialog> 
+
+            <p:ajaxStatus style="width:32px;height:32px;" 
+                          id="ajaxStatusPanel">
+                <f:facet name="start">
+                    <h:graphicImage value="/resources/img/ajax-loader.gif" />
+                </f:facet>
+
+                <f:facet name="complete"> 
+                    <h:outputText value="" />
+                </f:facet>
+            </p:ajaxStatus>
+
+
+        </composite:implementation>
+    </body>
+</html>
+

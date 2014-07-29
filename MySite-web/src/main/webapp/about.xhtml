@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:vo="http://java.sun.com/jsf/composite/user"
+      xmlns:vadm="http://java.sun.com/jsf/composite/admin">
+    
+    <h:head>
+        <title>Информация о сайте</title>
+        <h:outputStylesheet name="css/default.css" />
+        <h:outputStylesheet name="css/layout.css" />
+        <h:outputStylesheet name="css/shipmentinfo.css" />
+        <h:outputStylesheet name="css/about.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="resources/img/about/icon.ico"/>
+        
+    </h:head>
+
+    <h:body>
+
+        <p:growl id="userinfo"/>
+
+        <div class="seperator" style="height:20px;"/>
+
+        <div id="page" >
+
+            <h:panelGroup layout="block" id="header">
+                <vo:headercontent/>
+            </h:panelGroup>
+
+
+            <div id="content" style="margin-left: 5px;">
+
+                <p:panel header="Общая информация">
+                    <h:panelGrid columns="2" style="width:100%;">
+
+                        <p:panelGrid columns="2" style="table-layout: fixed; margin-left: 40px; ">
+                            <f:facet name="header">
+                                <h:outputText value="Информация о сервере"/> 
+                            </f:facet>
+
+                            <h:outputText value="Версия Java"/>
+                            <h:outputText value="#{serverInfo.javaVersion}"/>
+
+                            <h:outputText value="Сервер"/>
+                            <h:outputText value="#{serverInfo.serverInfo}"/>
+
+                            <h:outputText value="Эталонная реализация JSF"/>
+                            <h:outputText value="#{serverInfo.jsfImplementation} #{serverInfo.implementationVersion}"/>
+
+                            <h:outputText value="Версия PrimeFaces"/>
+                            <h:outputText value="#{serverInfo.primeFacesInfo}"/>
+
+                            <h:outputText value="Версия Hibernate"/>
+                            <h:outputText value="#{serverInfo.hibernateInfo}"/>
+
+                            <h:outputText value="Поддержка Websocket"/>
+                            <h:outputText value="#{serverInfo.atmosphereInfo}"/>
+
+                        </p:panelGrid>
+
+                        <p:galleria value="#{serverInfo.images}" var="image" panelWidth="350" panelHeight="200" showCaption="false">  
+                            <p:graphicImage value="#{image}" />  
+                        </p:galleria>
+                    </h:panelGrid> 
+                </p:panel>
+               
+                <p:panel header="Как построен сайт" style="margin-top: 10px;">
+                    <h:graphicImage value="/resources/img/about/about.png" style="margin-top:10px; max-width: 940px;"/>
+                </p:panel>
+                
+                <p:panel header="Кто автор сайта" style="width:100%; margin-top: 10px;display: inline-block ">
+                    <div style="float: left;">
+                    <p>
+                        Владимир Вышко
+                    </p>
+                    <p>
+                        Электронная почта: <a href="mailto:vovanok1992@gmail.com">vovanok1992@gmail.com</a>
+                    </p>
+                    <p>
+                        Скайп: vladimir.vyshko
+                    </p>
+                    <p>
+                        <h:outputLink value="http://vk.com/id10162050" >
+                            Вконтакте
+                        </h:outputLink>
+                    </p>      
+                    </div>
+                    
+                    <div style="float: right;">
+                        <script type="text/javascript" src="http://www.quizful.net/certificate?number=OQ00W08T3QEM"></script>
+                        <script type="text/javascript" src="http://www.quizful.net/certificate?number=R311L9231MYU"></script>
+                    </div>
+
+                </p:panel>
+                
+                <p:panel style="margin-top: 10px; width: 100%; text-align: center">
+                    
+                    <h2> Вам нравится сайт? </h2>
+                    <h:form>
+                        
+                   
+                    <p:commandButton ajax="true" value="Да!" style="position: relative" styleClass="yes_butt"/>
+                    <p:commandButton ajax="true" value="Нет!" style="position: relative" styleClass="no_butt"/>
+                    <h:outputScript name="js/joke.js" />
+                    
+                     </h:form>
+                </p:panel>
+
+                
+                 
+                 <div id="disqus_thread"></div>
+                 <script type="text/javascript">
+                     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                     var disqus_shortname = 'vovanok'; // required: replace example with your forum shortname
+
+                     /* * * DON'T EDIT BELOW THIS LINE * * */
+                     (function() {
+                         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                     })();
+                 </script>
+                 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+            </div>
+
+
+            <div id="footer">
+
+                <vo:footercontent/>
+
+            </div>
+        </div>   
+        <div class="seperator" style="height:20px;"/>
+    </h:body>
+
+
+</html>
+

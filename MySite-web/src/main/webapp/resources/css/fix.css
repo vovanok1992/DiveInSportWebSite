@@ -1,0 +1,18 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 22, 2014, 12:19:22 PM
+    Author     : Vovan <vovanok1992 at gmail.com>
+*/
+.someCustomClass .ui-datagrid-column {
+    width: 33.33%;
+    font-size: 100%;
+}
+
+.someCustomClass50 .ui-datagrid-column {
+    width: 50%;
+    font-size: 100%;
+}

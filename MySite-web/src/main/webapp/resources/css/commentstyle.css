@@ -1,0 +1,55 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23.03.2014, 19:21:38
+    Author     : vovan_000
+*/
+
+.comment{
+    position:relative;
+    margin:5px;
+    font-family:"PT Sans", sans-serif;
+    font-size:14px;
+    color:#777777;
+    border: 1px solid #999;
+    padding:2px;
+    border-radius: 10px; /* свойство для тех кто его поддерживает */
+  -moz-border-radius: 10px;  /* для firefox */
+  -webkit-border-radius: 10px;  /* для Safari и Chrome */
+    box-shadow: 0.5px 0.5px 10px #000;   
+    
+    }
+.block{
+    display:inline-block;
+    vertical-align:middle;
+    margin:5px;
+    }
+
+.comment .avatar{
+    padding:10px;
+    width:10px;
+    height:10px;
+    background:#7f8c8c url(/resources/img/uicon.png) no-repeat 50% 50%;  
+}
+.comment .author{
+    font-size:16px;
+    font-weight:bold;
+}
+.comment .date{
+    font-size:12px;
+    color:#bdc3c7;
+}
+.comment .time{
+    font-size:12px;
+    color:#bdc3c7;
+}
+.comment .text{
+    border-top:5px solid #e5e6e6;
+    padding:12px;
+    background:#f8f8f8;
+    font-style:italic;
+    text-align:justify;
+}

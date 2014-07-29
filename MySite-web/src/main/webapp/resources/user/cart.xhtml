@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <composite:interface>
+    </composite:interface>
+
+    <composite:implementation>
+
+        <p:panel header="Корзина" id="minicart" toggleable="true" style="margin-top: 10px; text-align: left; ">
+
+            <f:facet name="footer">
+                    <h:outputText value="Пусто" rendered="#{empty sessionCart.items}"/>
+                    <h:outputText value="Заказов:#{sessionCart.items.size()}" rendered="#{not empty sessionCart.items}"/>
+            </f:facet>
+            
+            <h:panelGroup rendered="#{not empty sessionCart.items}">
+<h:form>
+                <p:accordionPanel value="#{sessionCart.items}" var="basicCartItem" activeIndex="null">
+                    <p:tab title="#{basicCartItem.name}">
+                        <h:panelGrid columns="2" style="width:100%">
+                            <h:outputText value="Цена:"/>
+                            <h:outputText value="#{basicCartItem.price}"/>
+                            
+                            <h:outputText value="Код:"/>
+                            <h:outputText value="#{basicCartItem.code}"/>
+                            
+                            <h:outputText value="Кол-во:"/>
+                            <h:outputText value="#{basicCartItem.ammount}"/>
+                            
+                        </h:panelGrid>
+                        
+                        <p:commandButton value="Выбросить" 
+                                         style="font-size: 100%; width: 100%; "
+                                         action="#{sessionCart.removeItem(basicCartItem)}"
+                                         update=":cart"/>
+                    </p:tab>
+                </p:accordionPanel>
+                
+                    <p:button value="Перейтти в корзину" 
+                              outcome="/cart.xhtml"
+                              style="width: 100%; margin-top: 5px; color: #FF5511; font-weight: bold"/>
+                </h:form>
+            </h:panelGroup>
+
+        </p:panel>
+        
+        <p:sticky target="minicart" />
+
+    </composite:implementation>
+</html>
+
+

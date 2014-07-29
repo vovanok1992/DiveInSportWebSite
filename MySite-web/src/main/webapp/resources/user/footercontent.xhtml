@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui">
+
+    <composite:interface>
+    </composite:interface>
+
+    <composite:implementation>
+        <p:panel style="text-align: center; ">
+       
+        <table style="margin-left: auto;
+               margin-right: auto;">
+            <tr>
+                <td>
+                    <a href="http://www.i.ua/" target="_blank" onclick="this.href = 'http://i.ua/r.php?181512';" title="Rated by I.UA">
+                        <h:outputScript library="js" name="iua.js"/>
+                    </a>
+
+                </td>
+                <td>
+
+                    <!-- Yandex.Metrika informer -->
+                    <a href="https://metrika.yandex.ru/stat/?id=24261568&amp;from=informer"
+                       target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/24261568/3_1_FFFFFFFF_EFEFEFFF_0_pageviews"
+                                                        style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try {
+                                                                    Ya.Metrika.informer({i: this, id: 24261568, lang: 'ru'});
+                                                                    return false
+                                                                } catch (e) {
+                                                                }"/></a>
+                    <!-- /Yandex.Metrika informer -->
+
+                    <!-- Yandex.Metrika counter -->
+                    <script type="text/javascript">
+                        (function(d, w, c) {
+                            (w[c] = w[c] || []).push(function() {
+                                try {
+                                    w.yaCounter24261568 = new Ya.Metrika({id: 24261568,
+                                        clickmap: true,
+                                        trackLinks: true,
+                                        accurateTrackBounce: true});
+                                } catch (e) {
+                                }
+                            });
+
+                            var n = d.getElementsByTagName("script")[0],
+                                    s = d.createElement("script"),
+                                    f = function() {
+                                        n.parentNode.insertBefore(s, n);
+                                    };
+                            s.type = "text/javascript";
+                            s.async = true;
+                            s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                            if (w.opera == "[object Opera]") {
+                                d.addEventListener("DOMContentLoaded", f, false);
+                            } else {
+                                f();
+                            }
+                        })(document, window, "yandex_metrika_callbacks");
+                    </script>
+                    <noscript><div><img src="//mc.yandex.ru/watch/24261568" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                    <!-- /Yandex.Metrika counter -->
+
+                </td>
+            </tr>
+        </table>
+        
+        <h:link value="Информация о сайте" outcome="/about.xhtml" style="margin: 0 auto;"/>  
+        
+        </p:panel>
+
+    </composite:implementation>
+</html>
+
