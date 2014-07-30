@@ -127,7 +127,7 @@ public class CommentsBean implements Serializable{
         
         Comment c = new Comment();
         c.setText(newCommentText);
-        c.setDateAdded(new Date());
+        c.setCreated(new Date());
         c.setForShipmentId(getId());
 
         c.setUserId(curUser.getId());

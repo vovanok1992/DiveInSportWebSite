@@ -10,7 +10,7 @@
     </context-param>
     <context-param>
         <param-name>imagepath</param-name>
-        <param-value>S:/!SERGEY/!inf/Servers/pictures</param-value>
+        <param-value>E:/SERVER/images</param-value>
     </context-param>
     <context-param>
         <param-name>primefaces.THEME</param-name>

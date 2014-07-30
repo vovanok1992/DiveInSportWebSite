@@ -104,7 +104,7 @@ public class AdminCategoriesTableBean implements Serializable {
     public void newCategory(String name, String desc){
 
         Category newCat = new Category();
-        newCat.setDateCreated(new Date());
+        newCat.setCreated(new Date());
         if(selectedDocument!=null)newCat.setParentId(selectedDocument.getId());
         else newCat.setParentId(0l);
         newCat.setName(name);

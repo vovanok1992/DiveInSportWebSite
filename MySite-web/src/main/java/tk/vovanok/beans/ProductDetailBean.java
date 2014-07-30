@@ -105,7 +105,7 @@ public class ProductDetailBean implements Serializable{
         }
         
         RatingVote rv = new RatingVote();
-        rv.setMade(new Date());
+        rv.setCreated(new Date());
         rv.setMark(stars);
         rv.setUserId(cur.getId());
         rv.setShipmentId(id);

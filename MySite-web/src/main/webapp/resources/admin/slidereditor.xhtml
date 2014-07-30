@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:vo="http://java.sun.com/jsf/composite/user"
+      xmlns:vadm="http://java.sun.com/jsf/composite/admin"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:admin="http://xmlns.jcp.org/jsf/composite/admin">
+    <h:head>
+        <title>Настройка слайдера</title>
+        <h:outputStylesheet name="css/default.css" />
+        <h:outputStylesheet name="css/layout.css" />
+        <h:outputStylesheet name="css/shipmentinfo.css" />
+    </h:head>
+
+    <h:body>
+
+        <p:growl id="userinfo"/>
+
+        <div class="seperator" style="height:20px;"/>
+
+        <div id="page" >
+
+            <h:panelGroup layout="block" id="header">
+                <vo:headercontent/>
+            </h:panelGroup>
+
+            <div id="menu"> 
+                <vadm:navigatemenu selected="5"/>
+            </div>
+
+            <h:panelGroup layout="block" 
+                          id="content" 
+                          >
+                
+                <h:form id="register_doctor_form" enctype="multipart/form-data">
+                    <p:panel header="Добавить слайд">
+                        <p:messages id ="messages"/>
+                            
+                            <h:panelGrid columns="2" style="width:100%">
+                                <h:outputText value="Текст:"/>
+                             <p:inputText value="#{sliderEditorBean.text}" style="width:100%"/>
+
+                             <h:outputText value="Ссылка(без http://):"/>
+                             <p:inputText value="#{sliderEditorBean.link}" style="width:100%"/> 
+                                
+                            </h:panelGrid>
+                        
+                            <p:fileUpload mode="simple"
+                                          
+                                          value="#{sliderEditorBean.file}"
+                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                      style="width:100%;margin:10px;"/>
+
+                            <p:commandButton value="Добавить" 
+                                             action="#{sliderEditorBean.save()}" 
+                                             ajax="false"
+                                             />
+                       
+                        
+                    </p:panel>
+                    
+                    
+                </h:form>
+                
+                <p:fieldset 
+                    id="slides"
+                    legend="Салайды (Всего слайдов: #{sliderEditorBean.slides.size()})" 
+                    toggleable="true" 
+                    style="margin-top: 15px">
+                    
+                    
+                    <ui:repeat value="#{sliderEditorBean.slides}"
+                               var="slide">
+                    
+                        <p:panel style="margin-top: 20px;
+                                        display: inline-block;
+                                        width:100%;"
+                                        >
+                            <h:form>
+                                <p:commandButton icon="ui-icon ui-icon-closethick"
+                                                 style="position: relative;
+                                                        left: -25px;
+                                                        top: -25px;
+                                                        border-radius: 20px;
+
+                                                        "
+                                                        update=":slides"
+                                                        action="#{sliderEditorBean.remove()}"
+                                                        >
+                                    <f:setPropertyActionListener value="#{slide}"
+                                                                 target="#{sliderEditorBean.selected}"/>
+                                </p:commandButton>
+                                
+                                <p:commandButton icon="ui-icon-help"
+                                                 style="position: relative;
+                                                        left: -25px;
+                                                        top: -25px;
+                                                        border-radius: 20px;"
+                                                        update="info_dialog"
+                                                        oncomplete="PF('infoDialog').show()"
+                                                        >
+                                    <f:setPropertyActionListener value="#{slide}"
+                                                                 target="#{sliderEditorBean.selected}"/>
+                                </p:commandButton>
+                                
+                                <p:dialog id="info_dialog" 
+                                          widgetVar="infoDialog"
+                                          header="Полная информация"
+                                          showEffect="fade"
+                                          hideEffect="fade">
+                                    <h:panelGrid columns="1">
+                                        <h:outputText value="Id:#{sliderEditorBean.selected.id}"/>
+                                        <h:outputText value="Text:#{sliderEditorBean.selected.text}"/>
+                                        <h:outputText value="Image name:#{sliderEditorBean.selected.imagePath}"/>
+                                        <h:outputText value="Link: #{sliderEditorBean.selected.link}"/>
+                                    </h:panelGrid>
+                                </p:dialog>
+                            </h:form>
+                            
+                            
+                            <div style="margin-top:-30px;" >
+                                
+                              
+                                    
+                                <p:panelGrid columns="2" style="float: left; margin-top: 10px; width:440px;">
+                                        <f:facet name="header">
+                                            Характеристики
+                                        </f:facet>
+                                        <h:outputText value="Текст"/>
+                                        <h:outputText value="#{slide.text}"/> 
+                                        
+                                        <h:outputText value="URL"/>
+                                        <p:button href="http://#{slide.link}" 
+                                                  value="Перейти"  
+                                                  alt="#{slide.link}"/>
+                                        
+                                        <h:outputText value="Изображение"/>
+
+                                        <h:outputText
+                                            value="#{slide.imagePath.length() gt 40 ? slide.imagePath.substring(0,38).concat('..'):slide.imagePath}" 
+                                            />
+                                       
+                                        
+                                       
+                                        
+                                    </p:panelGrid>
+                          
+                          
+                                    
+                               
+                                
+                                <h:graphicImage value="/image/slider/#{slide.imagePath}"
+                                                 style="max-height: 150px; max-width: 250px; float: right"/>                                                                
+                                
+                                
+                            </div>
+                            
+                            
+                        </p:panel>
+                    
+                    </ui:repeat>
+                    
+                </p:fieldset>
+
+
+
+            </h:panelGroup>
+
+            <div id="footer">
+
+                <vo:footercontent/>
+
+            </div>
+        </div>   
+        <div class="seperator" style="height:20px;"/>
+    </h:body>
+
+
+</html>
+

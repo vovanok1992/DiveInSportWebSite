@@ -1,5 +1,5 @@
 
-package tk.vovanok.dao;
+package tk.vovanok.dao.implementation;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +16,8 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import tk.vovanok.dao.GenericJpaDao;
+import tk.vovanok.dao.ShipmentDao;
 import tk.vovanok.entities.Category;
 import tk.vovanok.entities.Shipment;
 import tk.vovanok.entities.commons.CategoriesUtils;
@@ -30,9 +32,13 @@ import tk.vovanok.entities.commons.ImagePath;
 @Stateless
 public class ShipmentDaoImpl extends GenericJpaDao<Shipment, Long>
                              implements ShipmentDao{
+    @EJB
+    private ImagePath imagePath;
     
     @EJB
     private CategoriesUtils categoriesUtilsImpl;
+    
+    
 
     
     
@@ -172,7 +178,7 @@ public class ShipmentDaoImpl extends GenericJpaDao<Shipment, Long>
         
         for(Shipment s: result){
             try {
-                FileUtils.deleteDirectory(new File(ImagePath.getPath()+"/"+s.getImageFolder()));
+                FileUtils.deleteDirectory(new File(imagePath.getPathImg()+"/"+s.getImageFolder()));
             } catch (IOException ex) {
                 System.out.println("Error deleting picture folder for  '"+s.getName()+"'");
             }

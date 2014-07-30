@@ -57,10 +57,6 @@ public class Shipment extends BaseEntity{
     @Column(name = "ACTIVE")
     private boolean active;
 
-    @Column(name = "DATE_ADDED")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
-
     @ElementCollection
     @JoinTable(name = "PARAMETERS_OF_SHIPMENT",
             joinColumns = @JoinColumn(name = "SHIPMENT_ID")
@@ -127,14 +123,6 @@ public class Shipment extends BaseEntity{
 
     public void setEverageRating(double everageRating) {
         this.everageRating = everageRating;
-    }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
     }
 
     public Collection<ShipmentParameter> getParameters() {

@@ -1,22 +1,13 @@
 package tk.vovanok.entities;
 
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 
 @Entity
 @Table(name = "RATE_VOTES")
 public class RatingVote extends BaseEntity{
-    
-    @Column(name = "CREATED")
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date made;
-    
+       
     @Column(name = "USER_ID")
     private Long userId;
     
@@ -25,14 +16,6 @@ public class RatingVote extends BaseEntity{
     
     @Column(name = "MARK")
     private int mark;
-
-    public Date getMade() {
-        return made;
-    }
-
-    public void setMade(Date made) {
-        this.made = made;
-    }
 
 
     public int getMark() {

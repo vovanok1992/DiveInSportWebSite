@@ -1,5 +1,5 @@
 
-package tk.vovanok.dao;
+package tk.vovanok.dao.implementation;
 
 import java.io.Serializable;
 import java.util.List;
@@ -8,6 +8,8 @@ import javax.persistence.Query;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import tk.vovanok.dao.GenericJpaDao;
+import tk.vovanok.dao.InformationDao;
 import tk.vovanok.entities.Information;
 import tk.vovanok.entities.User;
 

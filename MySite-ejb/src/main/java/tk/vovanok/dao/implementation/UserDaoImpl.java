@@ -1,5 +1,5 @@
 
-package tk.vovanok.dao;
+package tk.vovanok.dao.implementation;
 
 import java.util.List;
 import javax.ejb.Stateless;
@@ -9,6 +9,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import tk.vovanok.dao.GenericJpaDao;
+import tk.vovanok.dao.UserDao;
 import tk.vovanok.entities.User;
 
 /**

@@ -1,10 +1,12 @@
 
-package tk.vovanok.dao;
+package tk.vovanok.dao.implementation;
 
 import java.io.Serializable;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import tk.vovanok.dao.GenericJpaDao;
+import tk.vovanok.dao.RatingDao;
 import tk.vovanok.entities.RatingVote;
 
 /**

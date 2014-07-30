@@ -224,7 +224,22 @@
         <!-- Slides Container -->
         <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 990px; height: 400px;
             overflow: hidden;">
-            <div>
+            
+            <ui:repeat value="#{sliderBean.slides}" var="slide">
+            
+                <div>
+                    <a u="image" href="http://#{slide.link}">
+                    <h:graphicImage value="/image/slider/#{slide.imagePath}" /></a>
+                    <div u="caption" t="*" class="captionOrange"  
+                         style="position:absolute; left:20px; top: 30px; width:300px; height:30px;"> 
+                        #{slide.text}
+                    </div>
+                </div>
+                
+            
+            </ui:repeat>
+            
+<!--            <div>
                 <a u="image" href="#">
                     <h:graphicImage value="resources/img/dive/1.jpg" /></a>
                 <div u="caption" t="*" class="captionOrange"  
@@ -249,7 +264,7 @@
                 <div u="caption" t="*" class="captionOrange"  style="position:absolute; left:20px; top: 30px; width:300px; height:30px;"> 
                 для дайвинга!
                 </div>
-            </div>
+            </div>-->
         </div>
         
         

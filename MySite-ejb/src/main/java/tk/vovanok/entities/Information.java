@@ -33,10 +33,6 @@ public class Information extends BaseEntity {
     @Column(name="TOPIC")
     private String topic;
 
-    @Column(name = "DATE_ADDED")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
-
 
     public int getType() {
         return type;
@@ -52,14 +48,6 @@ public class Information extends BaseEntity {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
     }
 
     public String getTopic() {

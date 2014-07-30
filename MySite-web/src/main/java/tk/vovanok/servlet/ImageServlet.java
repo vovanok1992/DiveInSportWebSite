@@ -9,11 +9,15 @@ package tk.vovanok.servlet;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import javax.annotation.Resource;
+import javax.ejb.EJB;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import tk.vovanok.entities.commons.ImagePath;
 
 /**
  *
@@ -21,12 +25,19 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ImageServlet extends HttpServlet {
 
+    @EJB
+    private ImagePath path;
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
+        
+        
         String filename = request.getPathInfo();
-        File file = new File(getServletContext().getInitParameter("imagepath")+filename);
+
+        File file = new File(path.getPathImg()+filename);
+
         if(file.exists()){
         response.setHeader("Content-Type", getServletContext().getMimeType(file.getName()));
         response.setHeader("Content-Length", String.valueOf(file.length()));

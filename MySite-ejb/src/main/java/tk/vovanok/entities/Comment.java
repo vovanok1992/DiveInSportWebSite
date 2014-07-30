@@ -29,12 +29,6 @@ public class Comment extends BaseEntity{
     
     @Column(name = "IP")
     private String ip;
-    
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "DATE_ADDED")
-    private Date dateAdded;
-
-
 
     public String getText() {
         return text;
@@ -42,14 +36,6 @@ public class Comment extends BaseEntity{
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public Date getDateAdded() {
-        return dateAdded;
-    }
-
-    public void setDateAdded(Date dateAdded) {
-        this.dateAdded = dateAdded;
     }
 
     public String getUserName() {

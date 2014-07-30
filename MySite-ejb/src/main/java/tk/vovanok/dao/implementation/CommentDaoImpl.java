@@ -1,5 +1,5 @@
 
-package tk.vovanok.dao;
+package tk.vovanok.dao.implementation;
 
 import java.util.List;
 import javax.ejb.Stateless;
@@ -9,6 +9,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import tk.vovanok.dao.CommentDao;
+import tk.vovanok.dao.GenericJpaDao;
 import tk.vovanok.entities.Comment;
 
 /**

@@ -16,11 +16,7 @@ public class Category extends BaseEntity {
     
     @Column(name = "PARENT_ID")
     private Long parentId;
-    
-    @Column(name = "DATE_CREATED")
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date dateCreated;
-    
+        
     @Column(name = "DESCRIPTION")
     private String description;
 
@@ -54,14 +50,6 @@ public class Category extends BaseEntity {
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
     }
 
     public String getDescription() {

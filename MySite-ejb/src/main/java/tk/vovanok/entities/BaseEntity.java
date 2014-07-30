@@ -7,10 +7,13 @@
 package tk.vovanok.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -23,6 +26,10 @@ public class BaseEntity implements Serializable{
     @GeneratedValue
     @Column(name = "GENERATED_ID")
     protected Long id;
+    
+    @Column(name = "DATE_ADDED")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
 
     public Long getId() {
         return id;
@@ -31,5 +38,15 @@ public class BaseEntity implements Serializable{
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+    
+    
 
 }
