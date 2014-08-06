@@ -1,0 +1,92 @@
+/* 
+    Created on : Jul 31, 2014, 3:17:47 PM
+    Author     : Vovan <vovanok1992 at gmail.com>
+*/
+
+#panel_container{
+
+    background-color: #1A345E;
+    width: 100%;
+   overflow:auto;
+   
+}
+
+.item{
+    float: left;
+    padding: 8px;
+    margin-left: 10px;
+    
+}
+
+.item:hover{
+    background-color: #5884CB;
+    
+}
+
+.item a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 80%;
+    font-family: 'Play', sans-serif;
+}
+
+.phone{
+    color: #FFFFFF;
+    float: right;
+}
+
+#social{
+    text-align: left;
+}
+
+.circle {
+    height:25px;
+    width:25px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 25px; 
+    
+    font-size: 150%;
+    font-family: 'Play', sans-serif;
+    
+    margin: 2px;
+    
+    float: left;
+    border: 2px solid white;
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+}
+
+.circle:hover{
+    background-color: #5884CB;
+    
+}
+
+.phones{
+    float:left;
+    margin-left: 30px;
+    border-left: 1px solid white;
+    margin-top: 5px;
+}
+
+#the_phone{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: 'Play', sans-serif;
+    float:left;
+    font-weight: bold;
+    font-size: 130%;
+}
+
+#the_phone a{
+    color: white;
+}
+
+.onePhone{
+    font-family: 'Play', sans-serif;
+    font-size: 150%;
+    border-bottom: 1px solid #1A345E;
+}
+
+
+

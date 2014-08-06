@@ -14,7 +14,7 @@
     </context-param>
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>cupertino</param-value>
+        <param-value>#{globalThemeBean.theme}</param-value>
     </context-param>
     <context-param>
         <param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
@@ -72,16 +72,16 @@
         <listener-class>tk.vovanok.servlet.SessionListener</listener-class>
     </listener>
     
-    <filter> 
+<!--    <filter> 
         <display-name>Admin Filter</display-name>
         <filter-name>adminfilter</filter-name>
         <filter-class>com.vovan.servlet.AccessFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>adminfilter</filter-name>
-<!--        <url-pattern>/resources/admin/*</url-pattern>-->
+        <url-pattern>/resources/admin/*</url-pattern>
             <url-pattern></url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
     
     <session-config>
         <session-timeout>

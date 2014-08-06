@@ -12,8 +12,21 @@
 
     <composite:implementation>
         <h:outputStylesheet name="css/catalog.css" />
+        <h:outputStylesheet name="css/ribbon.css" />
+        
+        <div class="container" style="position: relative">
+            
+            <h:panelGroup class="ribbon ribbon-small #{catalogBean.getDiscount(cc.attrs.value.id).percents > 20 ?'ribbon-red' :'ribbon-blue'}"
+                          style="right:142px;"
+                              rendered="#{not empty catalogBean.getDiscount(cc.attrs.value.id)}">
+                <div class="banner" style="text-align: center">
+                    <div class="text" style="font-size: 120%; text-shadow:2px 2px 2px rgba(0, 0, 0, 0.5);">
+                        #{catalogBean.getDiscount(cc.attrs.value.id).percents}%
+                    </div>
+                    </div>
 
-        <div class="container" >
+            </h:panelGroup>
+            
             <div class="picture_cont">
                 <h:graphicImage class="image_thumb"
                     value="#{cc.attrs.value.getAbsolutePathSmall(cc.attrs.value.mainImageName)}"
@@ -41,15 +54,9 @@
                     <p:button outcome="getshipment" class="butt" icon="ui-icon-star" value="Детальнее" >
                         <f:param name="id" value="#{cc.attrs.value.id}" />
                     </p:button>
-                </h:form>
-            </div>
-            
-            <div class="info">
-                <div class="name">
-                    <h:outputText value="#{cc.attrs.value.name}" style="float:left"/>
                     
-                    <h:form >
-                        <p:commandButton id="edit" icon="ui-icon-locked" type="button" style="margin:2px;width: 25px;height: 25px; float: right;" rendered="#{loginBean.access > 5}"/>  
+                    
+                    <p:commandButton id="edit" value="Править" icon="ui-icon-locked" type="button" style="width:100%" rendered="#{loginBean.access > 5}"/>  
 
                         <p:overlayPanel id="chartPanel" for="edit" hideEffect="fade" style="font-size: 100%" rendered="#{loginBean.access > 5}">  
                             <h:panelGrid columns="1" style="width: 100%">
@@ -59,7 +66,18 @@
                                 </p:button>
                             </h:panelGrid>
                         </p:overlayPanel>  
-                    </h:form>
+                    
+                </h:form>
+            </div>
+            
+            <div class="info" >
+                
+                
+                
+                <div class="name">
+                    <h:outputText value="#{cc.attrs.value.name}" style="float:left"/>
+                    
+                    
                 </div>
                 
                 <div class="desc">

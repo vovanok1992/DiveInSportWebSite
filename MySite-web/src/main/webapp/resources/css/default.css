@@ -10,6 +10,7 @@ and open the template in the editor.
 
 .ui-widget, .ui-widget .ui-widget {
     font-size: small;
+    text-shadow: none;
 }
 
 .hide-column-names table thead tr {

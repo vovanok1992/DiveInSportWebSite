@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <composite:interface>
+    </composite:interface>
+
+    <composite:implementation>
+        
+        <h:outputStylesheet name="css/jsCarousel.css" />
+        <h:outputScript name="js/jquery.als-1.6.min.js" />
+            
+        <div class="als-container" id="demo3">
+            <div class="als-viewport">
+                <ul class="als-wrapper">
+                    <li class="als-item"><h:graphicImage value="/resources/img/logo/1.jpg" alt="orange" title="orange" />orange</li>
+                    <li class="als-item"><h:graphicImage value="/resources/img/logo/2.jpg" alt="apple" title="apple" />apple</li>
+                    <li class="als-item"><h:graphicImage value="/resources/img/logo/3.jpg" alt="apple"  title="banana" />banana</li>
+                    <li class="als-item"><h:graphicImage value="/resources/img/logo/4.jpg" alt="blueberry" title="blueberry" />blueberry</li>
+                    <li class="als-item"><h:graphicImage value="/resources/img/logo/5.jpg" alt="apple" title="watermelon" />watermelon</li>
+                    <li class="als-item"><h:graphicImage value="/resources/img/logo/6.jpg" alt="cherry" title="cherry" />cherry</li>
+                    <li class="als-item"><h:graphicImage value="/resources/img/logo/7.jpg" alt="strawberry" title="strawberry" />strawberry</li>
+                    <li class="als-item"><h:graphicImage value="/resources/img/logo/8.jpg" alt="avocado" title="avocado" />avocado</li>
+                    <li class="als-item"><h:graphicImage value="/resources/img/logo/9.jpg" alt="pear" title="pear" />pear</li>
+                    <li class="als-item"><h:graphicImage value="/resources/img/logo/19.jpg" alt="pineapple" title="pineapple" />pineapple</li>
+                    <li class="als-item"><h:graphicImage value="/resources/img/logo/18.jpg" alt="apple" title="papaya" />papaya</li>
+                    <li class="als-item"><h:graphicImage value="/resources/img/logo/17.jpg" alt="raspberry" title="raspberry" />raspberry</li>
+                </ul>
+            </div>
+        </div>
+        
+        
+       
+        
+        
+        <script type="text/javascript">
+        $( window ).load(function() {
+            $("#demo3").als({
+                visible_items: 6,
+                scrolling_items: 2,
+                orientation: "horizontal",
+                circular: "yes",
+                autoscroll: "yes",
+                interval: 4000
+            });
+        });
+        </script>
+   
+  
+
+
+
+    </composite:implementation>
+</html>
+
+

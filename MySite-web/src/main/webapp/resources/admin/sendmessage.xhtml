@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:vo="http://java.sun.com/jsf/composite/user"
+      xmlns:vadm="http://java.sun.com/jsf/composite/admin">
+    <h:head>
+        <title>Управление категориями</title>
+        <h:outputStylesheet name="css/default.css" />
+        <h:outputStylesheet name="css/layout.css" />
+        <h:outputStylesheet name="css/shipmentinfo.css" />
+    </h:head>
+
+    <h:body>
+
+        <p:growl id="userinfo"/>
+
+        <div class="seperator" style="height:20px;"/>
+
+        <div id="page" >
+
+            <h:panelGroup layout="block" id="header">
+                <vo:headercontent/>
+            </h:panelGroup>
+
+            <div id="menu"> 
+                <vadm:navigatemenu selected="7"/>
+            </div>
+
+            <h:panelGroup layout="block" 
+                          id="content" 
+                          >
+
+                <p:panel header="Отправить широковещательное сообщение">
+                    
+                    <h:form>
+                        
+                        <h:panelGrid columns="1" style="width:100%">
+                            
+                            <p:inputTextarea style="width:100%" autoResize="false"/>
+                            <p:commandButton value="Отправить1" action="#{messegerBean.test1()}"/>
+                            <p:commandButton value="Отправить2" action="#{messegerBean.test2()}"/>
+                        </h:panelGrid>
+                        
+                    </h:form>
+                    
+                </p:panel>
+             
+
+            </h:panelGroup>
+
+            <div id="footer">
+
+                <vo:footercontent/>
+
+            </div>
+        </div>   
+        <div class="seperator" style="height:20px;"/>
+    </h:body>
+
+
+</html>
+

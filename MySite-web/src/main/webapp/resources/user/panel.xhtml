@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <composite:interface>
+    </composite:interface>
+
+    
+    
+    <composite:implementation>
+        <link href='http://fonts.googleapis.com/css?family=Play&amp;subset=latin,cyrillic' rel='stylesheet' type='text/css'/>
+        <h:outputStylesheet name="css/panel.css" />
+        <h:form>
+            <div id="panel_container">
+
+                <div class="item">
+                    <h:commandLink value="О КОМПАНИИ"/>
+                </div>
+
+                <div class="item">
+                     <h:commandLink value="НОВОСТИ"/>
+                </div>
+
+                <div class="item">
+                    <h:commandLink value="ДОСТАВКА И ОПЛАТА"/>
+                </div>
+
+                <div class="item">
+                    <h:commandLink value="ГАРАНТИЯ И ВОЗВРАТ"/>
+                </div>
+                
+                <div class="phone">
+                    <div class="circle" id="VK">
+                        В
+                    </div>
+                    
+                    <div class="circle" id="Fa">
+                        f
+                    </div>
+                    
+                    <div class="phones">
+                        <h:graphicImage value="/resources/img/phone.png" height="25px;" style="margin-left: 5px;float:left;"/>
+                    
+                        <div id="the_phone">
+                            <h:panelGroup id="phoneBtnP" style="float:left; cursor: pointer" >
+                                <h:outputText  value="8 044 564 33 21"  style="float:left; margin-right: 10px"/>
+                                <h:panelGroup id="phoneBtn" class="ui-icon ui-icon-circle-triangle-s" style="margin: 5px;"/>                        
+                            </h:panelGroup>
+                            
+                                <p:overlayPanel id="panel_ov" for="phoneBtnP" hideEffect="fade">
+                                    <h:panelGrid columns="1">
+                                        <h:outputText styleClass="onePhone" value="8 044 523 33 13"/>
+                                        <h:outputText styleClass="onePhone" value="8 044 744 11 21"/>
+                                        <h:outputText styleClass="onePhone" value="8 456 523 34 11"/>
+                                    </h:panelGrid>    
+                                        
+                                </p:overlayPanel>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                </div>
+
+            </div>
+        </h:form>
+        
+        
+
+    </composite:implementation>
+</html>
+
+

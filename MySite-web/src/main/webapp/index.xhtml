@@ -18,6 +18,8 @@
 
     </h:head>
     <h:body>
+        <p:growl id="growl" showDetail="true" sticky="true" /> 
+        <vo:panel/>
         
         <vo:share/>
         
@@ -93,7 +95,7 @@
 
                         <f:facet name="right">
                             <p:button  value="Перейти в каталог" 
-                                       style="color: #EB5100"
+                                       style="color:#ABDCFF;"
                                        icon="ui-icon-document" 
                                        outcome="catalog.xhtml"/>
 
@@ -239,7 +241,7 @@
 
                 </p:dataGrid>
 
-
+                <vo:brands/>
 
 
             </div>

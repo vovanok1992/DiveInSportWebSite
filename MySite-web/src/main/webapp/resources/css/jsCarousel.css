@@ -1,0 +1,94 @@
+.als-container {
+        background-color: #1A345E;
+	position: relative;
+	width: 100%;
+	margin: 0px auto;
+	z-index: 0;
+        padding :0 !important;
+
+}
+
+.als-viewport {
+	position: relative;
+	overflow: hidden;
+	margin: 0px auto;
+      
+}
+
+.als-wrapper {
+       
+        background-color: #1A345E;
+	position: relative;
+	list-style: none;
+        margin :0 !important;
+        padding :0 !important;
+}
+
+.als-item {
+        border: 1px solid white;
+         /*background-color: #5884CB;*/
+          background-color: #1484e6;
+         color:white;
+	position: relative;
+	display: block;
+	text-align: center;
+	cursor: pointer;
+	float: left;
+        height:125px;
+        margin: 10px;
+        text-shadow: none;
+        font-family: 'Play', sans-serif;
+}
+
+.als-prev, .als-next {
+        color: white;
+	position: absolute;
+	cursor: pointer;
+	clear: both;
+}
+
+#demo3 {
+	
+}
+
+#demo3 .als-item {
+	
+	text-align: center;
+}
+
+#demo3 .als-item img {
+	display: block;
+	margin: 0 auto;
+	vertical-align: middle;
+}
+
+#demo3 .als-prev, #demo3 .als-next {
+	
+}
+
+#demo3 .als-prev {
+	
+}
+
+#demo3 .als-next {
+	
+}
+
+/*#header_br{
+    background: #1A345E;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#head_text{
+    overflow: auto;
+    font-family: 'Play', sans-serif;
+    border-radius: 5px;
+    padding-left: 30px;
+    color: white;
+    text-shadow: none;
+    background: #5884CB;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);  Параметры тени 
+}*/

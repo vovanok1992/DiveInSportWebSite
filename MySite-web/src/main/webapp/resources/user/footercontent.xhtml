@@ -9,68 +9,182 @@
     </composite:interface>
 
     <composite:implementation>
-        <p:panel style="text-align: center; ">
-       
-        <table style="margin-left: auto;
-               margin-right: auto;">
-            <tr>
-                <td>
-                    <a href="http://www.i.ua/" target="_blank" onclick="this.href = 'http://i.ua/r.php?181512';" title="Rated by I.UA">
-                        <h:outputScript library="js" name="iua.js"/>
-                    </a>
+        <h:outputStylesheet name="css/footer.css" />
 
-                </td>
-                <td>
+        <div id="foot_container">
 
-                    <!-- Yandex.Metrika informer -->
-                    <a href="https://metrika.yandex.ru/stat/?id=24261568&amp;from=informer"
-                       target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/24261568/3_1_FFFFFFFF_EFEFEFFF_0_pageviews"
-                                                        style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try {
-                                                                    Ya.Metrika.informer({i: this, id: 24261568, lang: 'ru'});
-                                                                    return false
-                                                                } catch (e) {
-                                                                }"/></a>
-                    <!-- /Yandex.Metrika informer -->
+            <div id="top">
+                <div class="item_bl" id="social">
+                    <table >
+                        <tr>
+                            <td>
+                                Мы в социальных сетях:
+                            </td>
+                        </tr>
 
-                    <!-- Yandex.Metrika counter -->
-                    <script type="text/javascript">
-                        (function(d, w, c) {
-                            (w[c] = w[c] || []).push(function() {
-                                try {
-                                    w.yaCounter24261568 = new Ya.Metrika({id: 24261568,
-                                        clickmap: true,
-                                        trackLinks: true,
-                                        accurateTrackBounce: true});
-                                } catch (e) {
-                                }
-                            });
+                        <tr>
+                            <td>
+                                <div class="circle" id="VK">
+                                    В
+                                </div>
 
-                            var n = d.getElementsByTagName("script")[0],
-                                    s = d.createElement("script"),
-                                    f = function() {
-                                        n.parentNode.insertBefore(s, n);
-                                    };
-                            s.type = "text/javascript";
-                            s.async = true;
-                            s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+                                <div class="circle" id="Fa">
+                                    f
+                                </div>
+                            </td>
+                        </tr>
 
-                            if (w.opera == "[object Opera]") {
-                                d.addEventListener("DOMContentLoaded", f, false);
-                            } else {
-                                f();
-                            }
-                        })(document, window, "yandex_metrika_callbacks");
-                    </script>
-                    <noscript><div><img src="//mc.yandex.ru/watch/24261568" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-                    <!-- /Yandex.Metrika counter -->
+                        <tr>
+                            <td >
+                                <div class="acc">
+                                    Diveinsport, 2014.
+                                </div>
+                                
+                            </td>
+                        </tr>
 
-                </td>
-            </tr>
-        </table>
-        
-        <h:link value="Информация о сайте" outcome="/about.xhtml" style="margin: 0 auto;"/>  
-        
-        </p:panel>
+
+                    </table>
+
+
+
+                </div>
+                
+                <div class="item_bl">
+                    
+                    <table id="phones">
+                        
+                        <tr>
+                            <td>
+                                Связаться с нами:
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                
+                                <div>
+                                    <a href="mailto:someone@example.com?Subject=Hello%20again" target="_top">
+                                        someone@example.com
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                8 064 4333 23 52
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                8 064 4111 23 53
+                            </td>
+                        </tr>
+                        
+                    </table>
+                    
+                </div>
+                
+                <div class="item_bl">
+                    
+                    <table id="phones">
+                        
+                        <tr>
+                            <td>
+                                Сайт создан с помощью:
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <h:graphicImage value="/resources/img/logo.png" 
+                                                style="width: 20px; margin-right: 5px;vertical-align: middle; "/>
+                                 <h:link class="acc"
+                                         style="margin-bottom:10px;"
+                                     value="Vyshko St." 
+                                     outcome="/about.xhtml"/>  
+                                
+                            </td>
+                        </tr>
+                        
+                        
+                        
+                    </table>
+                    
+                </div>
+
+                <div style="float:right;margin-right: 10px;">
+                    <table style="margin-left: auto;
+                           margin-right: auto;">
+                        <tr>
+                            <td>
+                                <a href="http://www.i.ua/" target="_blank" onclick="this.href = 'http://i.ua/r.php?181512';" title="Rated by I.UA">
+                                    <h:outputScript library="js" name="iua.js"/>
+                                </a>
+
+                            </td>
+                            <td>
+
+                                <!-- Yandex.Metrika informer -->
+                                <a href="https://metrika.yandex.ru/stat/?id=24261568&amp;from=informer"
+                                   target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/24261568/3_1_FFFFFFFF_EFEFEFFF_0_pageviews"
+                                                                    style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try {
+                                                                                Ya.Metrika.informer({i: this, id: 24261568, lang: 'ru'});
+                                                                                return false
+                                                                            } catch (e) {
+                                                                            }"/></a>
+                                <!-- /Yandex.Metrika informer -->
+
+                                <!-- Yandex.Metrika counter -->
+                                <script type="text/javascript">
+                                    (function(d, w, c) {
+                                        (w[c] = w[c] || []).push(function() {
+                                            try {
+                                                w.yaCounter24261568 = new Ya.Metrika({id: 24261568,
+                                                    clickmap: true,
+                                                    trackLinks: true,
+                                                    accurateTrackBounce: true});
+                                            } catch (e) {
+                                            }
+                                        });
+
+                                        var n = d.getElementsByTagName("script")[0],
+                                                s = d.createElement("script"),
+                                                f = function() {
+                                                    n.parentNode.insertBefore(s, n);
+                                                };
+                                        s.type = "text/javascript";
+                                        s.async = true;
+                                        s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                                        if (w.opera == "[object Opera]") {
+                                            d.addEventListener("DOMContentLoaded", f, false);
+                                        } else {
+                                            f();
+                                        }
+                                    })(document, window, "yandex_metrika_callbacks");
+                                </script>
+                                <noscript><div><img src="//mc.yandex.ru/watch/24261568" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                                <!-- /Yandex.Metrika counter -->
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="bottom">
+                <div class="disc">
+                    Все права на тексты в разделах проекта принадлежат их авторам.
+                </div>
+                
+               
+            </div>
+
+
+        </div>
 
     </composite:implementation>
 </html>

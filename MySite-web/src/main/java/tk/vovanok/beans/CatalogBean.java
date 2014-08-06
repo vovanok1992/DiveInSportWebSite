@@ -9,14 +9,18 @@ package tk.vovanok.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 import tk.vovanok.commons.CategorySortsTypes;
+import tk.vovanok.dao.DiscountDao;
 import tk.vovanok.dao.ShipmentDao;
+import tk.vovanok.entities.Discount;
 import tk.vovanok.entities.Shipment;
 
 /**
@@ -29,9 +33,12 @@ import tk.vovanok.entities.Shipment;
 public class CatalogBean implements Serializable{
     @EJB
     private ShipmentDao shipmentDao;
+    @EJB
+    private DiscountDao discountDao;
     
     List<Shipment> result ;
     private List<Integer> pages;
+    Map<Long,Discount> discounts;
     
     private int id;
     private int page = 1;
@@ -53,15 +60,34 @@ public class CatalogBean implements Serializable{
         return result;
     }
     
+    public Discount getDiscount(Long id){
+        return discounts.get(id);
+    }
+    
+    List<Long> getIdList(){
+        List<Long> ids = new ArrayList<>();
+            
+            for(Shipment s: result){
+                ids.add(s.getId());
+            }
+            
+        return ids;
+    }
+    
     public void updateList(){
         if(search!=null){
             result = shipmentDao.search(search, pageSize, page-1, sortType);
             allShipmentsCount =  shipmentDao.countSearchResults(search).intValue();
+            discounts = discountDao.getIdIn(getIdList());
+            
             return;
         }
 //        (int)
         allShipmentsCount =  (int) shipmentDao.getNuberOfShipments(id);
         result=shipmentDao.getBasicInfoList(sortType,id, getPage()-1, getPageSize());
+        discounts = discountDao.getIdIn(getIdList());
+           
+            
     }
     
     public void deleteShipment(int id){

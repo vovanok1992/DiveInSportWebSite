@@ -11,23 +11,24 @@
     </composite:interface>
 
     <composite:implementation> 
-                       <p:toolbar style="height:60px; 
-                                  font-size: 100%; 
-                                  border-bottom-left-radius: 0; 
-                                  border-bottom-right-radius: 0">
-                    <f:facet name="left">
+        <p:growl id="ggrowl" showDetail="true" sticky="true" /> 
+        
+        <h:outputStylesheet name="css/header_pan.css" />
+        
+        <div class="header_pan" >
+                    <div style="float:left">
 
                         <h:link outcome="/index.xhtml">
-                            <h:graphicImage value="/resources/img/banner.png"
-                                            
+                            <h:graphicImage value="/resources/img/Banner_primer.png"
+                                            style="height:90px;"           
                                  class="banner"/>
                         </h:link>
-                    </f:facet>      
+                    </div>      
 
-                    <f:facet name="right">
+                    <div style="float:right">
                         <vo:info/>
-                    </f:facet>  
-                </p:toolbar>
+                    </div>  
+                </div>
     </composite:implementation>
 </html>
 

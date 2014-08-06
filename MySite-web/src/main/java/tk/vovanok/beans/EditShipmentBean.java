@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -58,8 +59,11 @@ import tk.vovanok.entities.Shipment;
 @ViewScoped
 @Named
 public class EditShipmentBean implements Serializable {
-    @EJB
-    private ImagePathImpl imagePath;
+    
+    @Resource(lookup = "ImageFolder")
+    private String imagePath;
+    
+   
     
     @EJB
     private ShipmentDao shipmentDao;
@@ -242,15 +246,15 @@ public class EditShipmentBean implements Serializable {
         if(images.size()==1){
             images.clear();
             try {
-                FileUtils.deleteDirectory(new File(imagePath.getPathImg() + "/" + getPictureFolderName()));
+                FileUtils.deleteDirectory(new File(imagePath + "/" + getPictureFolderName()));
             } catch (IOException ex) {
                 System.out.println("Error deleting folder");
             } 
             renderFiles = false;
         } else {
             images.remove(pictureName);
-            FileUtils.deleteQuietly(new File(imagePath.getPathImg() + "/" + getPictureFolderName()+"/"+pictureName));
-            FileUtils.deleteQuietly(new File(imagePath.getPathImg() + "/" + getPictureFolderName()+"/"+pictureName+"_small."+pictureName.substring(pictureName.lastIndexOf(".")+1).toLowerCase()));
+            FileUtils.deleteQuietly(new File(imagePath + "/" + getPictureFolderName()+"/"+pictureName));
+            FileUtils.deleteQuietly(new File(imagePath + "/" + getPictureFolderName()+"/"+pictureName+"_small."+pictureName.substring(pictureName.lastIndexOf(".")+1).toLowerCase()));
         }
         
         RequestContext.getCurrentInstance().update("form:savedImages");
@@ -271,7 +275,7 @@ public class EditShipmentBean implements Serializable {
             setPictureFolderName(IdGenerator.generateId());
         }
         try {
-            File dir = new File(imagePath.getPathImg() + "/" + getPictureFolderName());
+            File dir = new File(imagePath + "/" + getPictureFolderName());
             if (!dir.exists()) {
                 dir.mkdirs();
             }
@@ -292,7 +296,7 @@ public class EditShipmentBean implements Serializable {
         }
         
         RequestContext.getCurrentInstance().update("form:savedImages");
-        FacesMessage msg = new FacesMessage("Файл ", event.getFile().getFileName() + " загружен. Абсолютный путь папки: "+imagePath.getPathImg()+"/"+getPictureFolderName());
+        FacesMessage msg = new FacesMessage("Файл ", event.getFile().getFileName() + " загружен. Абсолютный путь папки: "+imagePath+"/"+getPictureFolderName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 

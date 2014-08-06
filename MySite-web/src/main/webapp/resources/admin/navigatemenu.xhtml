@@ -40,6 +40,9 @@
                                       icon="ui-icon-circle-plus"
                                       style="#{cc.attrs.selected eq 4 ? 'color: #400000; font-weight: bold' : ''}"
                                       outcome="/resources/admin/addnewshipment.xhtml"/>
+                    <p:menuitem value="Скидки"  
+                                      style="#{cc.attrs.selected eq 8 ? 'color: #400000; font-weight: bold' : ''}"
+                                      outcome="/resources/admin/discounts.xhtml"/>
                 </p:submenu>  
                 
                 <p:submenu label="Дизайн">  
@@ -47,6 +50,18 @@
                                       icon="ui-icon ui-icon-transferthick-e-w"
                                       style="#{cc.attrs.selected eq 5 ? 'color: #400000; font-weight: bold' : ''}"
                                       outcome="/resources/admin/slidereditor.xhtml"/>
+                    <p:menuitem value="Тема компонентов"  
+                                      icon="ui-icon-star"
+                                      style="#{cc.attrs.selected eq 6 ? 'color: #400000; font-weight: bold' : ''}"
+                                      outcome="/resources/admin/theme.xhtml"/>
+                </p:submenu> 
+                
+                <p:submenu label="Другое">  
+                    <p:menuitem value="Широковещ. сообщение"  
+                                      icon="ui-icon ui-icon-comment"
+                                      style="#{cc.attrs.selected eq 7 ? 'color: #400000; font-weight: bold' : ''}"
+                                      outcome="/resources/admin/sendmessage.xhtml"/>
+
                 </p:submenu>  
             </p:menu>  
         </h:form>   

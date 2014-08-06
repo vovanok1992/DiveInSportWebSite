@@ -1,0 +1,82 @@
+/* 
+    Created on : Aug 4, 2014, 4:27:15 PM
+    Author     : Vovan <vovanok1992 at gmail.com>
+*/
+
+
+#foot_container{
+    background: #1A345E;
+    text-align: center;
+    /*margin: -10px;*/
+    border: 1px solid white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    overflow: auto;
+   
+   
+    color:#ABDCFF;
+     font-family: 'Play', sans-serif;
+}
+
+#top{
+    padding:10px;
+    overflow: auto;
+  
+}
+
+.acc{
+    font-weight: bold;
+    color: white;
+}
+
+#phones{
+  
+}
+
+#social{
+    float:left;
+}
+
+.circle {
+    height:25px;
+    width:25px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 25px; 
+    
+    font-size: 150%;
+    font-family: 'Play', sans-serif;
+    color:white;
+    
+    margin: 2px;
+    
+    float: left;
+    border: 2px solid white;
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+}
+
+.circle:hover{
+    background-color: #ABDCFF;
+    
+}
+
+#foot_container a{
+     color:white;
+     text-decoration: none;
+}
+
+#bottom{
+    background: #1A345E;
+    padding-bottom: 5px;
+}
+
+.disc{
+    font-size: 80%;
+    color:white;
+}
+
+.item_bl{
+    float: left;
+    margin-right: 70px;
+}

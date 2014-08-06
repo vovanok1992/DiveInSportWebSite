@@ -20,6 +20,7 @@ public class Sessions {
     private static List<HttpSession> sessions;
     
     public static int getSize(){
+        if(sessions == null) return -1;
         return sessions.size();
     }
     
