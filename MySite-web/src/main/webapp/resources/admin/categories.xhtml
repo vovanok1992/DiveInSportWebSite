@@ -48,28 +48,37 @@
                             </p:commandButton>
                         </f:facet> 
 
-                        <p:column style="width:32%">  
+                        <p:column >  
                             <f:facet name="header">  
                                 Name  
                             </f:facet>  
                             <h:outputText value="#{category.name}" />  
                         </p:column>  
+                        
+                        <p:column >  
+                            <f:facet name="header">  
+                                Img  
+                            </f:facet>  
+                            <h:graphicImage style="max-height: 50px; max-width: 50px"
+                                value="/image/categories/#{category.img}" 
+                                rendered="#{not empty category.img}"/> 
+                        </p:column>  
 
-                        <p:column style="width:32%">  
+                        <p:column >  
                             <f:facet name="header">  
                                 id  
                             </f:facet>  
                             <h:outputText value="#{category.id}" />  
                         </p:column>  
 
-                        <p:column style="width:32%">  
+                        <p:column >  
                             <f:facet name="header">  
                                 Date  
                             </f:facet>  
                             <h:outputText value="#{category.created}" />  
                         </p:column>  
 
-                        <p:column style="width:4%">
+                        <p:column style="width: 60px">
                             <f:facet name="header">  
                                 Actions  
                             </f:facet>  
@@ -89,8 +98,15 @@
                                 <f:setPropertyActionListener value="#{category}"
                                                              target="#{adminCategoriesTableBean.selectedDocument}"/>
                             </p:commandButton>
+                            
+                            <p:commandButton update=":formimg:editImg" oncomplete="PF('editImgDialog').show()" title="View Detail" icon="ui-icon-newwin">
+                                <f:setPropertyActionListener value="#{category}"
+                                                             target="#{adminCategoriesTableBean.selectedDocument}"/>
+                            </p:commandButton>
                         </p:column>  
                     </p:treeTable>  
+                    
+                
 
                     <p:dialog id="dialog_edit" header="Document Detail" showEffect="fade" widgetVar="editDialog" modal="true">  
                         <p:outputPanel id="editPanel">  
@@ -110,6 +126,8 @@
                                 <h:outputLabel for="desc_edit" value="desc " />  
                                 <p:inputTextarea id="desc_edit" value="#{adminCategoriesTableBean.selectedDocument.description}" style="font-weight:bold; width: 100%" />           
 
+                                
+                                
                             </h:panelGrid>  
 
                             <p:commandButton value="Сохранить изменения" 
@@ -153,6 +171,31 @@
                     </p:dialog>          
 
                 </h:form>  
+                
+                <h:form id="formimg" enctype="multipart/form-data">
+                        <p:dialog id="dialog_img" header="Изменить изображение" showEffect="fade" widgetVar="editImgDialog" modal="true">  
+                        <p:outputPanel id="editImg">  
+                            <h:panelGrid  columns="1" cellpadding="5" rendered="#{not empty adminCategoriesTableBean.selectedDocument}" style="width: 100%">  
+                                
+                                <h:outputText value="Select image:"/>
+                                
+                                <p:fileUpload mode="simple"
+                                      value="#{adminCategoriesTableBean.file}"
+                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                      style="width:100%;margin:10px;"/>
+                                
+                                
+                            </h:panelGrid>  
+
+                            <p:commandButton value="Сохранить" 
+                                             icon="ui-icon-check" 
+                                             action="#{adminCategoriesTableBean.updateImage()}"
+                                             style="width: 100%"
+                                             ajax="false"/>
+
+                        </p:outputPanel>  
+                    </p:dialog>
+                </h:form>
 
 
             </h:panelGroup>

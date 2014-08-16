@@ -7,22 +7,33 @@
 package tk.vovanok.beans;
 
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;  
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import org.apache.commons.io.IOUtils;
 import org.primefaces.context.RequestContext;
 import org.primefaces.model.DefaultTreeNode;  
 import org.primefaces.model.TreeNode;  
+import org.primefaces.model.UploadedFile;
 import tk.vovanok.dao.CategoryDao;
 import tk.vovanok.dao.ShipmentDao;
 import tk.vovanok.entities.Category;
 import tk.vovanok.entities.commons.CategoriesUtils;
+import tk.vovanok.entities.commons.ImagePath;
   
 
 @Named
@@ -37,6 +48,9 @@ public class AdminCategoriesTableBean implements Serializable {
    
     @EJB
     private CategoryDao categoryDaoImp;
+    
+    @EJB
+    ImagePath path;
 
     private TreeNode root;  
     private List<Category> categories;
@@ -52,6 +66,16 @@ public class AdminCategoriesTableBean implements Serializable {
     
     private String newRootName;
     private String newRootDesc;
+    
+    private UploadedFile file;
+ 
+    public UploadedFile getFile() {
+        return file;
+    }
+ 
+    public void setFile(UploadedFile file) {
+        this.file = file;
+    }
     
     @PostConstruct
     public void init() {  
@@ -73,7 +97,60 @@ public class AdminCategoriesTableBean implements Serializable {
         }
     }
     
+    public void updateImage(){
+    
+        if((selectedDocument.getImg() != null)){
+            File last =new File(path.getPathImg() + "/categories/" + selectedDocument.getImg());
+            if(last.exists()){
+                try{
+                    last.delete();
+                }catch(Exception e){
+                    FacesContext.getCurrentInstance().addMessage(
+                            null, new FacesMessage(
+                                    "Ошибка удаления файла!"));
+                    System.out.println("Error remove!!!!!");
+                    e.printStackTrace();
+                    return;
+                }
+            }
+        }
+        
+        File dir = null;
+        System.out.println(file == null);
+        OutputStream fos = null;
+        try{
+            
+            dir = new File(path.getPathImg() + "/categories/");
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            
+            fos = new FileOutputStream(dir.getAbsolutePath()+"/"+file.getFileName());
+            IOUtils.copy(file.getInputstream(), fos);
+        } catch (Exception e){
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(     
+                            "Ошибка загрузки файла!"));
+            System.out.println("Error!!!!!");
+            e.printStackTrace();
+            return;
+        } finally{
+            try {
+                fos.close();
+            } catch (IOException ex) {
+                Logger.getLogger(AdminCategoriesTableBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        selectedDocument.setImg(file.getFileName());
+        
+        categoryDaoImp.update(selectedDocument);
+    }
+    
     public void handleChange(){
+        
+        
+        
         categoryDaoImp.update(selectedDocument);
         RequestContext.getCurrentInstance().update("form");
     }

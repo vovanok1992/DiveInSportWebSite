@@ -12,7 +12,9 @@
         <h:outputStylesheet name="css/default.css" />
         <h:outputStylesheet name="css/layout.css" />
         <h:outputStylesheet name="css/fix.css" />
+        <h:outputStylesheet name="css/menupanel.css" />
         <h:outputScript name="js/jQuery.succinct.min.js" />
+        
 
         <link rel="shortcut icon" type="image/x-icon" href="resources/img/about/icon.ico"/>
 
@@ -33,18 +35,49 @@
 
             <div id="content" style="margin-left: 5px; padding: 0;">
 
-                <h:form>
-                    <p:toolbar style="border-radius: 0; font-size: 100%">
+                <h:form id="formh">
+                    <p:toolbar style="border-radius: 0; font-size: 100%" id="toolbar">
                         <f:facet name="left">
 
                             <p:commandButton id="dynaButton" value="Категории" type="button"  icon="ui-icon-extlink"/>
-                            <p:menu overlay="true" 
-                                    trigger="dynaButton" 
-                                    my="left top" 
-                                    at="left bottom" 
-                                    model="#{mainCategoriesBean.model}">
+                            <p:overlayPanel id="panel_menu" for="dynaButton" hideEffect="fade" style=" padding:0;">
+                                
+                                
+                                <div id="menu">
+                                    <ui:repeat value="#{mainCategoriesBean.cats}"
+                                               var="category">
+                                        <h:panelGroup layout="block" class="maincat">
 
-                            </p:menu>
+                                            <div class="maincat_img">
+                                                <h:graphicImage value="/image/categories/#{category.img}"/>
+                                            </div>
+
+                                            <div class="maincat_content">
+                                                <div class="maincat_header">
+                                                    <h:link value="#{category.name}" outcome="/catalog.xhtml" >
+                                                        <f:param name="categoryId" value="#{category.id}"/>
+                                                    </h:link>
+
+                                                </div>
+
+                                                <table style="width: 100%">
+                                                    <ui:repeat value="#{mainCategoriesBean.getChildCats(category.id)}" var="cat">
+                                                        <tr>
+                                                            <td>
+                                                                <h:link value="#{cat.name}" outcome="/catalog.xhtml" >
+                                                                    <f:param name="categoryId" value="#{cat.id}"/>
+                                                                </h:link>
+                                                            </td>
+                                                        </tr>
+                                                    </ui:repeat>
+                                                </table>
+
+                                            </div>
+                                        </h:panelGroup>
+                                    </ui:repeat>
+                                </div>
+                                        
+                            </p:overlayPanel>
 
                             <span class="ui-separator">
                                 <span class="ui-icon ui-icon-grip-dotted-vertical" />
@@ -93,7 +126,7 @@
 
                         </f:facet>
 
-                        <f:facet name="right">
+                        <f:facet name="right"  id="rightfacet">
                             <p:button  value="Перейти в каталог" 
                                        style="color:#ABDCFF;"
                                        icon="ui-icon-document" 
@@ -103,7 +136,32 @@
 
                             <p:button  value="Моя корзина" 
                                        icon="ui-icon-cart" 
-                                       outcome="cart.xhtml"/>
+                                       outcome="cart.xhtml"
+                                       />
+                            
+                            
+                                
+                            
+                            <h:panelGroup layout="block" rendered="#{not empty sessionCart.items.size()}"
+                                 style="position: relative;
+                                                 top: -12px;
+                                                 right: -276px;
+                                                 height: 20px;
+                                                 width: 20px;
+                                                 margin-top:-20px;
+                                                 border-radius: 10px;
+                                                 background: red;
+                                                 text-align: center;
+                                                 vertical-align: middle;
+                                                 line-height: 20px;
+                                                 color:white;
+                                                 font-size: 80%;" 
+                                >
+                            #{sessionCart.items.size()}
+                            </h:panelGroup>
+                                
+                            
+                            
                         </f:facet>
 
                     </p:toolbar>
@@ -171,6 +229,26 @@
 
                     </p:tab>
                 </p:tabView>
+                
+                
+          
+                    
+                    <p:dataGrid var="shipment" value="#{lastDiscountsBean.ships}" 
+                                columns="1"
+                                paginatorPosition ="bottom"
+                                rows="4" 
+                                paginator="true" 
+                                style="padding-bottom: -2px;"
+                                id="discounts"
+                                paginatorTemplate="{PageLinks}"
+                                >
+
+
+                        <vo:shipmentindex value="#{shipment}"/>
+
+                    </p:dataGrid>
+                    
+             
                 
                 <div id="buttons">
                     <div id="buttonsheader">
@@ -253,6 +331,54 @@
             </div>
         </div>  
         <div style="height: 20px;"/>
+        
+        <h:form id ="addtocart">
+            <p:dialog header="Добавить в корзину" 
+                      widgetVar="dlgAddToCart" 
+                      showEffect="fade" 
+                      hideEffect="fold"
+                      width="400px" 
+                      style="font-size: 100%; 
+                      margin-top: 100px" 
+                      resizable="false"
+                      position="center top">  
+
+                
+                <table style="width:100%">
+                    <tr>
+                        <td>
+                            Количество:
+                        </td>
+                        <td>
+                            <p:spinner value="#{sessionCart.ammount}" style="width: 100%"/>
+                        </td>
+                    </tr>
+                    <ui:repeat var="varParam" value="#{sessionCart.parameters}">
+                        <tr>
+                            <td>
+                                <h:outputText value="#{varParam.name}"/>   
+                            </td>
+
+                            <td>
+                                <h:selectOneMenu value="#{varParam.selected}" style="width: 100%">
+                                    <f:selectItems  value="#{varParam.values}" 
+                                                    var="variant" 
+                                                    itemValue="#{variant.key}" 
+                                                    itemLabel="#{variant.value}" />
+                                </h:selectOneMenu>  
+                            </td>
+                        </tr>
+                    </ui:repeat>
+                </table>
+
+                <p:commandButton value="Добавить"
+                                 action="#{sessionCart.generateCartItem()}"
+                                 update=":formh:toolbar"
+                                 oncomplete="PF('dlgAddToCart').hide();"
+                                 />
+
+            </p:dialog> 
+        </h:form>
     </h:body>
 </html>
 

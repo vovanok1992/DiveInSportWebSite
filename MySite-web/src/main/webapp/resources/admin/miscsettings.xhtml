@@ -1,12 +1,109 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:vo="http://java.sun.com/jsf/composite/user"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
     <h:head>
-        <title>Facelet Title</title>
+        <title>Интернет-магазин</title>
+        <h:outputStylesheet name="css/default.css" />
+        <h:outputStylesheet name="css/layout.css" />
+        <h:outputStylesheet name="css/fix.css" />
+        <h:outputStylesheet name="css/menupanel.css" />
+        <h:outputScript name="js/jQuery.succinct.min.js" />
+
+        <link rel="shortcut icon" type="image/x-icon" href="resources/img/about/icon.ico"/>
+
     </h:head>
     <h:body>
-        Hello from Facelets
+
+        <p:growl id="growl" showDetail="true" sticky="true" /> 
+        
+        <vo:panel/>
+        <vo:share/>
+
+        <style>
+            #settings_content{
+                min-height: 500px;
+                padding-left: 4px;
+                margin-top: 10px;
+                overflow: auto;
+                
+            }
+            
+            .settings_butt{
+                float:left;
+                font-size: 150%;
+                width:33%;
+                font-family: 'Play', sans-serif;
+            }
+        </style>
+        
+        <div style="height: 20px;"/>
+        <div id="page">
+
+            <h:panelGroup layout="block" id="header">
+                <vo:headercontent/>
+            </h:panelGroup>
+            
+            
+            
+            <div id="settings_content">
+                <p:button value="Категории"  
+                          icon="ui-icon-script"
+                          class="settings_butt"
+                          outcome="/resources/admin/categories.xhtml"/>   
+
+                <p:button value="Пользователи" 
+                          icon="ui-icon-person"
+                          class="settings_butt"
+                          outcome="/resources/admin/users.xhtml"/>  
+
+                <p:button value="Новости" 
+                          icon="ui-icon-info"
+                          class="settings_butt"
+                          outcome="/resources/admin/news.xhtml"/> 
+                
+                <p:button value="Добавить товар"  
+                          icon="ui-icon-circle-plus"
+                          class="settings_butt"
+                          outcome="/resources/admin/addnewshipment.xhtml"/>  
+
+                <p:button value="Скидки" 
+                          icon="ui-icon-bookmark"
+                          class="settings_butt"
+                          outcome="/resources/admin/discounts.xhtml"/>
+
+                <p:button value="Настройка слайдра" 
+                          icon="ui-icon ui-icon-transferthick-e-w" 
+                          class="settings_butt"
+                          outcome="/resources/admin/slidereditor.xhtml"/>
+                
+                
+                
+                <p:button value="Тема компонентов"  
+                          icon="ui-icon-star"
+                          class="settings_butt"
+                          outcome="/resources/admin/theme.xhtml"/> 
+
+                <p:button value="Широковещ. сообщ."  
+                          icon="ui-icon ui-icon-comment"
+                          class="settings_butt"
+                          outcome="/resources/admin/sendmessage.xhtml"/>
+
+            </div>
+
+    
+           
+            <div id="footer">
+                <vo:footercontent/>
+            </div>
+        </div>  
+        <div style="height: 20px;"/>
+
     </h:body>
 </html>
 

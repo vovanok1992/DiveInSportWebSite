@@ -27,7 +27,7 @@
     color: #FFFFFF;
     text-decoration: none;
     font-size: 80%;
-    font-family: 'Play', sans-serif;
+    font-family: 'Exo 2', sans-serif;
 }
 
 .phone{
@@ -47,7 +47,7 @@
     line-height: 25px; 
     
     font-size: 150%;
-    font-family: 'Play', sans-serif;
+    font-family: 'Exo 2', sans-serif;
     
     margin: 2px;
     
@@ -72,7 +72,7 @@
 #the_phone{
     margin-left: 10px;
     margin-right: 10px;
-    font-family: 'Play', sans-serif;
+    font-family: 'Exo 2', sans-serif;
     float:left;
     font-weight: bold;
     font-size: 130%;
@@ -83,7 +83,7 @@
 }
 
 .onePhone{
-    font-family: 'Play', sans-serif;
+    font-family: 'Exo 2', sans-serif;
     font-size: 150%;
     border-bottom: 1px solid #1A345E;
 }

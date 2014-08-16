@@ -17,8 +17,11 @@ and open the template in the editor.
 }
 .captionOrange
 {
-    background: #EB5100;
-    background-color: rgba(235, 81, 0, 0.6);
+    background: #1484e6;
+    background-color: rgba(0, 22, 129, 0.6);
+    text-decoration: none;
+    text-shadow: none;
+    font-family: 'Play', sans-serif;
 }
 .captionBlack
 {

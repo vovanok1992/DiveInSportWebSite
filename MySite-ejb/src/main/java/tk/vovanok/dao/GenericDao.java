@@ -18,7 +18,5 @@ public interface GenericDao<T, ID extends Serializable> {
     List<T> findAll();
     
     Long countAll();
-    
-   
-    
+
 }

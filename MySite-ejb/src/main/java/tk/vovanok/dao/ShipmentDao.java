@@ -22,4 +22,6 @@ public interface ShipmentDao extends GenericDao<Shipment, Long>{
 
     public void removeAllByCategoryId(Long id);
     
+    public List<Shipment> getIdIn(List<Long> list);
+    
 }

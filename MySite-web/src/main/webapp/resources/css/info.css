@@ -1,0 +1,56 @@
+/* 
+    Created on : Aug 7, 2014, 3:47:47 PM
+    Author     : Vovan <vovanok1992 at gmail.com>
+*/
+
+#info{
+    padding: 20px;
+    font-family: 'Exo 2', sans-serif;
+    text-align:justify;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+.warn{
+    font-weight: bold;
+    color:#0088cc;
+}
+
+.veryimportant{
+    color: red !important;
+    margin-bottom: 0;
+    font-weight: bold;
+
+}
+
+.infoheader{
+    font-size: 140%;
+    font-weight: bold;
+    color:#0044cc;
+    text-shadow: 1px 1px 4px rgba(150, 150, 231, 1);
+    margin:0;
+}
+
+.line{
+    margin-left: 10px;
+    border-left: 3px dotted #0044cc;
+    padding-left: 10px;
+    font-weight: bold;
+    color: #1A345E;
+}
+
+.important{
+
+    color: #1A345E;
+    font-weight: bold;
+    padding-left: 10px;
+
+}
+
+.item_header{
+    font-weight: bold;
+}
+
+.notify{
+    font-style:italic;
+}

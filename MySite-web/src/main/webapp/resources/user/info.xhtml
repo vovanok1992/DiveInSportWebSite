@@ -23,7 +23,7 @@
             <h:panelGrid columns="1" cellpadding="0" cellspacing="0">
             
             <h:form rendered="#{loginBean.valid}" 
-                    style="margin: 5px; float:right;z-index: 1000;"
+                    style="margin: 5px; float:right;z-index: 1000; font-family: 'Exo 2', sans-serif;"
                     class="user"
                     >
                 
@@ -45,6 +45,11 @@
                                     >  
                         <h:panelGrid columns="1" style="width: 100%">
                             
+                            <p:button value="Все настройки" 
+                                      icon="ui-icon-gear"
+                                      style="font-size: 100%; width: 100%" 
+                                      outcome="/resources/admin/miscsettings.xhtml"/> 
+                            
                             <p:button value="Добавить товар"  
                                       icon="ui-icon-circle-plus"
                                       style="font-size: 100%; width: 100%" 
@@ -59,11 +64,6 @@
                                       icon="ui-icon-person"
                                       style="font-size: 100%; width: 100%" 
                                       outcome="/resources/admin/users.xhtml"/>  
-                            
-                            <p:button value="Другие настройки" 
-                                      icon="ui-icon-gear"
-                                      style="font-size: 100%; width: 100%" 
-                                      outcome="/resources/admin/miscsettings.xhtml"/> 
                             
                             <p:button value="Управление новостями" 
                                       icon="ui-icon-info"
@@ -86,7 +86,7 @@
             <h:form rendered="#{!loginBean.valid}" 
                     class="user"
                    
-                    style="margin: 5px;float:right;"
+                    style="margin: 5px;float:right; font-family: 'Exo 2', sans-serif;"
                     >
                 Вы не залогинены!
                 

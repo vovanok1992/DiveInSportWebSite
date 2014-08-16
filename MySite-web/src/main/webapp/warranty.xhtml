@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:vo="http://java.sun.com/jsf/composite/user"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:admin="http://xmlns.jcp.org/jsf/composite/admin">
+
+    <h:head>
+        <title>Интернет-магазин</title>
+        <h:outputStylesheet name="css/default.css" />
+        <h:outputStylesheet name="css/layout.css" />
+        <h:outputStylesheet name="css/fix.css" />
+        <h:outputStylesheet name="css/menupanel.css" />
+        <h:outputStylesheet name="css/info.css" />
+        <h:outputScript name="js/jQuery.succinct.min.js" />
+
+        <link rel="shortcut icon" type="image/x-icon" href="resources/img/about/icon.ico"/>
+
+    </h:head>
+    <h:body>
+        
+
+
+        <p:growl id="growl" showDetail="true" sticky="true" /> 
+        
+        <vo:panel/>
+        <vo:share/>
+
+        <div style="height: 20px;"/>
+        <div id="page">
+
+            <h:panelGroup layout="block" id="header">
+                <vo:headercontent/>
+            </h:panelGroup>
+
+            <div id="content" style="margin-left: 5px; padding: 0; min-height: 500px;">
+                <div id="info" >
+                    <p class="infoheader">
+                        ГАРАНТИЯ И ВОЗВРАТ
+                    </p>
+
+                    <p>
+                        На все товары, представленные в нашем магазине, распространяется гарантия производителя, кроме одежды личного пользования в соответствии с Законом Украины.
+                    </p>
+                    
+                    <p class="important">Условия Возврата</p>
+                    
+                    <p>
+                        
+                        Согласно Закону Украины «О защите прав потребителя» покупатель может вернуть товар в течении 14 дней с момента покупки в таких случаях:
+                        <ol>
+                            <li>
+                                <p class="item_header">
+                                    Товар имеет существенные недостатки*:
+                                </p>
+                                <ul>
+                                    <li>
+                                        дефект возник по вине продавца товара;
+                                    </li>
+                                    <li>
+                                        производитель не может устранить дефект;
+                                    </li>
+                                    <li>
+                                        после ремонта товар теряет свои потребительские свойства.
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <li>
+                                <p class="item_header">
+                                    Товар не удовлетворил покупателя по форме, габаритам, фасону, цвету, размеру и на момент обмена аналогичного товара нет в продаже:
+                                </p>
+                                <ul>
+                                    <li>
+                                        товар не был в употреблении, сохранен его товарный вид, потребительские свойства;
+                                    </li>
+                                    <li>
+                                        сохранен товарный чек;
+                                    </li>
+                                    <li>
+                                        сохранены все аксессуары, компоненты и документация, которые входят в комплектацию товара;
+                                    </li>
+                                    <li>
+                                        не нарушена фирменная упаковка, бирки, наклейки со штрих-кодами, пломбы и ярлыки;
+                                    </li>
+                                </ul>
+                            
+                            </li>
+                        </ol>
+
+                    </p>
+                    <p class="notify">
+                        *Требования потребителя, предусмотренные этой статьей, не подлежат удовлетворению, если продавец докажет, что недостатки товара возникли вследствие нарушения потребителем правил пользования товаром или его хранения.
+                    </p>          
+                    <p class="important">
+                          В соответствии с приложением 172-94-п к ЗУ «О защите прав потребителей» исключение составляют: перчатки, носки, футболки, термобелье, пуховые изделия и тд.
+                     </p>
+                    
+                    <p>
+                         Для того, что бы вернуть товар вам необходимо:
+                    </p>
+                    <ul>
+                        <li>
+                            связаться с Менеджером по телефону «+38 (044) 303-90-10» и сообщить о намерении вернуть товар, уточнив причины;
+                        </li>
+                        <li>
+                            заполнить Заявление на возврат и приложить к товару;
+                        </li>
+                        <li>
+                            отправить товар по адресу, указанному в заявлении на возврат.
+                        </li>
+                    </ul>
+                    <p>
+                        Возврат товара по Украине осуществляется транспортной компанией «Нова пошта».
+                    </p>
+                     
+                    
+                    <div class="line">
+                        <p class="important">
+                            <p class="veryimportant">
+                               Внимание! 
+                            </p>
+                            
+                            При возврате денег за товар расчеты с покупателем производятся исходя из стоимости товара на момент его покупки.
+                            При возврате товара все затраты связанные с пересылкой товара (через компании-перевозчики) и/или отправкой денег (все банковские операции) берет на себя покупатель. 
+                            Возврат товара у Вас дома, осуществляется в том случае, если товар Вам не подошел сразу после его доставки и курьер еще находится у Вас. В таком случае Вы оплачиваете только стоимость доставки товара. 
+                        </p>
+                    </div>    
+
+                </div>
+
+                <vo:brands/>
+            </div>
+            <div id="footer">
+                <vo:footercontent/>
+            </div>
+        </div>  
+        <div style="height: 20px;"/>
+
+    </h:body>
+</html>
+

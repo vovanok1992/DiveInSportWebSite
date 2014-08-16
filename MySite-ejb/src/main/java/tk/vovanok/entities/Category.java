@@ -1,11 +1,9 @@
 package tk.vovanok.entities;
 
-import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 
 @Entity
 @Table(name = "CATEGORIES")
@@ -17,6 +15,9 @@ public class Category extends BaseEntity {
     @Column(name = "PARENT_ID")
     private Long parentId;
         
+    @Column(name = "IMAGE_PATH")
+    private String img;
+    
     @Column(name = "DESCRIPTION")
     private String description;
 
@@ -58,5 +59,13 @@ public class Category extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

@@ -57,7 +57,7 @@ public class DiscountDaoImpl extends GenericJpaDao<Discount, Long>
         Session s = getEntityManager().unwrap(Session.class);
         
         Criteria c = s.createCriteria(Discount.class);
-        c.add(Restrictions.lt("finish", new Date()));
+        c.add(Restrictions.gt("finish", new Date()));
         c.setMaxResults(limit);
         c.setFirstResult(page*limit);
         

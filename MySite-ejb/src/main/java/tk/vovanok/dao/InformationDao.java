@@ -12,4 +12,5 @@ public interface InformationDao extends GenericDao<Information, Long>{
     List<Information> getLast(int amount);
 
     public List<Information> get(int first, int pageSize, String sortField, boolean equals);
+    
 }

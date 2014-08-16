@@ -8,7 +8,10 @@ package tk.vovanok.beans;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -30,18 +33,32 @@ public class MainCategoriesBean implements Serializable{
     private CategoriesUtils categoriesUtils;
     
     private List<Category> cats;
+    Map<Long, List<Category>> childs;
     private MenuModel model;  
     
     
 
     public void init(){
         model = new DefaultMenuModel();
-        
+        cats = new ArrayList<>();
+        childs =new HashMap<>();
         
 
         List<Category> all = categoriesUtils.getAll();
         for(Category c: all){
             if (c.getParentId() == 0) {
+                cats.add(c);
+                List<Category> curr = new ArrayList<>();
+                for(Category cs: all){
+                    if(cs.getParentId().equals(c.getId())){
+                        curr.add(cs);
+                    }
+                }
+                childs.put(c.getId(), curr);
+                
+                
+                
+                
                 DefaultMenuItem item = new DefaultMenuItem();
                 item.setValue(c.getName());
                 item.setUrl("/catalog.xhtml?categoryId="+c.getId());
@@ -53,6 +70,10 @@ public class MainCategoriesBean implements Serializable{
         
     }
     
+    public List<Category> getChildCats(Long c){
+        return childs.get(c);
+    }
+    
     
     public MenuModel getModel() {  
          if(model==null) init();
@@ -60,7 +81,9 @@ public class MainCategoriesBean implements Serializable{
      }     
     
     public List<Category> getCats() {
+        
         if(cats == null) init();
+        System.out.println("getCats "+cats.size());
         return cats;
     }
 

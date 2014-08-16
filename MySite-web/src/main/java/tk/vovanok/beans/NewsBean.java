@@ -31,7 +31,7 @@ public class NewsBean {
     public List<Information> getLastNews() {
         if(lastNews == null) {
           
-            lastNews = informationDaoImpl.getLast(3);
+            lastNews = informationDaoImpl.getLast(2);
         }
         return lastNews;
     }

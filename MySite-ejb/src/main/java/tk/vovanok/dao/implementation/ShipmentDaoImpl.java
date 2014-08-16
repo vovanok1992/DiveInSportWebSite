@@ -3,7 +3,10 @@ package tk.vovanok.dao.implementation;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import org.apache.commons.io.FileUtils;
@@ -19,6 +22,7 @@ import org.hibernate.criterion.Restrictions;
 import tk.vovanok.dao.GenericJpaDao;
 import tk.vovanok.dao.ShipmentDao;
 import tk.vovanok.entities.Category;
+import tk.vovanok.entities.Discount;
 import tk.vovanok.entities.Shipment;
 import tk.vovanok.entities.commons.CategoriesUtils;
 
@@ -185,6 +189,21 @@ public class ShipmentDaoImpl extends GenericJpaDao<Shipment, Long>
             session.delete(s);
         }
 
+    }
+     
+    @Override
+    public List<Shipment> getIdIn(List<Long> list){
+        Session s = getEntityManager().unwrap(Session.class);
+        
+        Criteria c = s.createCriteria(Shipment.class);
+        c.add(Restrictions.in("id", list));
+        
+        System.out.println("LIST is"+list);
+        
+        List<Shipment> discs = c.list();
+    
+        
+        return discs;        
     }
     
 }

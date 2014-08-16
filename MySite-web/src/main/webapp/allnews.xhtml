@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:vo="http://java.sun.com/jsf/composite/user"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Интернет-магазин</title>
+        <h:outputStylesheet name="css/default.css" />
+        <h:outputStylesheet name="css/layout.css" />
+        <h:outputStylesheet name="css/fix.css" />
+        <h:outputStylesheet name="css/menupanel.css" />
+        <h:outputScript name="js/jQuery.succinct.min.js" />
+
+        <link rel="shortcut icon" type="image/x-icon" href="resources/img/about/icon.ico"/>
+
+    </h:head>
+    <h:body>
+
+        <p:growl id="growl" showDetail="true" sticky="true" /> 
+        
+        <vo:panel/>
+        <vo:share/>
+
+        <div style="height: 20px;"/>
+        <div id="page">
+
+            <h:panelGroup layout="block" id="header">
+                <vo:headercontent/>
+            </h:panelGroup>
+
+            
+            
+            <div id="content" style="margin-left: 5px; padding: 0;font-family: 'Exo 2', sans-serif; ">
+            
+                <div style="background-color: #1A345E; 
+                     color: white; 
+                     text-shadow: none; 
+                     padding-top:5px;
+                     padding-left: 10px;
+                     overflow: auto
+                     ">
+                    
+                        <h:form>
+                            
+                            
+                            <table style="float:left">
+                                <tr>
+                                    <td>
+                                        <h:outputText value="Сортировка:" style="font-weight: bold;" />
+                                    </td>
+                                
+                                    <td>
+                                        
+                                        <p:selectOneMenu id="sorts" 
+                                                         value="#{allNewsTableBean.sortAsc}"
+                                                         >
+
+                                            <f:selectItem itemLabel="От новых к старым" itemValue="false"/>
+                                            <f:selectItem itemLabel="От старых к новым" itemValue="true"/>
+                                            
+                                            <p:ajax listener="#{allNewsTableBean.update()}" update=":info"/>
+                                        
+                                        </p:selectOneMenu>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                            </table>
+                            
+                            <p:selectOneButton style="margin-top: 3px; float: right;">
+                                <f:selectItem itemLabel="Все" itemValue="1" />  
+                                <f:selectItem itemLabel="Новости" itemValue="2" />  
+                                <f:selectItem itemLabel="Акции" itemValue="2" />  
+                            </p:selectOneButton>
+                                
+
+                        </h:form>
+                </div>
+                
+                <h:panelGroup layout="block" id="info" style="min-height: 800px; padding: 10px;">
+                    
+                    <ui:repeat value="#{allNewsTableBean.page}" var="information">
+                        <p:panel style="margin-bottom: 10px; font-size: 100%">
+                                <div style="width: 100%; display: inline-block">
+                                    
+                                
+                                    <div style="float:left; font-weight: bold">
+                                        #{information.topic}&nbsp;
+                                        (<h:outputText value="#{information.created}" >
+                                            <f:convertDateTime pattern="dd.MM.yyyy, HH:mm" />
+                                        </h:outputText>)
+                                    </div> 
+                                       
+                                    
+                                    <div style="float: right;">
+                                        <h:link value="(читать)" outcome="readnews" >
+                                            <f:param name="id" value="#{information.id}" />
+                                        </h:link>
+                                           
+                                    </div>
+                                </div>
+                                <p>
+ 
+                                    <h:outputText value="#{information.basicText}" escape="false"
+                                                  style=" text-align: justify; word-wrap: break-word"/> 
+                                </p>                        
+                            </p:panel>
+                    </ui:repeat> 
+                </h:panelGroup>
+
+
+    
+                
+                <vo:brands/>
+            </div>
+            <div id="footer">
+                <vo:footercontent/>
+            </div>
+        </div>  
+        <div style="height: 20px;"/>
+
+    </h:body>
+</html>
+

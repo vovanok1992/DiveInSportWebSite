@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <composite:interface>
+        <composite:attribute name="value" type="tk.vovanok.entities.Shipment"/>
+    </composite:interface>
+
+    <composite:implementation>
+        <h:outputStylesheet name="css/catalog.css" />
+        <h:outputStylesheet name="css/ribbon.css" />
+        
+        <div class="container" style="position: relative; margin-top: -4px; margin-bottom: -4px;">
+            
+            <h:panelGroup class="ribbon ribbon-small #{lastDiscountsBean.getDiscount(cc.attrs.value.id).percents > 20 ?'ribbon-red' :'ribbon-blue'}"
+                          style="right:142px;"
+                              rendered="#{not empty lastDiscountsBean.getDiscount(cc.attrs.value.id)}">
+                <div class="banner" style="text-align: center">
+                    <div class="text" style="font-size: 120%; text-shadow:2px 2px 2px rgba(0, 0, 0, 0.5);">
+                        #{lastDiscountsBean.getDiscount(cc.attrs.value.id).percents}%
+                    </div>
+                    </div>
+
+            </h:panelGroup>
+            
+            <div class="picture_cont">
+                <h:graphicImage class="image_thumb"
+                    value="#{cc.attrs.value.getAbsolutePathSmall(cc.attrs.value.mainImageName)}"
+                    />
+                <div class="rate">
+                    <h:form>
+                        <p:rating value="#{cc.attrs.value.ratingInStars}" readonly="true"/> 
+                    </h:form>
+                </div>
+            </div>
+            
+            <div class="price">
+                <div class="value" style="margin-top: 0px;">
+                    #{priceBean.getPrice(cc.attrs.value)}                    
+                </div>
+                <h:form>
+                    <p:commandButton 
+                        class="butt" 
+                        icon="ui-icon-cart" 
+                        value="В корзину"
+                        actionListener="#{sessionCart.loadById(cc.attrs.value.id)}"
+                        update=":addtocart"
+                        oncomplete="PF('dlgAddToCart').show()"
+                        />
+                    <p:button outcome="getshipment" class="butt" icon="ui-icon-star" value="Детальнее" >
+                        <f:param name="id" value="#{cc.attrs.value.id}" />
+                    </p:button>
+                    
+                    
+                    <p:commandButton id="edit" value="Править" icon="ui-icon-locked" type="button" style="width:100%" rendered="#{loginBean.access > 5}"/>  
+
+                        <p:overlayPanel id="chartPanel" for="edit" hideEffect="fade" style="font-size: 100%" rendered="#{loginBean.access > 5}">  
+                            <h:panelGrid columns="1" style="width: 100%">
+                                <p:commandButton value="Удалить" action="#{catalogBean.deleteShipment(cc.attrs.value.id)}" style="width: 100%"/>
+                                <p:button value="Править"  style="width: 100%" outcome="/resources/admin/addnewshipment.xhtml">
+                                    <f:param name="edit"  value="#{cc.attrs.value.id}" />
+                                </p:button>
+                            </h:panelGrid>
+                        </p:overlayPanel>  
+                    
+                </h:form>
+            </div>
+            
+            <div class="info" >
+                
+                
+                
+                <div class="name">
+                    <h:outputText value="#{cc.attrs.value.name}" style="float:left"/>
+                    
+                    
+                </div>
+                
+                <div class="desc">
+                    #{cc.attrs.value.infoLight}
+                </div>
+                
+                <div class="date">
+                    Добавлено: #{cc.attrs.value.created}
+                </div>
+            </div>
+        </div>
+
+    </composite:implementation>
+
+</html>
+
