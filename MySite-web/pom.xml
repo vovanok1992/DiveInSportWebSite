@@ -63,7 +63,7 @@
             <type>jar</type>
         </dependency>
         
-        <dependency>  
+<!--        <dependency>  
             <groupId>tk.vovanok</groupId>  
             <artifactId>vovan-one</artifactId>  
             <version>1.0.0</version>
@@ -104,6 +104,7 @@
             <version>1.0.0</version>
             <type>jar</type>
         </dependency>
+        -->
         
         <dependency>
             <groupId>org.imgscalr</groupId>
