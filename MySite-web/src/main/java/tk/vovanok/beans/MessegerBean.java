@@ -1,6 +1,7 @@
 
 package tk.vovanok.beans;
 
+import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -13,7 +14,7 @@ import org.primefaces.context.RequestContext;
  */
 @Named
 @ViewScoped
-public class MessegerBean {
+public class MessegerBean implements Serializable{
     
     public void test1(){
         sendMessage(true, "asdasd");

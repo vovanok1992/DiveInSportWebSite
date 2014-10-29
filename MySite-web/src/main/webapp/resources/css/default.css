@@ -11,6 +11,7 @@ and open the template in the editor.
 .ui-widget, .ui-widget .ui-widget {
     font-size: small;
     text-shadow: none;
+    font-family: 'Exo 2', sans-serif;
 }
 
 .hide-column-names table thead tr {

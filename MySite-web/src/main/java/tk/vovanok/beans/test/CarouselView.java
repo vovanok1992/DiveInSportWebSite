@@ -1,6 +1,7 @@
 
 package tk.vovanok.beans.test;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -13,7 +14,7 @@ import javax.inject.Named;
  */
 @Named
 @ViewScoped
-public class CarouselView {
+public class CarouselView implements Serializable{
     
     private List<String> logos;
     

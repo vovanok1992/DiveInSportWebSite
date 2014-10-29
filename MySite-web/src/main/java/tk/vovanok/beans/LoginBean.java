@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.enterprise.context.SessionScoped;
@@ -33,6 +34,11 @@ public class LoginBean implements Serializable {
 
     public String getMessage() {
         return message;
+    }
+    
+    @PostConstruct
+    public void test(){
+        System.out.println("WORKING!");
     }
     
     public long getId(){   

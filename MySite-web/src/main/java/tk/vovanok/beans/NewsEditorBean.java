@@ -6,6 +6,7 @@
 
 package tk.vovanok.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
@@ -19,7 +20,7 @@ import tk.vovanok.entities.Information;
  */
 @Named
 @ViewScoped
-public class NewsEditorBean {
+public class NewsEditorBean implements Serializable{
     @EJB
     private InformationDao informationDao;
     private String text;

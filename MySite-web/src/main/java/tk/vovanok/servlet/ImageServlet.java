@@ -42,7 +42,12 @@ public class ImageServlet extends HttpServlet {
         response.setHeader("Content-Type", getServletContext().getMimeType(file.getName()));
         response.setHeader("Content-Length", String.valueOf(file.length()));
         response.setHeader("Content-Disposition", "inline; filename=\"" + filename + "\"");
-        Files.copy(file.toPath(), response.getOutputStream());
+        try{
+            Files.copy(file.toPath(), response.getOutputStream());
+        } catch (IOException e){
+            System.out.println("error sending: "+filename);
+        }    
+        
         } else {    
             ServletContext context = getServletContext();
             String fullPath = context.getRealPath("/resources/img/no-image.png");

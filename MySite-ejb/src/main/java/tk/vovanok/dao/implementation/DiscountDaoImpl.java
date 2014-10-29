@@ -37,6 +37,8 @@ public class DiscountDaoImpl extends GenericJpaDao<Discount, Long>
     
     @Override
     public Map<Long, Discount> getIdIn(List<Long> list){
+        if(list==null || list.isEmpty()) return null;
+        
         Session s = getEntityManager().unwrap(Session.class);
         
         Criteria c = s.createCriteria(Discount.class);

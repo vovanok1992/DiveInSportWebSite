@@ -26,7 +26,6 @@
                     style="margin: 5px; float:right;z-index: 1000; font-family: 'Exo 2', sans-serif;"
                     class="user"
                     >
-                
                 Вы залогинены:
                 <b>#{loginBean.uname}&nbsp;</b>
                 <h:outputText value="[администратор]" 
@@ -90,6 +89,7 @@
                     >
                 Вы не залогинены!
                 
+                
                 <p:commandButton id="modalDialogLoginButton" 
                                  value="Войти" 
                                  onclick="PF('dlgLogin').show();" 
@@ -98,7 +98,7 @@
                 
                 <p:commandButton id="modalDialogRegisterButton" 
                                  value="Регистрация" 
-                                 onclick="PF('dlgRegister').show();" 
+                                 onclick="PF('dlgRegister').show()" 
                                  type="button" 
                                  ajax="true" />   
                 
@@ -123,7 +123,7 @@
                       width="auto" 
                       style="font-size: 100%; margin-top: 30px" 
                       resizable="false"
-                      position="center top">  
+                      >  
                 
                 <h:form id="loginForm">
                     <h:panelGrid id = "grid" 

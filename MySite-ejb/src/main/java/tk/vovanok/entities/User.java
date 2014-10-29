@@ -32,9 +32,6 @@ public class User extends BaseEntity{
     @Column(name = "IP_ADD")
     private String ipAddress;
     
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date registrationDate;
-    
     @Column(name = "USER_ACCESS_LEVEL")
     private int accessLevel;
     
@@ -85,14 +82,6 @@ public class User extends BaseEntity{
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Date getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(Date registrationDate) {
-        this.registrationDate = registrationDate;
     }
 
     public int getAccessLevel() {

@@ -1,23 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- *//*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- *//*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- *//*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tk.vovanok.beans;
-
-
 
 import java.awt.image.ImagingOpException;
 import java.io.File;
@@ -60,10 +41,8 @@ import tk.vovanok.entities.Shipment;
 @Named
 public class EditShipmentBean implements Serializable {
     
-    @Resource(lookup = "ImageFolder")
+    @Resource(lookup = "imageFolder")
     private String imagePath;
-    
-   
     
     @EJB
     private ShipmentDao shipmentDao;
@@ -71,19 +50,14 @@ public class EditShipmentBean implements Serializable {
     @EJB
     private CategoryDao categoryDao;
     
-    
-
-    private int textEditorNum;
-    
+    private int textEditorNum;   
     private String name;
-    
     private String price;
     private String information;
     private int categoryId;
     private String pictureFolderName;
     private boolean renderFiles;
     private List<String> images;
-    
     private String mainPicture;
     private boolean active;
     private List<Category> categories;

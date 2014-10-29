@@ -1,6 +1,7 @@
 
 package tk.vovanok.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +21,7 @@ import tk.vovanok.entities.Shipment;
  */
 @Named
 @ViewScoped
-public class LastDiscountsBean {
+public class LastDiscountsBean implements Serializable{
     @EJB
     private ShipmentDao shipmentDao;
     @EJB

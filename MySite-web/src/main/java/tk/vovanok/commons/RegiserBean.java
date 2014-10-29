@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tk.vovanok.commons;
-
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.Size;
 import nl.captcha.Captcha;
 import org.primefaces.context.RequestContext;
 import tk.vovanok.dao.UserDao;
@@ -29,38 +24,31 @@ public class RegiserBean {
     @EJB
     private UserDao userDao;
 
+    @Size(min=4, max=20, message = "Length of password should be betwen 4 and 20")
     private String password;
+    
     private String passwordConfirm;
+    
+    @Size(min=4, max=20, message = "Length of login should be betwen 4 and 20")
     private String login;
+    
     private String captcha;
     
     private String phone;
     private String email;
 
-    /**
-     * @return the password
-     */
     public String getPassword() {
         return password;
     }
 
-    /**
-     * @param password the password to set
-     */
     public void setPassword(String password) {
         this.password = password;
     }
 
-    /**
-     * @return the login
-     */
     public String getLogin() {
         return login;
     }
 
-    /**
-     * @param login the login to set
-     */
     public void setLogin(String login) {
         this.login = login;
     }
@@ -106,7 +94,7 @@ public class RegiserBean {
         newUser.setLogin(login);
         newUser.setPassword(password);
         newUser.setAccessLevel(0);
-        newUser.setRegistrationDate(new Date());
+        newUser.setCreated(new Date());
         newUser.setIpAddress(getIp());
         List<AditionalParameter> params = new ArrayList<>();
        

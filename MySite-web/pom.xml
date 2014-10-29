@@ -63,7 +63,7 @@
             <type>jar</type>
         </dependency>
         
-<!--        <dependency>  
+        <dependency>  
             <groupId>tk.vovanok</groupId>  
             <artifactId>vovan-one</artifactId>  
             <version>1.0.0</version>
@@ -104,7 +104,7 @@
             <version>1.0.0</version>
             <type>jar</type>
         </dependency>
-        -->
+        
         
         <dependency>
             <groupId>org.imgscalr</groupId>
@@ -130,7 +130,7 @@
         <dependency>  
             <groupId>org.primefaces</groupId>  
             <artifactId>primefaces</artifactId>  
-            <version>5.0</version>  
+            <version>5.1</version>  
         </dependency>  
         
         <dependency>  
@@ -160,7 +160,7 @@
         <dependency>
             <groupId>org.atmosphere</groupId>
             <artifactId>atmosphere-runtime</artifactId>
-            <version>2.1.7</version>
+            <version>2.1.9</version>
         </dependency>
         
         <dependency>
