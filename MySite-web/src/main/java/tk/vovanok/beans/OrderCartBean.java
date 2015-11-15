@@ -7,6 +7,8 @@
 package tk.vovanok.beans;
 
 import tk.vovanok.cart.SessionCart;
+import tk.vovanok.dao.CartItemDao;
+import tk.vovanok.dao.OrderDao;
 import tk.vovanok.entities.Order;
 import tk.vovanok.entities.User;
 import tk.vovanok.entities.commons.AdditionalParameter;
@@ -18,6 +20,7 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,6 +30,12 @@ import java.util.List;
 @Named
 @ViewScoped
 public class OrderCartBean implements Serializable{
+
+    @Inject
+    OrderDao orderDao;
+
+    @Inject
+    CartItemDao cartItemDao;
 
     @Inject
     private LoginBean curUser;
@@ -138,10 +147,15 @@ public class OrderCartBean implements Serializable{
         o.setPayType(payType);
         o.setDeliveryType(deliveryType);
         o.setPhone(selectedPhone);
+        o.setCreated(new Date());
+        o.setInfo(info);
+        o.setCartItems(cart.getItems());
+
+
         System.out.println("RES:= " + o);
-
-        System.out.println("ITMES=" + cart.getItems());
-
+        cartItemDao.saveAll(o.getCartItems());
+        orderDao.save(o);
+        System.out.println("SAVE COMPLETE!!!!!" + o.getId());
     }
 }
 

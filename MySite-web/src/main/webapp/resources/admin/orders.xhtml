@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:vo="http://java.sun.com/jsf/composite/user"
+      xmlns:vadm="http://java.sun.com/jsf/composite/admin">
+
+    <h:head>
+        <title>Управление пользователями</title>
+        <h:outputStylesheet name="css/default.css" />
+        <h:outputStylesheet name="css/layout.css" />
+        <h:outputStylesheet name="css/shipmentinfo.css" />
+    </h:head>
+    <h:body>
+        <p:growl id="userinfo"/>
+
+        <div class="seperator" style="height:20px;"/>
+
+        <div id="page" >
+
+            <h:panelGroup layout="block" id="header">
+                <vo:headercontent/>
+            </h:panelGroup>
+
+            <div id="menu"> 
+                <vadm:navigatemenu selected="11"/>
+            </div>
+
+            <h:panelGroup layout="block" 
+                          id="content" 
+                          >
+
+
+                <h:form id="form">  
+
+                    <p:dataTable var="order"
+                                 value="#{allOrdersBean.lazyModel}"
+                                 paginator="true" rows="10"  
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+                                 rowsPerPageTemplate="5,10,15" 
+                                 selectionMode="single"
+                                 selection="#{allOrdersBean.selectedOrder}"
+                                 id="newsTable" 
+                                 lazy="true"
+                                 style=" margin-top: 10px;"
+                                 >
+
+                        <p:column style=""
+                                  headerText="id">
+                            <h:outputText value="#{order.id}" />
+                        </p:column>
+
+                        <p:column style=""
+                            headerText="Имя пользователя">
+                            <h:outputText value="#{order.name}" />
+                        </p:column>  
+
+                        <p:column style=""
+                            sortBy="registrationDate"
+                            headerText="Дата создания">
+                            <h:outputText value="#{order.created}" />
+                        </p:column>  
+
+                        <p:column>
+                            <p:button rendered="#{not empty order.userId}"
+                                icon="ui-icon-gear"
+                                outcome="aboutuser.xhtml?id=#{order.userId}"
+                                value="#{order.name}"/>
+                        </p:column>
+
+                        <p:column>
+                            <p:button
+                                      icon="ui-icon-extlink"
+                                      outcome="/order.xhtml?id=#{order.id}"
+                                      value="Заказ"/>
+                        </p:column>
+
+
+                        <f:facet name="header">
+                            Заказы
+                        </f:facet>
+
+                    </p:dataTable>  
+
+                </h:form>  
+
+            </h:panelGroup>
+
+            <div id="footer">
+
+                <vo:footercontent/>
+
+            </div>
+        </div>   
+        <div class="seperator" style="height:20px;"/>
+
+
+    </h:body>
+</html>
+

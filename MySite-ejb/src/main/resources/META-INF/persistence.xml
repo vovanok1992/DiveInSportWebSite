@@ -8,11 +8,6 @@
       <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
       <jta-data-source>jdbcmysql</jta-data-source>
       
-<!--      <class>tk.vovanok.entities.Category</class>
-      <class>tk.vovanok.entities.User</class>
-      <class>tk.vovanok.entities.Comment</class>
-      <class>tk.vovanok.entities.Shipment</class>-->
-
       <properties>
           <property name="hibernate.transaction.jta.platform" 
                     value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform" />

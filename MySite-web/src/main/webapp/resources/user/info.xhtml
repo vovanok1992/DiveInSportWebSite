@@ -31,6 +31,10 @@
                 <h:outputText value="[администратор]" 
                               style="font-weight: bold; color: green"
                               rendered="#{loginBean.access > 5}"/>
+                <p:button value="Заказы"
+                          icon="ui-icon-circle-plus"
+                          outcome="/resources/admin/orders.xhtml"/>
+
                 <p:commandButton value="Выйти" action="#{loginBean.logoutReflesh}" />
                 
                 <h:panelGroup rendered="#{loginBean.access > 5}">
@@ -47,8 +51,8 @@
                             <p:button value="Все настройки" 
                                       icon="ui-icon-gear"
                                       style="font-size: 100%; width: 100%" 
-                                      outcome="/resources/admin/miscsettings.xhtml"/> 
-                            
+                                      outcome="/resources/admin/miscsettings.xhtml"/>
+
                             <p:button value="Добавить товар"  
                                       icon="ui-icon-circle-plus"
                                       style="font-size: 100%; width: 100%" 

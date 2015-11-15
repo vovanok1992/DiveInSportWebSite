@@ -47,8 +47,6 @@
                                  style=" margin-top: 10px;"
                                  >  
 
-
-
                         <p:column style=""
                             headerText="Имя">  
                             <h:outputText value="#{user.login}" />  
@@ -62,7 +60,7 @@
                         <p:column style=""
                             sortBy="registrationDate"
                             headerText="Дата регистрации">  
-                            <h:outputText value="#{user.registrationDate}" />  
+                            <h:outputText value="#{user.created}" />
                         </p:column>  
 
                         <p:column style="width:30px"
@@ -78,8 +76,6 @@
                         </f:facet>
 
                     </p:dataTable>  
-
-
 
                 </h:form>  
 

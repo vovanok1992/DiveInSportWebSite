@@ -12,6 +12,7 @@ import tk.vovanok.beans.VarParam;
 import tk.vovanok.commons.CurrencyUtils;
 import tk.vovanok.commons.Variant;
 import tk.vovanok.dao.ShipmentDao;
+import tk.vovanok.entities.BasicCartItem;
 import tk.vovanok.entities.Shipment;
 import tk.vovanok.entities.commons.ShipmentParameter;
 

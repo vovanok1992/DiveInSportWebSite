@@ -81,12 +81,12 @@
                                          style="width: 100%;">
 
                                 <h:outputText value="Способ доставки"/>
-                                <p:selectOneRadio value="#{orderCartBean.deliveryType}">
+                                <p:selectOneRadio value="#{orderCartBean.deliveryType}" layout="grid" columns="1">
                                     <f:selectItems value="#{deliveryBean.deliveryTypes}"/>
                                 </p:selectOneRadio>
 
                                 <h:outputText value="Способ оплаты"/>
-                                <p:selectOneRadio value="#{orderCartBean.payType}">
+                                <p:selectOneRadio value="#{orderCartBean.payType}" layout="grid" columns="1">
                                     <f:selectItems value="#{deliveryBean.payTypes}"/>
                                 </p:selectOneRadio>
 

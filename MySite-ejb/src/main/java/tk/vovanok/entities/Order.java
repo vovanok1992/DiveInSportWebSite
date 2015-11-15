@@ -1,8 +1,15 @@
 package tk.vovanok.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.List;
+
 /**
  * Created by vovan_000 on 21.03.2015.
  */
+@Entity
+@Table(name = "ORDERS")
 public class Order extends BaseEntity {
 
     private Long userId;
@@ -11,7 +18,10 @@ public class Order extends BaseEntity {
     private String phone;
     private String payType;
     private String deliveryType;
+    private String info;
 
+    @OneToMany
+    private List<BasicCartItem> cartItems;
 
     public Long getUserId() {
         return userId;
@@ -70,7 +80,23 @@ public class Order extends BaseEntity {
                 ", phone='" + phone + '\'' +
                 ", payType='" + payType + '\'' +
                 ", deliveryType='" + deliveryType + '\'' +
+                ", cartItems=" + cartItems +
                 '}';
     }
 
+    public List<BasicCartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<BasicCartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public String getInfo() {
+        return info;
+    }
 }
