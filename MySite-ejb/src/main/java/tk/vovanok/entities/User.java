@@ -7,7 +7,6 @@
 package tk.vovanok.entities;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -15,9 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import tk.vovanok.entities.commons.AditionalParameter;
+
+import tk.vovanok.entities.commons.AdditionalParameter;
 
 @Entity
 @Table(name = "USERS")
@@ -39,7 +37,7 @@ public class User extends BaseEntity{
     @JoinTable(name = "USER_ADITIONAL_INFO",
             joinColumns = @JoinColumn(name = "USER_ID")
     )
-    private Collection<AditionalParameter> aditionalInfo;
+    private Collection<AdditionalParameter> aditionalInfo;
 
    
     @Override
@@ -92,11 +90,11 @@ public class User extends BaseEntity{
         this.accessLevel = accessLevel;
     }
 
-    public Collection<AditionalParameter> getAditionalInfo() {
+    public Collection<AdditionalParameter> getAditionalInfo() {
         return aditionalInfo;
     }
 
-    public void setAditionalInfo(Collection<AditionalParameter> aditionalInfo) {
+    public void setAditionalInfo(Collection<AdditionalParameter> aditionalInfo) {
         this.aditionalInfo = aditionalInfo;
     }
 

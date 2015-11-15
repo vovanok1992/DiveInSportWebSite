@@ -54,6 +54,17 @@
             
             </ui:repeat>
 
+            <h:panelGroup rendered="#{sliderBean.slides.size() == 0}">
+                <div>
+                    <a u="image" href="http://google.com">
+                        <h:graphicImage value="/resources/img/no-image.png" /></a>
+                    <div u="caption" t="*" class="captionOrange"
+                         style="position:absolute; left:20px; top: 30px; width:300px; height:30px;">
+                        NO SLIDES
+                    </div>
+                </div>
+            </h:panelGroup>
+
         </div>
         
         

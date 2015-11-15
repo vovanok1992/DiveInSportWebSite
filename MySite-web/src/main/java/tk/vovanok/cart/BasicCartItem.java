@@ -7,16 +7,13 @@
 package tk.vovanok.cart;
 
 import java.math.BigDecimal;
-import java.util.Map;
 import java.util.Objects;
-import javax.inject.Named;
 
 /**
- *
  * @author Vovan <vovanok1992 at gmail.com>
  */
 
-public class BasicCartItem implements ShopItem{
+public class BasicCartItem implements ShopItem {
 
     private String name;
     private String description;
@@ -24,9 +21,7 @@ public class BasicCartItem implements ShopItem{
     private BigDecimal price;
     private int shipmentId;
     private int ammount;
-    private Map<Integer,Integer> selectedParams;
-    
-    
+
     @Override
     public BigDecimal getPrice() {
         return price;
@@ -42,27 +37,9 @@ public class BasicCartItem implements ShopItem{
         return description;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if(! (obj instanceof BasicCartItem)) return false;
-        BasicCartItem item = (BasicCartItem) obj;
-        return code.equals(item.code) && (ammount == item.ammount);
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 29 * hash + Objects.hashCode(this.code);
-        hash = 29 * hash + this.ammount;
-        return hash;
-    }
-    
-    
-
     public void setName(String name) {
         this.name = name;
     }
-
 
     public void setDescription(String desc) {
         this.description = desc;
@@ -72,22 +49,12 @@ public class BasicCartItem implements ShopItem{
         this.price = price;
     }
 
-
-
     public int getShipmentId() {
         return shipmentId;
     }
 
     public void setShipmentId(int shipmentId) {
         this.shipmentId = shipmentId;
-    }
-
-    public Map<Integer,Integer> getSelectedParams() {
-        return selectedParams;
-    }
-
-    public void setSelectedParams(Map<Integer,Integer> selectedParams) {
-        this.selectedParams = selectedParams;
     }
 
     public String getCode() {
@@ -106,6 +73,30 @@ public class BasicCartItem implements ShopItem{
         this.ammount = ammount;
     }
 
-    
-    
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof BasicCartItem)) return false;
+        BasicCartItem item = (BasicCartItem) obj;
+        return code.equals(item.code) && (ammount == item.ammount);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 29 * hash + Objects.hashCode(this.code);
+        hash = 29 * hash + this.ammount;
+        return hash;
+    }
+
+    @Override
+    public String toString() {
+        return "BasicCartItem{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", code='" + code + '\'' +
+                ", price=" + price +
+                ", shipmentId=" + shipmentId +
+                ", ammount=" + ammount +
+                '}';
+    }
 }

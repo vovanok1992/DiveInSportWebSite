@@ -1,116 +1,114 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:vo="http://java.sun.com/jsf/composite/user"
       xmlns:vadm="http://java.sun.com/jsf/composite/admin">
-    <h:head>
-        <title>Корзина</title>
-        <h:outputStylesheet name="css/default.css" />
-        <h:outputStylesheet name="css/layout.css" />
-        <h:outputStylesheet name="css/shipmentinfo.css" />
-    </h:head>
+<h:head>
+    <title>Корзина</title>
+    <h:outputStylesheet name="css/default.css"/>
+    <h:outputStylesheet name="css/layout.css"/>
+    <h:outputStylesheet name="css/shipmentinfo.css"/>
+</h:head>
 
-    <h:body>
+<h:body>
 
-        <p:growl id="userinfo"/>
+    <p:growl id="userinfo"/>
 
-        <div class="seperator" style="height:20px;"/>
+    <div class="seperator" style="height:20px;"/>
 
-        <div id="page" >
+    <div id="page">
 
-            <h:panelGroup layout="block" id="header">
-                <vo:headercontent/>
-            </h:panelGroup>
+        <h:panelGroup layout="block" id="header">
+            <vo:headercontent/>
+        </h:panelGroup>
 
-            <h:panelGroup layout="block" 
-                          id="content" 
-                          style="margin-left: 10px;"
-                          >
+        <h:panelGroup layout="block"
+                      id="content"
+                      style="margin-left: 10px;"
+                >
 
-                <p:dataTable value="#{sessionCart.items}" var="basicCartItem">
-                    <p:column headerText="Товар">
-                        #{basicCartItem.description}
-                    </p:column>
+            <p:dataTable value="#{sessionCart.items}" var="basicCartItem">
+                <p:column headerText="Товар">
+                    #{basicCartItem.description}
+                </p:column>
 
-                    <p:column headerText="Код">
-                        #{basicCartItem.code}
-                    </p:column>
+                <p:column headerText="Код">
+                    #{basicCartItem.code}
+                </p:column>
 
-                    <p:column headerText="Количество">
-                        #{basicCartItem.ammount}
-                    </p:column>
+                <p:column headerText="Количество">
+                    #{basicCartItem.ammount}
+                </p:column>
 
-                    <p:column headerText="Цена за единицу">
-                        #{basicCartItem.price}
-                    </p:column>
+                <p:column headerText="Цена за единицу">
+                    #{basicCartItem.price}
+                </p:column>
 
+            </p:dataTable>
 
-                </p:dataTable>   
-
+            <p:panel style="margin-top:10px; overflow: hidden">
                 <h:form id="loginForm">
-                    <p:commandButton value="Оформить заказ"  
-                                     onclick="PF('dlgOrder').show();" 
-                                     type="button" 
-                                     ajax="true" 
-                                     style="margin:10px;"/>
+                    <div style="overflow: auto; width: 100%; padding: 10px">
 
-                    <p:dialog 
-                        header="Оформить заказ" 
-                        widgetVar="dlgOrder" 
-                        showEffect="fade" 
-                        hideEffect="drop" 
-                        height="auto" 
-                        width="auto" 
-                        style="font-size: 100%; margin-top: 100px" 
-                        resizable="false"
-                        position="center top">  
+                        <div style="float: left; width:50%">
+                            <h:panelGrid id="details"
+                                         columns="2"
+                                         cellpadding="5"
+                                         style="width: 100%;">
 
-                        <h:outputText value="Укажите вашу контактную информацию, что бы мы смогли с вами связаться."/>
+                                <h:outputText value="ФИО*"/>
+                                <p:inputText style="width:100%" value="#{orderCartBean.name}"/>
 
-                        <h:panelGrid id = "grid" 
-                                     columns="2" 
-                                     cellpadding="5"
-                                     style="width: 100%;"> 
-                            <h:outputText value="Телефон"/>
-                            <p:selectOneMenu value="#{orderCartBean.selectedPhone}"
+                                <h:outputText value="E-mail*"/>
+                                <p:inputText style="width:100%" value="#{orderCartBean.email}"/>
 
-                                             editable="true"
-                                             style="font-size: 100%; width: 100%;">
+                                <h:outputText value="Телефон*"/>
+                                <p:inputText style="width:100%" value="#{orderCartBean.selectedPhone}"/>
 
-                                <f:selectItems value="#{orderCartBean.phones}"/>
-                            </p:selectOneMenu>
+                                <h:outputText value="Коментарий к заказу"/>
+                                <p:inputTextarea style="width:100%" value="#{orderCartBean.info}"/>
+                            </h:panelGrid>
+                        </div>
 
-                            <h:outputText value="Доп. информация"/>
-                            <p:inputTextarea value=""
-                                             style="font-size: 100%; width: 100%"/>
+                        <div style="float: left; margin-left: 10px">
+                            <h:panelGrid id="delivery"
+                                         columns="1"
+                                         cellpadding="5"
+                                         style="width: 100%;">
 
+                                <h:outputText value="Способ доставки"/>
+                                <p:selectOneRadio value="#{orderCartBean.deliveryType}">
+                                    <f:selectItems value="#{deliveryBean.deliveryTypes}"/>
+                                </p:selectOneRadio>
 
-                        </h:panelGrid>   
+                                <h:outputText value="Способ оплаты"/>
+                                <p:selectOneRadio value="#{orderCartBean.payType}">
+                                    <f:selectItems value="#{deliveryBean.payTypes}"/>
+                                </p:selectOneRadio>
 
-                        <p:commandButton value="Оформить"/>
+                            </h:panelGrid>
+                        </div>
+                    </div>
 
-                        <p:messages id="logmessages" 
-                                    showDetail="true" 
-                                    autoUpdate="true" 
-                                    closable="true" /> 
-
-                    </p:dialog> 
+                    <p:commandButton value="Оформить заказ"
+                                     action="#{orderCartBean.makeOrder}"
+                                     style="margin:10px; font-size: 150%; float: right">
+                    </p:commandButton>
                 </h:form>
+            </p:panel>
 
+        </h:panelGroup>
 
-            </h:panelGroup>
-
-            <div id="footer">
-
-                <vo:footercontent/>
-
-            </div>
-        </div>   
-        <div class="seperator" style="height:20px;"/>
-    </h:body>
+        <div id="footer">
+            <vo:footercontent/>
+        </div>
+    </div>
+    <div class="seperator" style="height:20px;"/>
+</h:body>
 
 
 </html>

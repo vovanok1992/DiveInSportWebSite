@@ -6,18 +6,17 @@
 
 package tk.vovanok.servlet;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import javax.annotation.Resource;
-import javax.ejb.EJB;
+import tk.vovanok.entities.commons.ImagePath;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import tk.vovanok.entities.commons.ImagePath;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 /**
  *
@@ -46,6 +45,7 @@ public class ImageServlet extends HttpServlet {
             Files.copy(file.toPath(), response.getOutputStream());
         } catch (IOException e){
             System.out.println("error sending: "+filename);
+            e.printStackTrace();
         }    
         
         } else {    

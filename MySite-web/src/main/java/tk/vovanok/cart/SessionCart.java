@@ -7,15 +7,6 @@
 package tk.vovanok.cart;
 
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 import tk.vovanok.beans.VarParam;
 import tk.vovanok.commons.CurrencyUtils;
@@ -23,6 +14,13 @@ import tk.vovanok.commons.Variant;
 import tk.vovanok.dao.ShipmentDao;
 import tk.vovanok.entities.Shipment;
 import tk.vovanok.entities.commons.ShipmentParameter;
+
+import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -38,8 +36,8 @@ public class SessionCart implements Serializable{
     private List<VarParam> parameters;
     private Shipment loaded;
     private int ammount = 1;
-    
-    
+    private String deliveryType;
+    private String payType;
 
 
     public void generateCartItem(){
@@ -157,5 +155,21 @@ public class SessionCart implements Serializable{
 
     public void setAmmount(int ammount) {
         this.ammount = ammount;
+    }
+
+    public void setDeliveryType(String deliveryType) {
+        this.deliveryType = deliveryType;
+    }
+
+    public String getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setPayType(String payType) {
+        this.payType = payType;
+    }
+
+    public String getPayType() {
+        return payType;
     }
 }

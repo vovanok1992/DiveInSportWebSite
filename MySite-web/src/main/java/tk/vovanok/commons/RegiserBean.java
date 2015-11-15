@@ -15,7 +15,7 @@ import nl.captcha.Captcha;
 import org.primefaces.context.RequestContext;
 import tk.vovanok.dao.UserDao;
 import tk.vovanok.entities.User;
-import tk.vovanok.entities.commons.AditionalParameter;
+import tk.vovanok.entities.commons.AdditionalParameter;
 
 @Named
 @RequestScoped
@@ -96,11 +96,11 @@ public class RegiserBean {
         newUser.setAccessLevel(0);
         newUser.setCreated(new Date());
         newUser.setIpAddress(getIp());
-        List<AditionalParameter> params = new ArrayList<>();
+        List<AdditionalParameter> params = new ArrayList<>();
        
         if(checkPhone()){
             
-            AditionalParameter phoneParam = new AditionalParameter();
+            AdditionalParameter phoneParam = new AdditionalParameter();
             phoneParam.setParam("phone");
             phoneParam.setArgument(phone);
             params.add(phoneParam);
@@ -108,7 +108,7 @@ public class RegiserBean {
         }
         
         if((email!=null) && (!email.trim().equals(""))){
-            AditionalParameter phoneParam = new AditionalParameter();
+            AdditionalParameter phoneParam = new AdditionalParameter();
             phoneParam.setParam("email");
             phoneParam.setArgument(email);
             params.add(phoneParam);

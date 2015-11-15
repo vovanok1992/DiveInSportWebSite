@@ -14,7 +14,6 @@
         <h:outputStylesheet name="css/fix.css" />
         <h:outputStylesheet name="css/menupanel.css" />
         <h:outputScript name="js/jQuery.succinct.min.js" />
-        
 
         <link rel="shortcut icon" type="image/x-icon" href="resources/img/about/icon.ico"/>
 
@@ -33,7 +32,7 @@
                 <vo:headercontent/>
             </h:panelGroup>
 
-            <div id="content" style="margin-left: 5px; padding: 0;">
+            <h:panelGroup id="content" style="margin-left: 5px; padding: 0;">
 
                 <h:form id="formh">
                     <p:toolbar style="border-radius: 0; font-size: 100%" id="toolbar">
@@ -103,7 +102,6 @@
                                       >
                                
                             </p:commandButton>
-                           
 
                             <script>
                                 $( '.searchtext' ).click(function() {
@@ -120,10 +118,8 @@
                                       alert('Длина поискового запроса должна быть больше 2 символов!');
                                   }
                                 });
-                                
-                                
-                            </script>
 
+                            </script>
                         </f:facet>
 
                         <f:facet name="right"  id="rightfacet">
@@ -132,16 +128,11 @@
                                        icon="ui-icon-document" 
                                        outcome="catalog.xhtml"/>
 
-
-
                             <p:button  value="Моя корзина" 
                                        icon="ui-icon-cart" 
                                        outcome="cart.xhtml"
                                        />
-                            
-                            
-                                
-                            
+
                             <h:panelGroup layout="block" rendered="#{not empty sessionCart.items.size()}"
                                  style="position: relative;
                                                  top: -12px;
@@ -159,16 +150,13 @@
                                 >
                             #{sessionCart.items.size()}
                             </h:panelGroup>
-                                
-                            
-                            
+
                         </f:facet>
 
                     </p:toolbar>
                 </h:form>
 
                 <vo:slider />
-
 
                 <p:tabView style="border-radius: 0;">
 
@@ -197,18 +185,11 @@
                                     </div>
                                 </div>
                                 <p>
- 
                                     <h:outputText value="#{information.basicText}" escape="false"
                                                   style=" text-align: justify; word-wrap: break-word"/> 
                                 </p>                        
                             </p:panel>
-
-
                         </ui:repeat>
-
-
-
-
 
                     </p:tab>
                     <p:tab title="Написать администрации">
@@ -223,16 +204,12 @@
                     </p:tab>
 
                     <p:tab title="О магазине">
- 
 
                         <h:outputText value="After a break of more than 15 years..." />
 
                     </p:tab>
                 </p:tabView>
-                
-                
-          
-                    
+
                     <p:dataGrid var="shipment" value="#{lastDiscountsBean.ships}" 
                                 columns="1"
                                 paginatorPosition ="bottom"
@@ -247,9 +224,7 @@
                         <vo:shipmentindex value="#{shipment}"/>
 
                     </p:dataGrid>
-                    
-             
-                
+
                 <div id="buttons">
                     <div id="buttonsheader">
                        Популярные категории 
@@ -313,23 +288,16 @@
                             <p:button value="Детальнее" outcome="getshipment.xhtml" style="font-size: 100%;">
                                 <f:param name="id" value="#{shipment.id}"/>
                             </p:button>
-                        
-
                     </p:panel>
 
                 </p:dataGrid>
-
                 <vo:brands/>
-
-
-            </div>
+            </h:panelGroup>
+            <!-- -->
             <div id="footer">
-                
                 <vo:footercontent/>
-                    
-               
             </div>
-        </div>  
+        </div>
         <div style="height: 20px;"/>
         
         <h:form id ="addtocart">

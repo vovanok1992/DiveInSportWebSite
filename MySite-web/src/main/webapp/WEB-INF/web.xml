@@ -67,11 +67,11 @@
         <servlet-name>SimpleCaptcha</servlet-name>
         <url-pattern>/simpleCaptcha.png</url-pattern>
     </servlet-mapping>
-    
-    <listener>
-        <listener-class>tk.vovanok.servlet.SessionListener</listener-class>
-    </listener>
-    
+
+    <!--<listener>-->
+        <!--<listener-class>tk.vovanok.servlet.SessionListener</listener-class>-->
+    <!--</listener>-->
+    <!-- -->
 <!--    <filter> 
         <display-name>Admin Filter</display-name>
         <filter-name>adminfilter</filter-name>
