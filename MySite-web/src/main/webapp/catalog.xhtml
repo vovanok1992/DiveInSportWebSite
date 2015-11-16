@@ -74,8 +74,8 @@
 
                 <p:panel header="Товаров на странице" style="margin-top: 10px; ">
                     <h:form>    
-                        <p:selectOneMenu id="sorts" 
-                                         style="width: 100%; font-size: 100%" 
+                        <p:selectOneMenu id="itemsonpage"
+                                         style="font-size: 85%"
                                          value="#{catalogBean.pageSize}" >
 
                             <f:selectItem itemLabel="5" itemValue="5"/>
@@ -92,8 +92,8 @@
 
                 <p:panel header="Сортировка" style="margin-top: 10px; ">
                     <h:form>    
-                        <p:selectOneMenu id="sorts" 
-                                         style="width: 100%; font-size: 100%" 
+                        <p:selectOneMenu id="sorts"
+                                         style="width: 85%;"
                                          value="#{catalogBean.sortType}">
 
                             <f:selectItem itemLabel="Самые новые" 
@@ -113,8 +113,8 @@
 
                 <p:panel header="Денежная единица" style="margin-top: 10px; ">
                     <h:form>    
-                        <p:selectOneMenu id="sorts" 
-                                         style="width: 100%; font-size: 100%" 
+                        <p:selectOneMenu id="currency"
+                                         style="width: 85%;"
                                          value="#{loginBean.priceType}">
 
                             <f:selectItem itemLabel="$ - USD" itemValue="1"/>
@@ -166,7 +166,7 @@
                                 </p:tab>
                             </p:accordionPanel>
 
-                            <p:button value="Перейтти в корзину" 
+                            <p:button value="Перейти в корзину"
                                       outcome="/cart.xhtml"
                                       style="width: 100%; 
                                       margin-top: 5px; 
