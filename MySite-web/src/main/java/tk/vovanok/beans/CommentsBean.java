@@ -6,10 +6,11 @@
 
 package tk.vovanok.beans;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import org.primefaces.context.RequestContext;
+import tk.vovanok.dao.CommentDao;
+import tk.vovanok.entities.Comment;
+import tk.vovanok.entities.User;
+
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -17,10 +18,10 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.primefaces.context.RequestContext;
-import tk.vovanok.dao.CommentDao;
-import tk.vovanok.entities.Comment;
-import tk.vovanok.entities.User;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Named
 @ViewScoped
@@ -124,7 +125,7 @@ public class CommentsBean implements Serializable{
     
     public void createComment(){
         if(curUser == null || curUser.getAccessLevel()<0){return;}
-        
+
         Comment c = new Comment();
         c.setText(newCommentText);
         c.setCreated(new Date());
