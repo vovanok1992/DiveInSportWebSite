@@ -195,7 +195,8 @@
             </div>
 
             <h:panelGroup layout="block" 
-                            id="content">
+                            id="content"
+                            style="position: relative;">
 
                 <div id="smallmenu" 
                      style="z-index: 10">
@@ -292,8 +293,8 @@
                     </div>
 
                     <script>
-                                $closed = true;
-                                $('#text').click(function(){
+                        $closed = true;
+                        $('#text').click(function(){
 
                         if ($closed == true){
                         $('#menubutton').fadeOut("fast");
@@ -323,7 +324,7 @@
 
                 <div style="width: 100%; text-align: center; bottom: 0">
                     <h:form id="pages">
-                        <div style="border: solid 1px #FF9911; border-radius: 5px; margin-bottom: 5px; margin-top: 10px;">
+                        <div style="border: solid 1px #FF9911; border-radius: 5px; position: absolute;bottom: 5px;width:97%">
                             <ui:repeat value="#{catalogBean.pages}" var="pageNum" >
                                 <p:commandButton action="#{catalogBean.setPage(pageNum)}" 
                                                  update=":ships :pages"
@@ -334,11 +335,7 @@
                         </div>
                     </h:form>
                 </div>
-
-
-
             </h:panelGroup>
-
 
             <div id="footer">
                 <vo:footercontent/>
