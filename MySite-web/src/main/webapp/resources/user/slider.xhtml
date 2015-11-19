@@ -1,26 +1,23 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:composite="http://java.sun.com/jsf/composite"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">  
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-    <composite:interface>
+<composite:interface>
 
-    </composite:interface> 
+</composite:interface>
 
-    <composite:implementation>
+<composite:implementation>
 
-        <h:outputScript name="js/jssor.slider.mini.js" />
-        <h:outputScript name="js/jssorconfig.js" />
-        
-        <h:outputStylesheet name="css/slider.css" />
+    <h:outputScript name="js/jssor.slider.mini.js"/>
+    <h:outputScript name="js/jssorconfig.js"/>
 
-        
-        
-    
+    <h:outputStylesheet name="css/slider.css"/>
 
-       <!-- Jssor Slider Begin -->
+    <!-- Jssor Slider Begin -->
     <!-- You can move inline styles (except 'top', 'left', 'width' and 'height') to css file or css block. -->
     <div id="slider1_container" style="position: relative; width: 990px;
         
@@ -31,33 +28,33 @@
             <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
                 background-color: #000; top: 0px; left: 0px;width: 100%;height:100%;">
             </div>
-            <div style="position: absolute; display: block; background: url(../img/loading.gif) no-repeat center center;
+            <div style="position: absolute; display: block; background: url(resources/img/ajax-loader.gif) no-repeat center center;
                 top: 0px; left: 0px;width: 100%;height:100%;">
             </div>
         </div>
-        
+
         <!-- Slides Container -->
         <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 990px; height: 400px;
             overflow: hidden;">
-            
+
             <ui:repeat value="#{sliderBean.slides}" var="slide">
-            
+
                 <div>
                     <a u="image" href="http://#{slide.link}">
-                    <h:graphicImage value="/image/slider/#{slide.imagePath}" /></a>
-                    <div u="caption" t="*" class="captionOrange"  
-                         style="position:absolute; left:20px; top: 30px; width:300px; height:30px;"> 
+                        <h:graphicImage value="/image/slider/#{slide.imagePath}"/></a>
+
+                    <div u="caption" t="*" class="captionOrange"
+                         style="position:absolute; left:20px; top: 30px; width:300px; height:30px;">
                         #{slide.text}
                     </div>
                 </div>
-                
-            
             </ui:repeat>
 
             <h:panelGroup rendered="#{sliderBean.slides.size() == 0}">
                 <div>
                     <a u="image" href="http://google.com">
-                        <h:graphicImage value="/resources/img/no-image.png" /></a>
+                        <h:graphicImage value="/resources/img/no-image.png"/></a>
+
                     <div u="caption" t="*" class="captionOrange"
                          style="position:absolute; left:20px; top: 30px; width:300px; height:30px;">
                         NO SLIDES
@@ -66,8 +63,7 @@
             </h:panelGroup>
 
         </div>
-        
-        
+
         <!-- Bullet Navigator Skin Begin -->
         <!-- jssor slider bullet navigator skin 01 -->
         <style>
@@ -78,18 +74,29 @@
             .jssorb01 .av:hover     (active mouseover)
             .jssorb01 .dn           (mousedown)
             */
-            .jssorb01 div, .jssorb01 div:hover, .jssorb01 .av
-            {
+            .jssorb01 div, .jssorb01 div:hover, .jssorb01 .av {
                 filter: alpha(opacity=70);
                 opacity: .7;
-                overflow:hidden;
+                overflow: hidden;
                 cursor: pointer;
                 border: #000 1px solid;
             }
-            .jssorb01 div { background-color: gray; }
-            .jssorb01 div:hover, .jssorb01 .av:hover { background-color: #d3d3d3; }
-            .jssorb01 .av { background-color: #fff; }
-            .jssorb01 .dn, .jssorb01 .dn:hover { background-color: #555555; }
+
+            .jssorb01 div {
+                background-color: gray;
+            }
+
+            .jssorb01 div:hover, .jssorb01 .av:hover {
+                background-color: #d3d3d3;
+            }
+
+            .jssorb01 .av {
+                background-color: #fff;
+            }
+
+            .jssorb01 .dn, .jssorb01 .dn:hover {
+                background-color: #555555;
+            }
         </style>
         <!-- bullet navigator container -->
         <div u="navigator" class="jssorb01" style="position: absolute; bottom: 16px; right: 10px;">
@@ -97,7 +104,7 @@
             <div u="prototype" style="POSITION: absolute; WIDTH: 12px; HEIGHT: 12px;"></div>
         </div>
         <!-- Bullet Navigator Skin End -->
-        
+
         <!-- Arrow Navigator Skin Begin -->
         <style>
             /* jssor slider arrow navigator skin 05 css */
@@ -109,20 +116,37 @@
             .jssora05ldn            (mousedown)
             .jssora05rdn            (mousedown)
             */
-            .jssora05l, .jssora05r, .jssora05ldn, .jssora05rdn
-            {
-            	position: absolute;
-            	cursor: pointer;
-            	display: block;
-                background: url(../img/a17.png) no-repeat;
-                overflow:hidden;
+            .jssora05l, .jssora05r, .jssora05ldn, .jssora05rdn {
+                position: absolute;
+                cursor: pointer;
+                display: block;
+                background: url(resources/img/a17.png) no-repeat;
+                overflow: hidden;
             }
-            .jssora05l { background-position: -10px -40px; }
-            .jssora05r { background-position: -70px -40px; }
-            .jssora05l:hover { background-position: -130px -40px; }
-            .jssora05r:hover { background-position: -190px -40px; }
-            .jssora05ldn { background-position: -250px -40px; }
-            .jssora05rdn { background-position: -310px -40px; }
+
+            .jssora05l {
+                background-position: -10px -40px;
+            }
+
+            .jssora05r {
+                background-position: -70px -40px;
+            }
+
+            .jssora05l:hover {
+                background-position: -130px -40px;
+            }
+
+            .jssora05r:hover {
+                background-position: -190px -40px;
+            }
+
+            .jssora05ldn {
+                background-position: -250px -40px;
+            }
+
+            .jssora05rdn {
+                background-position: -310px -40px;
+            }
         </style>
         <!-- Arrow Left -->
         <span u="arrowleft" class="jssora05l" style="width: 40px; height: 40px; top: 123px; left: 8px;">
@@ -134,10 +158,7 @@
         <a style="display: none" href="http://www.jssor.com">Carousel jQuery</a>
     </div>
     <!-- Jssor Slider End -->
-       
-
-
-    </composite:implementation>
+</composite:implementation>
 
 
 </html>

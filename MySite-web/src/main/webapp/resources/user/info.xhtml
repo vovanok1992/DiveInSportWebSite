@@ -33,7 +33,8 @@
                               rendered="#{loginBean.access > 5}"/>
                 <p:button value="Заказы"
                           icon="ui-icon-circle-plus"
-                          outcome="/resources/admin/orders.xhtml"/>
+                          outcome="/resources/admin/orders.xhtml"
+                          rendered="#{loginBean.access > 5}"/>
 
                 <p:commandButton value="Выйти" action="#{loginBean.logoutReflesh}" />
                 
@@ -179,7 +180,7 @@
                                      id="infoGrid" 
                                      style="width: 100%">
 
-                            <h:outputLabel for="" 
+                            <h:outputLabel for="username"
                                            value="Логин: *" />
                             <p:inputText id="username" 
                                          value="#{regiserBean.login}" 

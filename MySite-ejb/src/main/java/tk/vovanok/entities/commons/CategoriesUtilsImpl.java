@@ -6,15 +6,14 @@
 
 package tk.vovanok.entities.commons;
 
+import tk.vovanok.dao.CategoryDao;
+import tk.vovanok.entities.Category;
+
+import javax.ejb.EJB;
+import javax.ejb.Singleton;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Singleton;
-import javax.ejb.Stateful;
-import javax.ejb.Stateless;
-import tk.vovanok.dao.CategoryDao;
-import tk.vovanok.entities.Category;
 
 /**
  *
@@ -29,7 +28,9 @@ public class CategoriesUtilsImpl implements CategoriesUtils{
     List<Category> all;
     
     public  List<Category> getAll() {
+        System.out.println("GET ALL");
         if (all == null) {
+            System.out.println("||| INIT ALL ");
             all = categoryDao.findAll();
         }
         return all;

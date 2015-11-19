@@ -7,33 +7,30 @@
 package tk.vovanok.beans;
 
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.Serializable;  
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
 import org.apache.commons.io.IOUtils;
 import org.primefaces.context.RequestContext;
-import org.primefaces.model.DefaultTreeNode;  
-import org.primefaces.model.TreeNode;  
+import org.primefaces.model.DefaultTreeNode;
+import org.primefaces.model.TreeNode;
 import org.primefaces.model.UploadedFile;
 import tk.vovanok.dao.CategoryDao;
 import tk.vovanok.dao.ShipmentDao;
 import tk.vovanok.entities.Category;
 import tk.vovanok.entities.commons.CategoriesUtils;
 import tk.vovanok.entities.commons.ImagePath;
+
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
   
 
 @Named
@@ -95,6 +92,7 @@ public class AdminCategoriesTableBean implements Serializable {
                 
             }
         }
+        categoriesUtilsImpl.update();
     }
     
     public void updateImage(){
@@ -145,14 +143,13 @@ public class AdminCategoriesTableBean implements Serializable {
         selectedDocument.setImg(file.getFileName());
         
         categoryDaoImp.update(selectedDocument);
+        categoriesUtilsImpl.update();
     }
     
     public void handleChange(){
-        
-        
-        
         categoryDaoImp.update(selectedDocument);
         RequestContext.getCurrentInstance().update("form");
+        categoriesUtilsImpl.update();
     }
     
    
@@ -168,6 +165,7 @@ public class AdminCategoriesTableBean implements Serializable {
         
         removeWithChilds(c,forRemove);
         reflesh();
+        categoriesUtilsImpl.update();
     }
     
     public void reflesh(){
@@ -191,6 +189,7 @@ public class AdminCategoriesTableBean implements Serializable {
         categories.add(newCat);
 
         reflesh();
+        categoriesUtilsImpl.update();
     }
     
     public void newRootCategory() {

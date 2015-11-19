@@ -388,6 +388,7 @@
 
                 <p:commandButton value="Добавить"
                                  action="#{sessionCart.generateCartItem()}"
+                                 update=":cartcontent"
                                  oncomplete="PF('dlgAddToCart').hide();"
                                  />
 
