@@ -36,6 +36,19 @@
                 <configuration>
                     <version>6</version>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <modules>
+                    <webModule>
+                        <groupId>tk.vovanok</groupId>
+                        <artifactId>MySite-web</artifactId>
+                        <unpack>true</unpack>
+                        <!--<contextRoot></contextRoot>-->
+                    </webModule>
+                    <ejbModule>
+                        <groupId>tk.vovanok</groupId>
+                        <artifactId>MySite-ejb</artifactId>
+                        <unpack>true</unpack>
+                    </ejbModule>
+                </modules>
                 </configuration>
             </plugin>
         </plugins>

@@ -47,25 +47,21 @@ public class AdminCategoriesTableBean implements Serializable {
     private CategoryDao categoryDaoImp;
     
     @EJB
-    ImagePath path;
+    private ImagePath path;
 
     private TreeNode root;  
     private List<Category> categories;
    
-  
-    private Category selectedDocument;  
+    private Category selectedDocument;
+    private UploadedFile file;
     
     private String editName;
     private String editDesc;
-      
     private String newName;
     private String newDesc;
-    
     private String newRootName;
     private String newRootDesc;
-    
-    private UploadedFile file;
- 
+
     public UploadedFile getFile() {
         return file;
     }
@@ -141,7 +137,6 @@ public class AdminCategoriesTableBean implements Serializable {
         }
         
         selectedDocument.setImg(file.getFileName());
-        
         categoryDaoImp.update(selectedDocument);
         categoriesUtilsImpl.update();
     }
@@ -210,20 +205,14 @@ public class AdminCategoriesTableBean implements Serializable {
                 }
             }
         } else {
-            
             int curId = ((Category)localRoot.getData()).getId().intValue();
-            
             for(Category c : categories){
-                
                 if(c.getParentId() == curId){
-                    
                     TreeNode newNode = new DefaultTreeNode(c, localRoot);
                     fill(newNode);
                 }
             }
-            
         }
-  
     }
     
     public void collapsingORexpanding(TreeNode n, boolean option) {

@@ -10,8 +10,7 @@
     <f:metadata>  
         <f:viewParam name="ids" value="#{productDetailBean.someass}"/> 
         <f:viewParam name="id" value="#{productDetailBean.id}"/>  
-        <f:viewParam name="id" value="#{commentsBean.id}"/>  
-        
+        <f:viewParam name="id" value="#{commentsBean.id}"/>
     </f:metadata> 
 
     <h:head>
@@ -37,6 +36,8 @@
         
         <p:growl id="userinfo"/>
 
+        <vo:panel/>
+
         <div class="seperator" style="height:20px;"/>
 
         <div id="page" >
@@ -58,9 +59,6 @@
                 <h:panelGroup id="cart">
                     <vo:cart/>
                 </h:panelGroup>
-                
-                
-               
             </div>
 
             <h:panelGroup layout="block" 

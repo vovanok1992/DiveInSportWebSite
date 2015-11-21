@@ -74,15 +74,13 @@ div#header {
 #content {
   -moz-border-radius: 4px;
   border-radius: 4px;
-  padding-top: 10px;
-  overflow:hidden; 
+    overflow:hidden;
   text-shadow: 0 1px 0 #fff;
   line-height: 1.5;
-  padding: 10px;
+    padding: 10px;
 
-  
-  margin:10px 5px 10px 215px;
-  min-height:1000px;
+    margin:10px 5px 10px 215px;
+  /*min-height:1000px;*/
   /*_height:500px*/
   background: #FFF;
 }

@@ -52,6 +52,7 @@
 
             <p:panel style="margin-top:10px; overflow: hidden">
                 <h:form id="loginForm">
+                    <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
                     <div style="overflow: auto; width: 100%; padding: 10px">
 
                         <div style="float: left; width:50%">
@@ -61,7 +62,9 @@
                                          style="width: 100%;">
 
                                 <h:outputText value="ФИО*"/>
-                                <p:inputText style="width:100%" value="#{orderCartBean.name}"/>
+                                <p:inputText style="width:100%" value="#{orderCartBean.name}" required="true" validatorMessage="ФИО должно сожержать не менее 4х символов">
+                                    <f:validateLength minimum="4" />
+                                </p:inputText>
 
                                 <h:outputText value="E-mail*"/>
                                 <p:inputText style="width:100%" value="#{orderCartBean.email}"/>
@@ -95,6 +98,7 @@
                     </div>
 
                     <p:commandButton value="Оформить заказ"
+                                     validateClient="true"
                                      action="#{orderCartBean.makeOrder}"
                                      style="margin:10px; font-size: 150%; float: right">
                     </p:commandButton>
