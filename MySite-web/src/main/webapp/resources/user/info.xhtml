@@ -17,6 +17,38 @@
 </composite:interface>
 
 <composite:implementation>
+    <style>
+        .neworderalert {color: #ff1309 !important;}
+        @-webkit-keyframes colours {
+            0% {color: #ff000d;}
+            25% {color: #d1780e;}
+            50% {color: #f8cb4a;}
+            75% {color: #cdcad1;}
+            100% {color: #ff00f6;}
+
+        }
+        @-moz-keyframes colours {
+            0% {color: #ff000d;}
+            25% {color: #d1780e;}
+            50% {color: #f8cb4a;}
+            75% {color: #cdcad1;}
+            100% {color: #ff00f6;}
+        }
+
+        .neworderalert {
+            -webkit-animation-direction: normal;
+            -webkit-animation-duration: 5s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-name: colours;
+            -webkit-animation-timing-function: ease;
+            -moz-animation-direction: normal;
+            -moz-animation-duration: 5s;
+            -moz-animation-iteration-count: infinite;
+            -moz-animation-name: colours;
+            -moz-animation-timing-function: ease;
+        }
+    </style>
+
     <vo:up/>
 
     <h:panelGrid columns="1" cellpadding="0" cellspacing="0">
@@ -30,12 +62,17 @@
             <h:outputText value="[администратор]"
                           style="font-weight: bold; color: green"
                           rendered="#{loginBean.access > 5}"/>
-            <p:button value="Заказы"
+
+
+            <p:button value="Заказы #{adminNotificationsBean.newOrders > 0 ? ' ('.concat(adminNotificationsBean.newOrders).concat(')') : ''}"
                       icon="ui-icon-circle-plus"
                       outcome="/resources/admin/orders.xhtml"
-                      rendered="#{loginBean.access > 5}"/>
+                      styleClass="#{adminNotificationsBean.newOrders > 0 ? 'neworderalert' : ''}"
+                      rendered="#{loginBean.access > 5}">
+            </p:button>
 
-            <p:commandButton value="Выйти" action="#{loginBean.logoutReflesh}"/>
+
+            <p:commandButton value="Выйти" action="#{loginBean.logoutReflesh}" />
 
             <h:panelGroup rendered="#{loginBean.access > 5}">
                 <p:commandButton type="button"

@@ -1,21 +1,24 @@
 package tk.vovanok.beans;
 
+import org.primefaces.context.RequestContext;
+import tk.vovanok.cart.SessionCart;
+import tk.vovanok.dao.UserDao;
+import tk.vovanok.entities.User;
+
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import org.primefaces.context.RequestContext;
-import tk.vovanok.dao.UserDao;
-import tk.vovanok.entities.User;
 
 @Named
 @SessionScoped
@@ -23,6 +26,9 @@ public class LoginBean implements Serializable {
     
     @EJB
     private UserDao userDao;
+
+    @Inject
+    SessionCart cart;
 
     private String password;
     private String message, uname;
@@ -170,25 +176,24 @@ public class LoginBean implements Serializable {
         this.uname = null;
         this.password = null;
         this.valid = false;
-        
-        
+
+        cart.clean();
+
+        session.invalidate();
         updateHeader();
+
     }
 
     public void updateHeader(){
         RequestContext.getCurrentInstance().update("header");
-        RequestContext.getCurrentInstance().update("content"); 
+        RequestContext.getCurrentInstance().update("content");
     }
     
     private String getURL() {
-        
        HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-       
        return req.getRequestURI();
-   
     }
-    
-    
+
     public  HttpSession getSession() {
         return (HttpSession) FacesContext.
                 getCurrentInstance().
@@ -215,7 +220,6 @@ public class LoginBean implements Serializable {
             return null;
         }
     }
-    
 
     /**
      * @return the valid

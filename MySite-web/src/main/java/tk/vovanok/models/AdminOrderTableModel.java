@@ -18,6 +18,8 @@ public class AdminOrderTableModel extends LazyDataModel<Order> {
     private Long numOfRows;
     private int userId;
 
+    private String status;
+
     List<Order> datasource;
 
     public void updateRowCount(){
@@ -40,7 +42,7 @@ public class AdminOrderTableModel extends LazyDataModel<Order> {
 
     @Override
     public List<Order> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
-        datasource = getOrderDao().getOrders(first, pageSize, sortField, sortOrder.equals(SortOrder.ASCENDING));
+        datasource = getOrderDao().getOrders(first, pageSize, sortField, sortOrder.equals(SortOrder.ASCENDING), status);
 
         //rowCount
         int dataSize = datasource.size();
@@ -81,4 +83,11 @@ public class AdminOrderTableModel extends LazyDataModel<Order> {
         this.orderDao = orderDao;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

@@ -17,6 +17,8 @@
 <h:body>
     <p:growl id="userinfo"/>
 
+    <vo:panel/>
+
     <div class="seperator" style="height:20px;"/>
 
     <div id="page">
@@ -25,72 +27,198 @@
             <vo:headercontent/>
         </h:panelGroup>
 
-        <div id="menu">
-            <vadm:navigatemenu selected="11"/>
+        <div style="overflow: auto; position: relative">
+            <div id="menu">
+                <vadm:navigatemenu selected="11"/>
+            </div>
+
+            <h:panelGroup layout="block"
+                          id="content"
+                          styleClass="withsidebar"
+                          style="position: absolute; top:0; bottom: 0">
+
+                <h:form id="form">
+
+                    <p:dataTable var="order"
+                                 value="#{allOrdersBean.lazyNew}"
+                                 paginator="true" rows="10"
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                 paginatorPosition="bottom"
+                                 rowsPerPageTemplate="5,10,15"
+                                 selectionMode="single"
+                                 selection="#{allOrdersBean.selectedOrder}"
+                                 id="newsTable"
+                                 lazy="true"
+                                 style=" margin-top: 10px;"
+                            >
+
+                        <p:column style=""
+                                  headerText="id"
+                                  sortBy="#{order.id}">
+
+                            <h:outputText value="#{order.id}"/>
+                        </p:column>
+
+                        <p:column style=""
+                                  sortBy="#{order.name}"
+                                  headerText="Имя пользователя">
+                            <h:outputText value="#{order.name}"/>
+                        </p:column>
+
+                        <p:column style=""
+                                  sortBy="#{order.created}"
+                                  headerText="Дата создания">
+                            <h:outputText value="#{order.created}"/>
+                        </p:column>
+
+                        <p:column>
+                            <p:button rendered="#{not empty order.userId}"
+                                      icon="ui-icon-gear"
+                                      outcome="aboutuser.xhtml?id=#{order.userId}"
+                                      value="#{order.name}"/>
+                        </p:column>
+
+                        <p:column>
+                            <p:button
+                                    icon="ui-icon-extlink"
+                                    style="width:100%"
+                                    outcome="/order.xhtml?id=#{order.id}"
+                                    value="Заказ"/>
+
+                            <p:commandButton
+                                    icon="ui-icon-arrowthick-1-se"
+                                    style="width:100%"
+                                    action="#{allOrdersBean.changeStatus(order.id, 'processing')}"
+                                    update="form :header"
+                                    value="Принять"/>
+                        </p:column>
+
+                        <f:facet name="header">
+                            Новые Заказы
+                        </f:facet>
+
+                    </p:dataTable>
+
+                    <p:dataTable var="order"
+                                 value="#{allOrdersBean.lazyProcessing}"
+                                 paginator="true" rows="10"
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                 paginatorPosition="bottom"
+                                 rowsPerPageTemplate="5,10,15"
+                                 selectionMode="single"
+                                 selection="#{allOrdersBean.selectedOrder}"
+                                 id="processing"
+                                 lazy="true"
+                                 style=" margin-top: 10px;"
+                            >
+
+                        <p:column style=""
+                                  headerText="id"
+                                  sortBy="#{order.id}">
+
+                            <h:outputText value="#{order.id}"/>
+                        </p:column>
+
+                        <p:column style=""
+                                  sortBy="#{order.name}"
+                                  headerText="Имя пользователя">
+                            <h:outputText value="#{order.name}"/>
+                        </p:column>
+
+                        <p:column style=""
+                                  sortBy="#{order.created}"
+                                  headerText="Дата создания">
+                            <h:outputText value="#{order.created}"/>
+                        </p:column>
+
+                        <p:column>
+                            <p:button rendered="#{not empty order.userId}"
+                                      icon="ui-icon-gear"
+                                      outcome="aboutuser.xhtml?id=#{order.userId}"
+                                      value="#{order.name}"/>
+                        </p:column>
+
+                        <p:column>
+                            <p:button
+                                    icon="ui-icon-extlink"
+                                    outcome="/order.xhtml?id=#{order.id}"
+                                    style="width:100%"
+                                    value="Заказ"/>
+
+                            <p:commandButton
+                                    icon="ui-icon-arrowthick-1-se"
+                                    style="width:100%"
+                                    action="#{allOrdersBean.changeStatus(order.id, 'processed')}"
+                                    update="form"
+                                    value="Обработано"/>
+                        </p:column>
+
+                        <f:facet name="header">
+                            Принятые Заказы
+                        </f:facet>
+
+                    </p:dataTable>
+
+                    <p:dataTable var="order"
+                                 value="#{allOrdersBean.lazyProcessed}"
+                                 paginator="true" rows="10"
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                 paginatorPosition="bottom"
+                                 rowsPerPageTemplate="5,10,15"
+                                 selectionMode="single"
+                                 selection="#{allOrdersBean.selectedOrder}"
+                                 id="processed"
+                                 lazy="true"
+                                 style=" margin-top: 10px;"
+                            >
+
+                        <p:column style=""
+                                  headerText="id"
+                                  sortBy="#{order.id}">
+
+                            <h:outputText value="#{order.id}"/>
+                        </p:column>
+
+                        <p:column style=""
+                                  sortBy="#{order.name}"
+                                  headerText="Имя пользователя">
+                            <h:outputText value="#{order.name}"/>
+                        </p:column>
+
+                        <p:column style=""
+                                  sortBy="#{order.created}"
+                                  headerText="Дата создания">
+                            <h:outputText value="#{order.created}"/>
+                        </p:column>
+
+                        <p:column>
+                            <p:button rendered="#{not empty order.userId}"
+                                      icon="ui-icon-gear"
+                                      outcome="aboutuser.xhtml?id=#{order.userId}"
+                                      value="#{order.name}"/>
+                        </p:column>
+
+                        <p:column>
+
+                            <p:button
+                                    icon="ui-icon-extlink"
+                                    outcome="/order.xhtml?id=#{order.id}"
+                                    style="width:100%"
+                                    value="Заказ"/>
+
+                        </p:column>
+
+                        <f:facet name="header">
+                            Готовые Заказы
+                        </f:facet>
+
+                    </p:dataTable>
+
+                </h:form>
+
+            </h:panelGroup>
+
         </div>
-
-        <h:panelGroup layout="block"
-                      id="content"
-                >
-
-
-            <h:form id="form">
-
-                <p:dataTable var="order"
-                             value="#{allOrdersBean.lazyModel}"
-                             paginator="true" rows="10"
-                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                             rowsPerPageTemplate="5,10,15"
-                             selectionMode="single"
-                             selection="#{allOrdersBean.selectedOrder}"
-                             id="newsTable"
-                             lazy="true"
-                             style=" margin-top: 10px;"
-                        >
-
-                    <p:column style=""
-                              headerText="id"
-                              sortBy="#{order.id}">
-
-                        <h:outputText value="#{order.id}"/>
-                    </p:column>
-
-                    <p:column style=""
-                              sortBy="#{order.name}"
-                              headerText="Имя пользователя">
-                        <h:outputText value="#{order.name}"/>
-                    </p:column>
-
-                    <p:column style=""
-                              sortBy="#{order.created}"
-                              headerText="Дата создания">
-                        <h:outputText value="#{order.created}"/>
-                    </p:column>
-
-                    <p:column>
-                        <p:button rendered="#{not empty order.userId}"
-                                  icon="ui-icon-gear"
-                                  outcome="aboutuser.xhtml?id=#{order.userId}"
-                                  value="#{order.name}"/>
-                    </p:column>
-
-                    <p:column>
-                        <p:button
-                                icon="ui-icon-extlink"
-                                outcome="/order.xhtml?id=#{order.id}"
-                                value="Заказ"/>
-                    </p:column>
-
-
-                    <f:facet name="header">
-                        Заказы
-                    </f:facet>
-
-                </p:dataTable>
-
-            </h:form>
-
-        </h:panelGroup>
 
         <div id="footer">
 

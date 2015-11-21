@@ -19,6 +19,7 @@ public class Order extends BaseEntity {
     private String payType;
     private String deliveryType;
     private String info;
+    private String status;
 
     @OneToMany
     private List<BasicCartItem> cartItems;
@@ -98,5 +99,13 @@ public class Order extends BaseEntity {
 
     public String getInfo() {
         return info;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

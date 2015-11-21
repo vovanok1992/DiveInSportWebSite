@@ -39,8 +39,6 @@ public class SessionCart implements Serializable {
     private String payType;
 
     public void generateCartItem() {
-        if (loaded == null) System.out.println("WTF");
-
         StringBuilder code = new StringBuilder("" + loaded.getId());
         StringBuilder desc = new StringBuilder(loaded.getName()).append(". ");
 
@@ -60,11 +58,7 @@ public class SessionCart implements Serializable {
         item.setCode(code.toString());
         item.setAmmount(ammount);
 
-
         addItem(item);
-
-        System.out.println(code.toString());
-        System.out.println(desc.toString());
         ammount = 1;
     }
 
@@ -153,5 +147,9 @@ public class SessionCart implements Serializable {
 
     public String getPayType() {
         return payType;
+    }
+
+    public void clean() {
+        items = null;
     }
 }

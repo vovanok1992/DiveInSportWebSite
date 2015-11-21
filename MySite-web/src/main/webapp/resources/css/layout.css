@@ -2,120 +2,97 @@
     Created on : 04.02.2014, 14:37:37
     Author     : vovan_000
 */
-body{
-background: rgb(208,228,247); /* Old browsers */
-/*background: -moz-linear-gradient(-45deg, rgba(208,228,247,1) 0%, rgba(115,177,231,1) 24%, rgba(10,119,213,1) 50%, rgba(83,159,225,1) 79%, rgba(135,188,234,1) 100%);  FF3.6+ 
-background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(208,228,247,1)), color-stop(24%,rgba(115,177,231,1)), color-stop(50%,rgba(10,119,213,1)), color-stop(79%,rgba(83,159,225,1)), color-stop(100%,rgba(135,188,234,1)));  Chrome,Safari4+ 
-background: -webkit-linear-gradient(-45deg, rgba(208,228,247,1) 0%,rgba(115,177,231,1) 24%,rgba(10,119,213,1) 50%,rgba(83,159,225,1) 79%,rgba(135,188,234,1) 100%);  Chrome10+,Safari5.1+ 
-background: -o-linear-gradient(-45deg, rgba(208,228,247,1) 0%,rgba(115,177,231,1) 24%,rgba(10,119,213,1) 50%,rgba(83,159,225,1) 79%,rgba(135,188,234,1) 100%);  Opera 11.10+ 
-background: -ms-linear-gradient(-45deg, rgba(208,228,247,1) 0%,rgba(115,177,231,1) 24%,rgba(10,119,213,1) 50%,rgba(83,159,225,1) 79%,rgba(135,188,234,1) 100%);  IE10+ 
-background: linear-gradient(135deg, rgba(208,228,247,1) 0%,rgba(115,177,231,1) 24%,rgba(10,119,213,1) 50%,rgba(83,159,225,1) 79%,rgba(135,188,234,1) 100%);  W3C 
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0e4f7', endColorstr='#87bcea',GradientType=1 );  IE6-9 fallback on horizontal gradient */
-background-image: url(../../resources/img/cool_island-1680x1050.jpg);
-background-attachment: fixed;
-background-size: cover;
-margin: 0;
-padding: 0;
-font-family: 'Exo 2', sans-serif;
+body {
+    background: rgb(208, 228, 247) url(../../resources/img/cool_island-1680x1050.jpg) fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    font-family: 'Exo 2', sans-serif;
 }
 
 div.bar {
     width: 100%;
-    margin: 0;
     top: 0;
     height: 30px;
     border: solid 3px #FF9911;
     color: #ECF1EF;
-    margin-bottom: 10px;
+    margin: 0 0 10px;
 }
 
-.bar .login{
+.bar .login {
     float: right;
 }
+
 #page {
-    
-    border:1px solid whitesmoke;
-    width:1000px;
+
+    border: 1px solid whitesmoke;
+    width: 1000px;
     margin: 0 auto;
     min-width: 700px;
-    padding:5px;
-    text-align:left;
+    padding: 5px;
+    text-align: left;
     border-radius: 5px;
 
-    -webkit-box-shadow: 0px 0px 15px #222;
+    -webkit-box-shadow: 0 0 15px #222;
     -moz-box-shadow: 0px 0px 15px #222;
     box-shadow: 0px 0px 15px #222;
 
-    background-color:rgba(255,255,255,0.5);
-    
+    background-color: rgba(255, 255, 255, 0.5);
 
-}
-
-div {
-/*  text-align:center;*/
 }
 
 div#header {
-  
-  min-height:65px;
-  padding:5px;
-  overflow: hidden;
-  
+    min-height: 65px;
+    padding: 5px;
+    overflow: hidden;
 }
 
 #menu {
-  width:200px;
-  float:left;
-  margin:10px 0 10px 5px;
-  z-index: 5;
-  overflow:auto; 
+    width: 200px;
+    float: left;
+    margin: 10px 0 10px 5px;
+    z-index: 5;
+    overflow: auto;
 }
 
 #content {
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-    overflow:hidden;
-  text-shadow: 0 1px 0 #fff;
-  line-height: 1.5;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    overflow: hidden;
+    text-shadow: 0 1px 0 #fff;
+    line-height: 1.5;
     padding: 10px;
-
-    margin:10px 5px 10px 215px;
-  /*min-height:1000px;*/
-  /*_height:500px*/
-  background: #FFF;
+    margin: 10px 5px 10px 215px;
+    background: #FFF;
 }
 
 
-#buttons{
-    height:200px;
- 
-    background: rgb(210,235,249); /* Old browsers */
-background: -moz-linear-gradient(top,  rgba(210,235,249,1) 0%, rgba(254,255,255,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(210,235,249,1)), color-stop(100%,rgba(254,255,255,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  rgba(210,235,249,1) 0%,rgba(254,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  rgba(210,235,249,1) 0%,rgba(254,255,255,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  rgba(210,235,249,1) 0%,rgba(254,255,255,1) 100%); /* IE10+ */
-background: linear-gradient(to bottom,  rgba(210,235,249,1) 0%,rgba(254,255,255,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2ebf9', endColorstr='#feffff',GradientType=0 ); /* IE6-9 */
 
+#buttons {
+    height: 200px;
+    background: rgb(210, 235, 249); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(210, 235, 249, 1) 0%, rgba(254, 255, 255, 1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(210, 235, 249, 1)), color-stop(100%, rgba(254, 255, 255, 1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(210, 235, 249, 1) 0%, rgba(254, 255, 255, 1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(210, 235, 249, 1) 0%, rgba(254, 255, 255, 1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(210, 235, 249, 1) 0%, rgba(254, 255, 255, 1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(210, 235, 249, 1) 0%, rgba(254, 255, 255, 1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d2ebf9', endColorstr='#feffff', GradientType=0); /* IE6-9 */
 }
 
-#buttonsheader{
-    padding:2px;
+#buttonsheader {
+    padding: 2px;
     background: white;
     float: right;
     border-bottom-left-radius: 8px;
 }
 
-
-.buttons_item{
+.buttons_item {
     height: 140px;
-    
     border: 1px solid transparent;
 }
 
-.buttons_item:hover{
-  
+.buttons_item:hover {
     border: 1px solid #ABDCFF;
     background-color: rgba(0, 120, 201, 0.4);
     border-radius: 5px;
@@ -125,11 +102,19 @@ div#footer {
     padding: 5px;
 }
 
-.user{
-   float: right;
+.user {
+    float: right;
 }
 
-.banner{
-   padding: 5px;
+.banner {
+    padding: 5px;
+}
+
+.withsidebar{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 5px;
+    left: 5px;
 }
 

@@ -134,8 +134,7 @@ public class OrderCartBean implements Serializable{
         return name;
     }
 
-    public void makeOrder() {
-        System.out.println("click");
+    public String makeOrder() {
         Order o = new Order();
 
         if(curUser!=null && curUser.getU() !=null){
@@ -150,12 +149,14 @@ public class OrderCartBean implements Serializable{
         o.setCreated(new Date());
         o.setInfo(info);
         o.setCartItems(cart.getItems());
+        o.setStatus("new");
 
-
-        System.out.println("RES:= " + o);
         cartItemDao.saveAll(o.getCartItems());
         orderDao.save(o);
-        System.out.println("SAVE COMPLETE!!!!!" + o.getId());
+
+        cart.clean();
+
+        return "/order.xhtml?id=" + o.getId() + "&faces-redirect=true";
     }
 }
 

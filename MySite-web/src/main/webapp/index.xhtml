@@ -25,6 +25,8 @@
 
     <vo:share/>
 
+    <h:form id="cartcontent"></h:form>
+
     <div style="height: 20px;"/>
     <div id="page">
 
@@ -134,8 +136,9 @@
                                   outcome="cart.xhtml"
                                 />
 
-                        <h:panelGroup layout="block" rendered="#{not empty sessionCart.items.size()}"
-                                      style="position: relative;
+
+                            <h:panelGroup layout="block" rendered="#{not empty sessionCart.items.size() and sessionCart.items.size() > 0}"
+                                          style="position: relative;
                                                  top: -12px;
                                                  right: -276px;
                                                  height: 20px;
@@ -148,9 +151,11 @@
                                                  line-height: 20px;
                                                  color:white;
                                                  font-size: 80%;"
-                                >
-                            #{sessionCart.items.size()}
-                        </h:panelGroup>
+                                    >
+                                #{sessionCart.items.size()}
+                            </h:panelGroup>
+
+
 
                     </f:facet>
 

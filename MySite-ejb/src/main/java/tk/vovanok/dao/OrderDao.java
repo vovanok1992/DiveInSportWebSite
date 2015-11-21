@@ -13,4 +13,8 @@ public interface OrderDao extends GenericDao<Order, Long>{
 
      List<Order> getOrders(int starstRow, int pageSize, String orderField, boolean asc);
 
+     List<Order> getOrders(int starstRow, int pageSize, String orderField, boolean asc, String status);
+
+     Long countNewOrders();
+
 }
